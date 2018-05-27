@@ -17,18 +17,6 @@ app.use(bodyParser.json());
 var jwt = require('jsonwebtoken');
 const superSecret = "OurSecretKeyIsTheBest!"; // secret variable
 app.use(morgan('dev'));
-/*
-var xmlserializer = require('xmlserializer');
-var html2xhtml = function (htmlString) {
-var parser = require('parse5'),
-dom = parser.parse(htmlString);
- 
-return xmlserializer.serializeToString(dom);
-
-
-var fs = require('fs'),
-    parseString = require('xml2js').parseString;
-*/
 fs = require('fs');
 parseString = require('xml2js').parseString;
 
@@ -55,17 +43,6 @@ app.get('/getCountries', function(req,res){
     });    
 })
    
-/*fs = require('fs');
-var parser = require('xml2json');
-
-fs.readFile( './countries.xml', function(err, data) {
-    var json = parser.toJson(data);
-    console.log("to json ->", json);
- });
-
-*/
-
-
 
 app.post('/register', function(req,res){
    var UserName = req.body.userName;
