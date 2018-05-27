@@ -35,38 +35,6 @@ router.get('/:name', function(req,res){
     }).catch(function (err) {
         res.send(err);
             });
-    /*
-    DButilsAzure.execQuery("SELECT * FROM POI WHERE POI_name = '"+name+"'")
-        .then(function (recordSet) {   
-
-
-
-        res.json({
-            success: true,
-            POI_name: recordSet[0].POI_name,
-            NumOfViews: recordSet[0].NumOfViews,
-            POI_description: recordSet[0].POI_description,
-            POI_rank: recordSet[0].POI_rank,
-            Review1: recordSet[0].Review1,
-            Review2: recordSet[0].Review2,
-            PicturePath: recordSet[0].PicturePath,
-            Category: recordSet[0].Category
-
-
-        });
-
-
-   }).catch(function (err) {
-    res.send(err);
-        });
-        
-
-        DButilsAzure.execQuery("UPDATE POI SET NumOfViews = NumOfViews + 1 WHERE POI_name = '"+name+"'").then(function (recordSet) {   
-            res.json({ success: true, message: 'Point of interest is saved to favorites.' });
-        }).catch(function (err) {
-        res.send(err);
-               });
-        */
 })
 
 router.get('/updatePOIs', function(req,res){
