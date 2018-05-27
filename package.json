@@ -1,0 +1,31 @@
+{
+  "name": "lab",
+  "version": "1.0.0",
+  "description": "",
+  "main": "DButils.js",
+  "dependencies": {
+    "async": "^2.6.1",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
+    "crypto-js": "^3.1.9-1",
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.2.1",
+    "morgan": "^1.9.0",
+    "mssql": "^3.3.0",
+    "nodemon": "^1.17.4",
+    "reject": "^0.0.1",
+    "tedious": "^2.6.1",
+    "tedious-connection-pool": "^1.0.5",
+    "xmlserializer": "^0.6.1"
+  },
+  "devDependencies": {
+    "xml2js": "^0.4.19"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
