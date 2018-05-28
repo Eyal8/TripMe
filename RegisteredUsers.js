@@ -42,6 +42,27 @@ router.use('/', function (req, res, next) {
 
 })
 
+router.put('/reorder', function(req, res)
+{
+    var pois = req.body.pois;
+  //  var promises = [];
+    var func = DButilsAzure.execQuery("DELETE FROM POIsForUser WHERE UserName = '"+req.userName+"'");
+   /* promises.push(DButilsAzure.execQuery("DELETE FROM POIsForUser WHERE UserName = '"+req.userName+"'"));  */   
+    for(var i = 0; i < pois.length; i++)
+    {
+        func.then(DButilsAzure.execQuery("INSERT INTO POIsForUser (POI_name, UserName, CreatedAt) VALUES ('"+pois[i]+"','"+req.userName+"', GETDATE())"));   
+    }
+  //  Promise.all(promises).then(function(recordSet){
+         func.then(function(x){
+            res.json({
+            success: true,
+            message: "POIs reordered."
+        })
+        .catch(function (err) {
+            res.send(err);
+        });
+})
+
 router.post('/savePOI', function(req,res){
     var poi_name = req.body.poi_name;
     DButilsAzure.execQuery("IF NOT EXISTS (SELECT POI_name FROM POIsForUser WHERE POI_name = '"+poi_name+"' AND UserName = '"+req.userName+"') BEGIN UPDATE RegisteredUsers SET NumOfFavorites = NumOfFavorites + 1 WHERE UserName = '"+req.userName+"' END").then(function (recordSet) {   
@@ -54,8 +75,6 @@ router.post('/savePOI', function(req,res){
     }).catch(function (err) {
        res.send(err);
        });
-
-    
 })
 
 router.delete('/removePOI', function(req,res){
