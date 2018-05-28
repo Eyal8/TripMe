@@ -58,7 +58,7 @@ router.post('/savePOI', function(req,res){
     
 })
 
-router.post('/removePOI', function(req,res){
+router.delete('/removePOI', function(req,res){
     var poi_name = req.body.poi_name;
     DButilsAzure.execQuery("IF EXISTS (SELECT POI_name FROM POIsForUser WHERE POI_name = '"+poi_name+"' AND UserName = '"+req.userName+"') BEGIN UPDATE RegisteredUsers SET NumOfFavorites = NumOfFavorites - 1 WHERE UserName = '"+req.userName+"' END").then(function (recordSet) {   
     }).catch(function (err) {
@@ -86,7 +86,7 @@ router.get('/getPOIs', function(req,res){
 })
 
 router.get('/get2MostPopularPOIs', function(req,res){
-   DButilsAzure.execQuery("DECLARE @category VARCHAR(100), @poi_name1 VARCHAR(100), @poi_name2 VARCHAR(100); SELECT @poi_name1=POI_name, @category=POI.Category FROM CategoriesForUser JOIN POI ON CategoriesForUser.CategoryName = POI.Category WHERE UserName = '"+req.userName+"' AND POI_rank = (SELECT MAX(POI_rank) FROM CategoriesForUser JOIN POI ON CategoriesForUser.CategoryName = POI.Category); SELECT @poi_name2 = POI.POI_name FROM CategoriesForUser JOIN POI ON CategoriesForUser.CategoryName = POI.Category WHERE UserName = '"+req.userName+"' AND POI_rank = (SELECT MAX(POI_rank) FROM CategoriesForUser JOIN POI ON CategoriesForUser.CategoryName = POI.Category WHERE POI.Category <> @category); SELECT * FROM POI WHERE POI_name=@poi_name1; SELECT * FROM POI WHERE POI_name=@poi_name2").then(function(recordSet){
+   DButilsAzure.execQuery("DECLARE @category VARCHAR(100), @poi_name1 VARCHAR(100), @poi_name2 VARCHAR(100); SELECT @poi_name1=POI_name, @category=POI.Category FROM CategoriesForUser JOIN POI ON CategoriesForUser.CategoryName = POI.Category WHERE UserName = '"+req.userName+"' AND POI_rank = (SELECT MAX(POI_rank) FROM CategoriesForUser JOIN POI ON CategoriesForUser.CategoryName = POI.Category); SELECT @poi_name2 = POI.POI_name FROM CategoriesForUser JOIN POI ON CategoriesForUser.CategoryName = POI.Category WHERE UserName = '"+req.userName+"' AND POI.Category <> @category AND POI_rank = (SELECT MAX(POI_rank) FROM CategoriesForUser JOIN POI ON CategoriesForUser.CategoryName = POI.Category WHERE POI.Category <> @category); SELECT * FROM POI WHERE POI_name=@poi_name1; SELECT * FROM POI WHERE POI_name=@poi_name2").then(function(recordSet){
         res.json(recordSet);
    }).catch(function (err) {
     res.send(err);
@@ -94,8 +94,11 @@ router.get('/get2MostPopularPOIs', function(req,res){
 })
 
 router.get('/get2MostRecentPOIs', function(req,res){
-    DButilsAzure.execQuery("SELECT POI.POI_name, NumOfViews, POI_description, POI_rank, Review1, Review2, PicturePath, Category FROM POIsForUser JOIN POI ON POIsForUser.POI_name=POI.POI_name WHERE CreatedAt = (SELECT MAX(CreatedAt) FROM POIsForUser WHERE UserName='"+req.userName+"'); SELECT POI.POI_name, NumOfViews, POI_description, POI_rank, Review1, Review2, PicturePath, Category FROM POIsForUser JOIN POI ON POIsForUser.POI_name=POI.POI_name WHERE CreatedAt = (SELECT MAX(CreatedAt) FROM POIsForUser WHERE UserName='"+req.userName+"' AND CreatedAt < (SELECT MAX(CreatedAt) FROM POIsForUser WHERE UserName='"+req.userName+"'))").then(function(recordSet){
-         res.json(recordSet);
+    DButilsAzure.execQuery("SELECT POI.POI_name, NumOfViews, POI_description, POI_rank, Review1, Review2, PicturePath, Category, CreatedAt FROM POIsForUser JOIN POI ON POIsForUser.POI_name=POI.POI_name WHERE CreatedAt = (SELECT MAX(CreatedAt) FROM POIsForUser WHERE UserName='"+req.userName+"'); SELECT POI.POI_name, NumOfViews, POI_description, POI_rank, Review1, Review2, PicturePath, Category FROM POIsForUser JOIN POI ON POIsForUser.POI_name=POI.POI_name WHERE CreatedAt = (SELECT MAX(CreatedAt) FROM POIsForUser WHERE UserName='"+req.userName+"' AND CreatedAt < (SELECT MAX(CreatedAt) FROM POIsForUser WHERE UserName='"+req.userName+"'))").then(function(recordSet){
+        if(recordSet.length == 0)
+            res.json("You didnt save any point of interest");
+        else
+            res.json(recordSet);
     }).catch(function (err) {
      res.send(err);
          });    

@@ -43,8 +43,8 @@ CREATE TABLE CategoriesForUser
     UserName VARCHAR(100) NOT NULL,
 
     CONSTRAINT [PK_CatergoriesUsers] PRIMARY KEY (CategoryName, UserName),    
-    FOREIGN KEY (UserName) REFERENCES RegisteredUsers (UserName),
-    FOREIGN KEY (CategoryName) REFERENCES Categories (CategoryName)    
+    CONSTRAINT fk_userName FOREIGN KEY (UserName) REFERENCES RegisteredUsers (UserName),
+    CONSTRAINT fk_category FOREIGN KEY (CategoryName) REFERENCES Categories (CategoryName)    
    
 )    
 
