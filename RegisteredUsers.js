@@ -45,20 +45,18 @@ router.use('/', function (req, res, next) {
 router.put('/reorder', function(req, res)
 {
     var pois = req.body.pois;
-  //  var promises = [];
-    var func = DButilsAzure.execQuery("DELETE FROM POIsForUser WHERE UserName = '"+req.userName+"'");
-   /* promises.push(DButilsAzure.execQuery("DELETE FROM POIsForUser WHERE UserName = '"+req.userName+"'"));  */   
+    var promises = [];
+    DButilsAzure.execQuery("DELETE FROM POIsForUser WHERE UserName = '"+req.userName+"'");     
     for(var i = 0; i < pois.length; i++)
     {
-        func.then(DButilsAzure.execQuery("INSERT INTO POIsForUser (POI_name, UserName, CreatedAt) VALUES ('"+pois[i]+"','"+req.userName+"', GETDATE())"));   
+        promises.push(DButilsAzure.execQuery("INSERT INTO POIsForUser (POI_name, UserName, CreatedAt) VALUES ('"+pois[i]+"','"+req.userName+"', GETDATE())"));   
     }
-  //  Promise.all(promises).then(function(recordSet){
-         func.then(function(x){
-            res.json({
+    Promise.all(promises).then(function(recordSet){
+        res.json({
             success: true,
             message: "POIs reordered."
         })
-        .catch(function (err) {
+        }).catch(function (err) {
             res.send(err);
         });
 })
