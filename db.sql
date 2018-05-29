@@ -72,7 +72,7 @@ CREATE TABLE POIsForUser
     POI_name VARCHAR(100) NOT NULL,
     UserName VARCHAR(100) NOT NULL,
     CreatedAt DATETIME NOT NULL,
-    Position INT IDENTITY(1,1) NOT NULL,
+    Position INT,
 
     CONSTRAINT [PK_POIsUsers] PRIMARY KEY (POI_name, UserName),    
     FOREIGN KEY (UserName) REFERENCES RegisteredUsers (UserName),

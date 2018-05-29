@@ -8,7 +8,7 @@ const superSecret = "OurSecretKeyIsTheBest!"; // secret variable
 router.use('/', function (req, res, next) {
 
     // check header or url parameters or post parameters for token
-    var token = req.body.token || req.query.token || req.headers['x-access-token'];
+    var token = req.body.token || req.query.token || req.headers['token'];
     console.log("token " + token);
     // decode token
     if (token) {
@@ -46,10 +46,9 @@ router.put('/reorder', function(req, res)
 {
     var pois = req.body.pois;
     var promises = [];
-    DButilsAzure.execQuery("DELETE FROM POIsForUser WHERE UserName = '"+req.userName+"'");     
     for(var i = 0; i < pois.length; i++)
     {
-        promises.push(DButilsAzure.execQuery("INSERT INTO POIsForUser (POI_name, UserName, CreatedAt) VALUES ('"+pois[i]+"','"+req.userName+"', GETDATE())"));   
+        promises.push(DButilsAzure.execQuery("UPDATE POIsForUser SET Position = '"+i+"' WHERE POI_name = '"+pois[i]+"' AND UserName = '"+req.userName+"'"));   
     }
     Promise.all(promises).then(function(recordSet){
         res.json({

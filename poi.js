@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var DButilsAzure = require('./DButils');
 
-router.get('/updatePOIs', function(req,res){
+router.get('/update', function(req,res){
     DButilsAzure.execQuery("SELECT NumOfViews, POI_rank, Review1, Review2 FROM POI").then(function (recordSet) {   
     res.json(recordSet);
 }).catch(function (err) {
@@ -12,21 +12,13 @@ res.send(err);
 
 router.get('/get3PopRand', function(req, res){
     DButilsAzure.execQuery("SELECT TOP 3 * FROM POI WHERE POI_rank >= 70 ORDER BY NEWID()").then(function (recordSet) {   
-        /*var rand1Math.floor(Math.random() * recordSet.length);
-        var rand2 = Math.floor(Math.random() * recordSet.length);
-        while(rand2 == rand1)
-            rand2 = Math.floor(Math.random() * recordSet.length);
-        var rand3 = Math.floor(Math.random() * recordSet.length);
-        while(rand2 == rand3)
-            rand3 = Math.floor(Math.random() * recordSet.length);
-       // var result = recordSet[rand1].concat(recordSet[rand2]);*/
         res.json(recordSet);
    }).catch(function (err) {
     res.send(err);
         });
 })
 
-router.get('/all_poi', function(req,res){
+router.get('/all', function(req,res){
         DButilsAzure.execQuery("SELECT * FROM POI").then(function (recordSet) {   
         res.json(recordSet);
    }).catch(function (err) {

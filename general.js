@@ -4,7 +4,8 @@ var DButilsAzure = require('./DButils');
 var jsonConcat = require("json-concat");
 const superSecret = "OurSecretKeyIsTheBest!"; // secret variable
 var jwt = require('jsonwebtoken');
-
+var fs = require('fs');
+var parseString = require('xml2js').parseString;
 router.get('/getCountries', function(req,res){
     fs.readFile('countries.xml', 'utf-8', function (err, data){
         if(err) console.log(err);
@@ -129,13 +130,19 @@ router.post('/forgotpass',function(req,res){
     var userName = req.body.userName;
     var userQuestion = req.body.question;
     var userAnswer = req.body.answer;
-    var answer = "Answer"+userQuestion;
-    console.log(answer);
-    DButilsAzure.execQuery("SELECT Answer1, Pass FROM RegisteredUsers WHERE UserName='"+userName+"'").then(function (recordSet) {   
-      
-         if(userAnswer == recordSet[0].Answer1){
+    DButilsAzure.execQuery("SELECT Answer1, Answer2, Pass FROM RegisteredUsers WHERE UserName='"+userName+"'").then(function (recordSet) {
+        if(userQuestion == 1)
+        {
+            if(userAnswer == recordSet[0].Answer1){
             res.send('Your password is: '+recordSet[0].Pass);
-         }
+            }
+        }
+        else if(userQuestion == 2)
+        {
+            if(userAnswer == recordSet[0].Answer2){
+                res.send('Your password is: '+recordSet[0].Pass);
+                }
+        }
     }).catch(function (err) {
         res.send(err);
             });
