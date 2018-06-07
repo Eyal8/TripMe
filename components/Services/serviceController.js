@@ -30,7 +30,7 @@ angular.module('TripMe')
         let serverUrl = 'http://localhost:3000/'
 
         let user = {
-            userName: 'eyal8',
+            userName: 'eyal',
             password: 'eyalR123',
             isAdmin: true
         }
