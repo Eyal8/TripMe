@@ -1,0 +1,33 @@
+#topnav
+{
+	z-index: 999;
+	position: -webkit-sticky;
+	position: sticky;
+	top: 20px;
+	height: 45px;
+	line-height: 45px;
+	background: white;
+	overflow: hidden;
+	list-style-type: none;
+    margin: auto;
+	width:950px;
+    background-color: rgba(200,180,240,0.8);
+    border-radius: 12px;
+}
+#topnav li{
+	float: left;
+	width:14.2857142857%;
+	font-weight:bold;
+}
+#topnav li a{
+	display: block;
+	position: relative;
+    color: white;
+    text-align: center;
+	padding: 14px 25px;
+    text-decoration: none;
+	bottom: 15px;
+}
+#topnav li a:hover{
+	background-color: rgba(200,80,255,0.6);
+}
