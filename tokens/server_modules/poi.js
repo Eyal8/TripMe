@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var DButilsAzure = require('./DButils');
+var DButilsAzure = require('../DButils');
 
 router.get('/update', function(req,res){
     DButilsAzure.execQuery("SELECT NumOfViews, POI_rank, Review1, Review2 FROM POI").then(function (recordSet) {   

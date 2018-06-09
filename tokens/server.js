@@ -20,7 +20,7 @@ app.use('/poi', poi);
 app.use('/registeredUsers', registeredUsers);
 app.use('/general', general);
 
-var port = 3000;
+var port = process.env.PORT || 3000;
 app.listen(port, function () {
     console.log('App listening on port ' + port);
 });

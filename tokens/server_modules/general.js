@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var DButilsAzure = require('./DButils');
+var DButilsAzure = require('../DButils');
 var jsonConcat = require("json-concat");
 const superSecret = "OurSecretKeyIsTheBest!"; // secret variable
 var jwt = require('jsonwebtoken');
@@ -37,6 +37,7 @@ router.get('/getCategories', function(req, res){
 })
 
 router.post('/register', function(req,res){
+    console.log("hegiaaa");
    var UserName = req.body.userName;
    var Password = req.body.password;
    var confirmedPassword = req.body.confirmedPassword;

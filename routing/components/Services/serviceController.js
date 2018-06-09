@@ -29,24 +29,27 @@ angular.module('TripMe')
             $location.path('/poi')
         }
 
-        let serverUrl = 'http://localhost:8080/'
+        let serverUrl = 'http://localhost:3000/'
 
         let user = {
-            userName: "Shir",
+            userName: "Shiruuu",
             password: "abcd",
-            isAdmin: true
+        
         }
 
 
         self.signUp = function () {
             // register user
-            $http.post(serverUrl + "users/", user)
+            console.log("1")
+            $http.post(serverUrl + "general/register/", user)
                 .then(function (response) {
+                    console.log("2")
                     //First function handles success
                     self.signUp.content = response.data;
                 }, function (response) {
                     //Second function handles error
                     self.signUp.content = "Something went wrong";
+                    console.log("3")
                 });
         }
 
