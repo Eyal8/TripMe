@@ -1,31 +1,51 @@
 
 <html ng-app="TripMe">
-    <head>
+    <head><title>Trip Me</title>
         <link rel="stylesheet" type="text/css" href="style.css" />
-        <title>Trip Me</title>
 </head>
-    <body ng-controller="myCtrl as ctrl">
+    <body ng-controller="indexController as indxCtrl">
+     
+        <body>
+            <div id="topnav">
+				<li><a href="#/about">About Me</a></li>
+				<li><a href="#/poi">My POIs</a></li>
+				<li><a href="#/service">Service</a></li>
+			</div>
+<!--            <ul>
+              <li><a class="active" href="#/">Home</a></li>
+              <li><a href="#/about">About</a></li>
+              <li><a href="#/poi">POI</a></li>
+              <li><a href="#/service">service</a></li>
 
-        <div id="topnav">
-            <li><a href="#!about">About Me</a></li>
-            <li><a href="/">My Photos</a></li>
-            <li><a href="#playlist">My Playlist</a></li>
-            <li><a href="#like">Like</a></li>
-            <li><a href="#qrcoder">QR code</a></li>
-            <li><a href="#spa">Q&A </a></li>
-            <li><a href="#contact">Contact Me</a></li>
-        </div>
-        <div ng-view></div>
-    </br>
-        <button ng-click="srvCtrl.login()">Login</button>
+              <span ng-model="indxCtrl.userName">hello {{indxCtrl.userName}}</span>
+            </ul>-->
+            
+        <br>
+        <br>
+        <div  ng-view></div>
+
+        <img ng-src="http://2.bp.blogspot.com/-1D3ZYnPFJZE/VM0PgrciaJI/AAAAAAAAIl0/qYQXEOcRYr4/s1600/Free%2BAngularJS%2BEbooks.png" height="150px">
+
+
+    </div>
+
         <script
-        src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.js">
-       </script>
-       <script src="myCtrl.js" ></script>
-       <script src="app.js" ></script>
-       <script src="components/Services/serviceController.js" ></script>
-       <script src="components/Services/localStorageModel.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <script src="node_modules/angular-local-storage/dist/angular-local-storage.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>       
+        <script src="app.js" ></script>
+        <script src="indexController.js" ></script>
+        <script src="components/About/aboutController.js" ></script>
+        <script src="components/POI/poiCtrl.js" ></script>
+        <script src="components/Services/serviceController.js" ></script>
+        <script src="components/Services/localStorageModel.js"></script>
 
+
+
+ 
     </body>
     </html>
+    
+    
+
     

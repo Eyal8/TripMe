@@ -1,3 +1,5 @@
+
+
 angular.module('TripMe')
     // .service('myService', function () { this.set = function() {return "hello"} })
     .service('setHeadersToken',[ '$http', function ($http) {
@@ -27,18 +29,18 @@ angular.module('TripMe')
             $location.path('/poi')
         }
 
-        let serverUrl = 'http://localhost:3000/'
+        let serverUrl = 'http://localhost:8080/'
 
         let user = {
-            userName: 'eyal',
-            password: 'eyalR123',
+            userName: "Shir",
+            password: "abcd",
             isAdmin: true
         }
 
 
         self.signUp = function () {
             // register user
-            $http.post(serverUrl + "Users/", user)
+            $http.post(serverUrl + "users/", user)
                 .then(function (response) {
                     //First function handles success
                     self.signUp.content = response.data;
@@ -50,7 +52,7 @@ angular.module('TripMe')
 
         self.login = function () {
             // register user
-            $http.post(serverUrl + "general/login", user)
+            $http.post(serverUrl + "Users/login", user)
                 .then(function (response) {
                     //First function handles success
                     self.login.content = response.data.token;
