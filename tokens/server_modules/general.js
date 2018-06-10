@@ -37,7 +37,6 @@ router.get('/getCategories', function(req, res){
 })
 
 router.post('/register', function(req,res){
-    console.log("hegiaaa");
    var UserName = req.body.userName;
    var Password = req.body.password;
    var confirmedPassword = req.body.confirmedPassword;
@@ -48,6 +47,15 @@ router.post('/register', function(req,res){
    var Email = req.body.email;
    var categories = req.body.categories;
    var answersForRecovery = req.body.answersForRecovery;
+
+    DButilsAzure.execQuery("SELECT TOP 1 UserName FROM RegisteredUsers WHERE UserName='"+UserName+"'").then(function (recordSet) {
+        if(recordSet.length == 1){
+            res.json({ success: false, message: 'UserName already exists.' });
+        }
+    }).catch(function (err) {
+        res.send(err);
+            });
+
    if(UserName.length <3 || UserName.length > 8){
         res.json({ success: false, message: 'Please enter a 3 to 8 characters in UserName.' });
    }
@@ -63,20 +71,36 @@ router.post('/register', function(req,res){
    else if(Password != confirmedPassword){
         res.status(500).send({error: 'Passwords doesn\'t match'})
     }
+    else if(!validateEmail(Email))
+    {
+        res.json({ success: false, message: 'Please enter valid email.' });
+
+    }
+    else if(categories[0] == "" || categories[1] == "")
+    {
+        res.json({ success: false, message: 'Please choose two categories.' });
+    }
    else{
-        DButilsAzure.execQuery("INSERT INTO RegisteredUsers (UserName, Pass, FirstName, LastName, City, Country, Email,Answer1,Answer2, NumOfFavorites) VALUES ('"+UserName+"','"+Password+"','"+FirstName+"','"+LastName+"','"+City+"','"+Country+"','"+Email+"','"+answersForRecovery[0]+"','"+answersForRecovery[1]+"',0)").then(function (recordSet) {
-            res.send('User is registered in the system.')
-            }).catch(function (err) {
-                res.send(err);
-            });
+        var promises = [];
+        promises.push(DButilsAzure.execQuery("INSERT INTO RegisteredUsers (UserName, Pass, FirstName, LastName, City, Country, Email,Answer1,Answer2, NumOfFavorites) VALUES ('"+UserName+"','"+Password+"','"+FirstName+"','"+LastName+"','"+City+"','"+Country+"','"+Email+"','"+answersForRecovery[0]+"','"+answersForRecovery[1]+"',0)"));
         for(var i=0; i<categories.length;i++){
-            DButilsAzure.execQuery("INSERT INTO CategoriesForUser (CategoryName, UserName) VALUES ('"+categories[i]+"','"+UserName+"')").then(function (recordSet) {  
+            promises.push(DButilsAzure.execQuery("INSERT INTO CategoriesForUser (CategoryName, UserName) VALUES ('"+categories[i]+"','"+UserName+"')"))
+        }
+        Promise.all(promises).then(function(recordSet){
+            res.json({
+                success: true,
+                message: "User is registered in the system.."
+            })
             }).catch(function (err) {
                 res.send(err);
             });
-        }
     }
 });
+
+function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
 
 router.post('/login',function(req,res){
 

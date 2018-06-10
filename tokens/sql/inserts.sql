@@ -1,5 +1,5 @@
 INSERT INTO Categories (CategoryName) VALUES ('Food');
-INSERT INTO Categories (CategoryName) VALUES ('Historic sites');
+INSERT INTO Categories (CategoryName) VALUES ('Historic Sites');
 INSERT INTO Categories (CategoryName) VALUES ('Night Life');
 INSERT INTO Categories (CategoryName) VALUES ('Attractions');
 
