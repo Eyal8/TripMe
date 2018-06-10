@@ -8,13 +8,8 @@ angular.module('TripMe')
     
    /* self.selectedCity= function (id){
 
-<<<<<<< HEAD
-        console.log (self.selected )
-    }*/
-=======
         console.log (self.selected)
     }
->>>>>>> 3a15370b0ae017bd5a53a79af9d45f005439e5e7
 
  /*   self.addToCart = function (id, city) {
 
