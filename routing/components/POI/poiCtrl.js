@@ -23,5 +23,63 @@ angular.module('TripMe')
 
 
     }
+    self.updatePOIs = function(){
+        // register user
+        $http.get(serverUrl + "poi/update", user)
+        .then(function (response) {
+            //First function handles success
+            self.signUp.content = response.data;
+        }, function (response) {
+            //Second function handles error
+            self.signUp.content = "Something went wrong";
+        });
+    }
 
- }]);
+    self.get3PopRand = function(){
+        // register user
+        $http.get(serverUrl + "poi/get3PopRand", user)
+        .then(function (response) {
+            //First function handles success
+            self.signUp.content = response.data;
+        }, function (response) {
+            //Second function handles error
+            self.signUp.content = "Something went wrong";
+        });
+    }
+
+    self.getAllPOIs = function(){
+        // register user
+        $http.get(serverUrl + "poi/all", user)
+        .then(function (response) {
+            //First function handles success
+            self.signUp.content = response.data;
+        }, function (response) {
+            //Second function handles error
+            self.signUp.content = "Something went wrong";
+        });
+    }
+
+    self.getOnePOI = function(){
+        // register user
+        $http.get(serverUrl + "poi/:name", user)
+        .then(function (response) {
+            //First function handles success
+            self.signUp.content = response.data;
+        }, function (response) {
+            //Second function handles error
+            self.signUp.content = "Something went wrong";
+        });
+    }
+
+    self.updatePOIs = function(){
+        // register user
+        $http.get(serverUrl + "poi/update", user)
+        .then(function (response) {
+            //First function handles success
+            self.signUp.content = response.data;
+        }, function (response) {
+            //Second function handles error
+            self.signUp.content = "Something went wrong";
+        });
+    }
+}]);

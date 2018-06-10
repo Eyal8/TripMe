@@ -7,7 +7,7 @@ var util = require('util')
 var cors = require('cors');
 var morgan = require('morgan');
 var Connection = require('tedious').Connection;
-//app.use(cors());
+app.use(cors());
 var DButilsAzure = require('./DButils');
 var poi = require('./server_modules/poi');
 var general = require('./server_modules/general');
