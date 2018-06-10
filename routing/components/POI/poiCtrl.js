@@ -12,7 +12,7 @@ angular.module('TripMe')
 
     self.selectedCity= function (id){
 
-        console.log (self.selected )
+        console.log (self.selected)
     }
 
     self.addToCart = function (id, city) {

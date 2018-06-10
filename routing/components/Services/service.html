@@ -1,10 +1,149 @@
+<div>
+    <form name="form" novalidate>
+        <label>User Name:
+        <input type="text" ng-model="srvCtrl.user.userName" name="userName" required="" />
+        </label>
+        <br />
+        <div ng-show="form.$submitted || form.userName.$touched">
+        <div ng-show="form.userName.$error.required">Please enter a user name.</div>
+        </div>
+    
+        <label>Password:
+        <input type="password" ng-model="srvCtrl.user.password" name="password" required="" />
+        </label>
+        <br />
+        <div ng-show="form.$submitted || form.password.$touched">
+        <div ng-show="form.password.$error.required">Please enter a password.</div>
+        </div>
+    
+        <label>Confirmed Password:
+        <input type="password" ng-model="srvCtrl.user.confirmedPassword" name="confirmedPassword" required="" />
+        </label>
+        <br />
+        <div ng-show="form.$submitted || form.confirmedPassword.$touched">
+        <div ng-show="form.confirmedPassword.$error.required">Please enter the password again.</div>
+        </div>
+
+        <label>First Name:
+        <input type="text" ng-model="srvCtrl.user.firstName" name="firstName" required="" />
+        </label>
+        <br />
+        <div ng-show="form.$submitted || form.firstName.$touched">
+        <div ng-show="form.firstName.$error.required">Please enter your first name.</div>
+        </div>
+
+        <label>Last Name:
+        <input type="text" ng-model="srvCtrl.user.lastName" name="lastName" required="" />
+        </label>
+        <br />
+        <div ng-show="form.$submitted || form.lastName.$touched">
+        <div ng-show="form.lastName.$error.required">Please enter your last name.</div>
+        </div>
+
+        <label>City:
+        <input type="text" ng-model="srvCtrl.user.city" name="city" required="" />
+        </label>
+        <br />
+        <div ng-show="form.$submitted || form.city.$touched">
+        <div ng-show="form.city.$error.required">Please enter your city.</div>
+        </div>
+
+        <label>Country:
+        <input type="text" ng-model="srvCtrl.user.country" name="country" required="" />
+        </label>
+        <br />
+        <div ng-show="form.$submitted || form.country.$touched">
+        <div ng-show="form.country.$error.required">Please enter your country.</div>
+        </div>
+
+        <label>E-mail:
+        <input type="email" ng-model="srvCtrl.user.email" name="email" required="" />
+        </label>
+        <br />
+        <div ng-show="form.$submitted || form.email.$touched">
+        <span ng-show="form.email.$error.required">Please enter your email.</span>
+        <span ng-show="form.email.$error.email">This is not a valid email.</span>
+        </div>
+
+        <label>First Category:
+        <select ng-model="srvCtrl.user.categories[0]" name="categories[0]" required="">
+            <option value="" disabled selected>Select your category</option>
+            <option value="Food">Food</option>
+            <option value="Night Life">Night Life</option>
+            <option value="Historic Sites">Historic sites</option>
+            <option value="Attractions">Attractions</option>
+        </select>
+        </label><br>
+        Second Category:
+        <select ng-model="srvCtrl.user.categories[1]" name="categories[1]" required="">
+                <option value="" disabled selected>Select your category</option>
+                <option value="Food">Food</option>
+                <option value="Night Life">Night Life</option>
+                <option value="Historic Sites">Historic sites</option>
+                <option value="Attractions">Attractions</option>
+        </select><br>
+    
+        <label>First Question: What is your birth city?</label><br>
+
+        <label>First answer:
+        <input type="text" ng-model="srvCtrl.user.answersForRecovery[0]" name="answersForRecovery[0]" required="" />
+        </label>
+        <br />
+        <div ng-show="form.$submitted || form.answersForRecovery[0].$touched">
+        <div ng-show="form.answersForRecovery[0].$error.required">Please enter your answer to the first question.</div>
+        </div>
+
+
+        <label>Second Question: What is your mother's maiden name?</label><br>
+
+        <label>Second answer:
+        <input type="text" ng-model="srvCtrl.user.answersForRecovery[1]" name="answersForRecovery[1]" required="" />
+        </label>
+        <br />
+        <div ng-show="form.$submitted || form.answersForRecovery[1].$touched">
+        <div ng-show="form.answersForRecovery[1].$error.required">Please enter your answer to the first question.</div>
+        </div>
+
+        <pre>username = "{{user.userName}}"</pre>
+    </form>
+ </div>
+
+     <!-- 
+<form>
+    User Name: <input type="text" id="userName"><br>
+    Password: <input type="password" id="password"><br>
+    Confirmed Password: <input type="password" id="confirmedPassword"><br>
+    First Name: <input type="text" id="firstName"><br>
+    Last Name: <input type="text" id="lastName"><br>
+    City: <input type="text" id="city"><br>
+    Country: <input type="text" id="country"><br>
+    Email: <input type="email" id="email"><br>
+    First Category:
+    <select id="categories[0]">
+        <option value="" disabled selected>Select your category</option>
+        <option value="Food">Food</option>
+        <option value="Night Life">Night Life</option>
+        <option value="Historic Sites">Historic sites</option>
+        <option value="Attractions">Attractions</option>
+    </select><br>
+    Second Category:
+    <select id="categories[1]" value="">
+            <option value="" disabled selected>Select your category</option>
+            <option value="Food">Food</option>
+            <option value="Night Life">Night Life</option>
+            <option value="Historic Sites">Historic sites</option>
+            <option value="Attractions">Attractions</option>
+    </select><br>
+    First Question: What is your birth city?<br>
+    First answer: <input type="text" id="answersForRecovery[0]"><br>
+    Second Question: What is your mother's maiden name?<br>
+    Second answer: <input type="text" id="answersForRecovery[1]"><br>
+</form>-->
 <p>
-
     <button ng-click="srvCtrl.directToPOI()" >Click me to go to POI page</button>
-
 <br>
-<button ng-click="srvCtrl.signUp()">signUp</button>
-<span ng-bind="srvCtrl.signUp.content"></span>
+<button ng-click="srvCtrl.register()">Register</button>
+<span ng-bind="srvCtrl.register.content"></span>
 <br>
 <button ng-click="srvCtrl.login()">Login</button>
 <span ng-bind="srvCtrl.login.content"></span>
