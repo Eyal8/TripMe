@@ -9,7 +9,7 @@ angular.module('TripMe')
     self.getCountries = function(){
         $http.get(serverUrl + "general/getCountries")
         .then(function (response) {
-            let i = 0;
+            var i = 0;
             for (countries in response.data){
                 self.countries[i] = response.data[i];
                 i++;
@@ -40,9 +40,8 @@ angular.module('TripMe')
             .then(function (response) {
                 //First function handles success
                 self.register.content = response.data.message;
-                if(response.data.success = "true")
+                if(response.data.success == true)
                 {
-                    console.log("hegiaaa");
                     $location.path('/registered_users')
                 }
             }, function (response) {
