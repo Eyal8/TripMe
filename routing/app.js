@@ -27,7 +27,7 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
         })
         .when('/registered_users', {
             templateUrl: 'components/RegisteredUsers/ru.html',
-            controller: 'ruCtrl as ruCtrl'
+            controller: 'registeredUsersCtrl as ruCtrl'
         })
         .when('/singelPOI', {
             templateUrl: 'components/SinglePOI/singlePOI.html',

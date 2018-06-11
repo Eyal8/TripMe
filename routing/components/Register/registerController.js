@@ -40,8 +40,11 @@ angular.module('TripMe')
             .then(function (response) {
                 //First function handles success
                 self.register.content = response.data.message;
-                if(response.data.success == "true")
+                if(response.data.success = "true")
+                {
+                    console.log("hegiaaa");
                     $location.path('/registered_users')
+                }
             }, function (response) {
                 //Second function handles error
                 self.register.content = response.data.message;
