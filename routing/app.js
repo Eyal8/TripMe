@@ -13,10 +13,6 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
             templateUrl: 'components/Register/register.html',
             controller : 'registerController as rgCtrl'
         })
-        .when('/home', {
-            templateUrl: 'components/Home/home.html',
-            controller : 'homeController as hmCtrl'
-        })
         .when('/about', {
             templateUrl: 'components/About/about.html',
             controller : 'aboutController as abtCtrl'
