@@ -15,8 +15,6 @@ router.get('/getCountries', function(req,res){
         // we then pass the data to our method here
         parseString(data, function(err, result){
             if(err) console.log(err);
-            // here we log the results of our xml string conversion
-            console.log(result); 
             // save our json to a variable
             var json = result;
             var countries = [];

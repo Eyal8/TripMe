@@ -43,12 +43,6 @@ angular.module('TripMe')
                 });
         }*/
 
-        self.addTokenToLocalStorage = function () {
-            localStorageModel.addLocalStorage('token', self.login.content)
-        }
-
-
-
     }]);
 
 
