@@ -45,7 +45,12 @@ router.post('/register', function(req,res){
    var City = req.body.city;
    var Country = req.body.country;
    var Email = req.body.email;
-   var categories = req.body.categories;
+   var categories = [];
+   if(req.body.categories[0] && req.body.categories[1])
+   {
+        categories[0] = req.body.categories[0];
+        categories[1] = req.body.categories[1];
+   }
    var answersForRecovery = req.body.answersForRecovery;
 
     DButilsAzure.execQuery("SELECT TOP 1 UserName FROM RegisteredUsers WHERE UserName='"+UserName+"'").then(function (recordSet) {

@@ -1,8 +1,7 @@
-<<<<<<< HEAD
 <div>
     <form name="form" novalidate>
         <label>User Name:
-        <input type="text" ng-model="srvCtrl.user.userName" name="userName" required="" />
+        <input type="text" ng-model="rgCtrl.user.userName" name="userName" required="" />
         </label>
         <br />
         <div ng-show="form.$submitted || form.userName.$touched">
@@ -10,7 +9,7 @@
         </div>
     
         <label>Password:
-        <input type="password" ng-model="srvCtrl.user.password" name="password" required="" />
+        <input type="password" ng-model="rgCtrl.user.password" name="password" required="" />
         </label>
         <br />
         <div ng-show="form.$submitted || form.password.$touched">
@@ -18,7 +17,7 @@
         </div>
     
         <label>Confirmed Password:
-        <input type="password" ng-model="srvCtrl.user.confirmedPassword" name="confirmedPassword" required="" />
+        <input type="password" ng-model="rgCtrl.user.confirmedPassword" name="confirmedPassword" required="" />
         </label>
         <br />
         <div ng-show="form.$submitted || form.confirmedPassword.$touched">
@@ -26,7 +25,7 @@
         </div>
 
         <label>First Name:
-        <input type="text" ng-model="srvCtrl.user.firstName" name="firstName" required="" />
+        <input type="text" ng-model="rgCtrl.user.firstName" name="firstName" required="" />
         </label>
         <br />
         <div ng-show="form.$submitted || form.firstName.$touched">
@@ -34,7 +33,7 @@
         </div>
 
         <label>Last Name:
-        <input type="text" ng-model="srvCtrl.user.lastName" name="lastName" required="" />
+        <input type="text" ng-model="rgCtrl.user.lastName" name="lastName" required="" />
         </label>
         <br />
         <div ng-show="form.$submitted || form.lastName.$touched">
@@ -42,7 +41,7 @@
         </div>
 
         <label>City:
-        <input type="text" ng-model="srvCtrl.user.city" name="city" required="" />
+        <input type="text" ng-model="rgCtrl.user.city" name="city" required="" />
         </label>
         <br />
         <div ng-show="form.$submitted || form.city.$touched">
@@ -50,22 +49,15 @@
         </div>
 
         <label>Country:
-        <input type="text" ng-model="srvCtrl.user.country" name="country" required="" />
+        <input type="text" ng-model="rgCtrl.user.country" name="country" required="" />
         </label>
         <br />
         <div ng-show="form.$submitted || form.country.$touched">
         <div ng-show="form.country.$error.required">Please enter your country.</div>
         </div>
 
-        <label>Country:
-            <select  ng-model="srvCtrl.user.country_xml" name="country" required="">
-                <option ng-repeat="country in srvCtrl.countries"></option>
-            </select>
-            </label>
-
-
         <label>E-mail:
-        <input type="email" ng-model="srvCtrl.user.email" name="email" required="" />
+        <input type="email" ng-model="rgCtrl.user.email" name="email" required="" />
         </label>
         <br />
         <div ng-show="form.$submitted || form.email.$touched">
@@ -74,27 +66,34 @@
         </div>
 
         <label>First Category:
-        <select ng-model="srvCtrl.user.categories[0]" name="categories[0]" required="">
+        <select ng-model="rgCtrl.user.categories[0]" name="categories[0]" required>
             <option value="" disabled selected>Select your category</option>
             <option value="Food">Food</option>
             <option value="Night Life">Night Life</option>
             <option value="Historic Sites">Historic sites</option>
             <option value="Attractions">Attractions</option>
         </select>
-        </label><br>
+        </label>
+        <br />
+        <div ng-show="form.$submitted || form.categories[0].$touched">
+        <div ng-show="form.categories[0].$error.required">Please enter your first category.</div>
+        </div><br>
         Second Category:
-        <select ng-model="srvCtrl.user.categories[1]" name="categories[1]" required="">
+        <select ng-model="rgCtrl.user.categories[1]" name="categories[1]" required>
                 <option value="" disabled selected>Select your category</option>
                 <option value="Food">Food</option>
                 <option value="Night Life">Night Life</option>
                 <option value="Historic Sites">Historic sites</option>
                 <option value="Attractions">Attractions</option>
-        </select><br>
+        </select><br/>
+        <div ng-show="form.$submitted || form.categories[1].$touched">
+        <div ng-show="form.categories[1].$error.required">Please enter your second category.</div>
+        </div><br>
     
         <label>First Question: What is your birth city?</label><br>
 
         <label>First answer:
-        <input type="text" ng-model="srvCtrl.user.answersForRecovery[0]" name="answersForRecovery[0]" required="" />
+        <input type="text" ng-model="rgCtrl.user.answersForRecovery[0]" name="answersForRecovery[0]" required="" />
         </label>
         <br />
         <div ng-show="form.$submitted || form.answersForRecovery[0].$touched">
@@ -105,57 +104,16 @@
         <label>Second Question: What is your mother's maiden name?</label><br>
 
         <label>Second answer:
-        <input type="text" ng-model="srvCtrl.user.answersForRecovery[1]" name="answersForRecovery[1]" required="" />
+        <input type="text" ng-model="rgCtrl.user.answersForRecovery[1]" name="answersForRecovery[1]" required="" />
         </label>
         <br />
         <div ng-show="form.$submitted || form.answersForRecovery[1].$touched">
         <div ng-show="form.answersForRecovery[1].$error.required">Please enter your answer to the first question.</div>
         </div>
-
-        <pre>username = "{{user.userName}}"</pre>
     </form>
  </div>
 
-     <!-- 
-<form>
-    User Name: <input type="text" id="userName"><br>
-    Password: <input type="password" id="password"><br>
-    Confirmed Password: <input type="password" id="confirmedPassword"><br>
-    First Name: <input type="text" id="firstName"><br>
-    Last Name: <input type="text" id="lastName"><br>
-    City: <input type="text" id="city"><br>
-    Country: <input type="text" id="country"><br>
-    Email: <input type="email" id="email"><br>
-    First Category:
-    <select id="categories[0]">
-        <option value="" disabled selected>Select your category</option>
-        <option value="Food">Food</option>
-        <option value="Night Life">Night Life</option>
-        <option value="Historic Sites">Historic sites</option>
-        <option value="Attractions">Attractions</option>
-    </select><br>
-    Second Category:
-    <select id="categories[1]" value="">
-            <option value="" disabled selected>Select your category</option>
-            <option value="Food">Food</option>
-            <option value="Night Life">Night Life</option>
-            <option value="Historic Sites">Historic sites</option>
-            <option value="Attractions">Attractions</option>
-    </select><br>
-    First Question: What is your birth city?<br>
-    First answer: <input type="text" id="answersForRecovery[0]"><br>
-    Second Question: What is your mother's maiden name?<br>
-    Second answer: <input type="text" id="answersForRecovery[1]"><br>
-</form>-->
-=======
->>>>>>> 1c3213c668d40ca10433d6faf8c3e3e7c3abe186
-<p>
-    <button ng-click="srvCtrl.directToPOI()" >Click me to go to POI page</button>
-<button ng-click="srvCtrl.login()">Login</button>
-<span ng-bind="srvCtrl.login.content"></span>
+ <br>
+<button ng-click="form.$valid && rgCtrl.register()">Register</button>
+<span ng-bind="rgCtrl.register.content"></span>
 <br>
-<button ng-click="srvCtrl.reg()">validate token</button>
-<span ng-bind="srvCtrl.reg.content"></span>
-<br>
-<button ng-click="srvCtrl.addTokenToLocalStorage()">addTokenToLocalStorage</button>
-</p>
