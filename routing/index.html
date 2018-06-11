@@ -18,7 +18,7 @@
         <div ng-view></div>
 
         <div id="side_pois">
-            <table>
+            <table id="pois_table">
                     <tr ng-repeat="(id, poi) in indxCtrl.pois" >
                             <td>
                                 <a href="#/singlePOI"> <span ng-bind="poi.name"></span></a>
