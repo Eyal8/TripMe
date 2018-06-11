@@ -9,10 +9,10 @@ angular.module('TripMe')
         $http.post(serverUrl + "general/register", self.user)
             .then(function (response) {
                 //First function handles success
-                self.register.content = response.data;
+                self.register.content = response.data.message;
             }, function (response) {
                 //Second function handles error
-                self.register.content = "Something went wrong";
+                self.register.content = response.data.message;
             });
     }
 

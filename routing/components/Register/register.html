@@ -1,3 +1,4 @@
+<h1>Please fill all the fields in order to register</h1>
 <div>
     <form name="form" novalidate>
         <label>User Name:
@@ -114,6 +115,6 @@
  </div>
 
  <br>
-<button ng-click="form.$valid && rgCtrl.register()">Register</button>
+<button ng-click="rgCtrl.register()" ng-disabled="!form.$valid">Register</button>
 <span ng-bind="rgCtrl.register.content"></span>
 <br>
