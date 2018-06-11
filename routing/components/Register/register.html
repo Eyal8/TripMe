@@ -1,3 +1,4 @@
+<h1>Please fill all the fields in order to register</h1>
 <div>
     <form name="form" novalidate>
         <label>User Name:
@@ -49,12 +50,15 @@
         </div>
 
         <label>Country:
-        <input type="text" ng-model="rgCtrl.user.country" name="country" required="" />
+        <select ng-model="rgCtrl.user.country" name="country" required>
+                <option value="" disabled selected>Select your country</option>
+                <option ng-repeat="country in rgCtrl.countries" value="{{country}}">{{country}}</option>
+        </select>
         </label>
         <br />
         <div ng-show="form.$submitted || form.country.$touched">
         <div ng-show="form.country.$error.required">Please enter your country.</div>
-        </div>
+        </div><br>
 
         <label>E-mail:
         <input type="email" ng-model="rgCtrl.user.email" name="email" required="" />
@@ -66,54 +70,48 @@
         </div>
 
         <label>First Category:
-        <select ng-model="rgCtrl.user.categories[0]" name="categories[0]" required>
+        <select ng-model="rgCtrl.user.categories[0]" name="categories0" required>
             <option value="" disabled selected>Select your category</option>
-            <option value="Food">Food</option>
-            <option value="Night Life">Night Life</option>
-            <option value="Historic Sites">Historic sites</option>
-            <option value="Attractions">Attractions</option>
+            <option ng-repeat="category in rgCtrl.categories" value="{{category.CategoryName}}">{{category.CategoryName}}</option>
         </select>
         </label>
         <br />
-        <div ng-show="form.$submitted || form.categories[0].$touched">
-        <div ng-show="form.categories[0].$error.required">Please enter your first category.</div>
-        </div><br>
+        <div ng-show="form.$submitted || form.categories0.$touched">
+        <div ng-show="form.categories0.$error.required">Please enter your first category.</div>
+        </div>
         Second Category:
-        <select ng-model="rgCtrl.user.categories[1]" name="categories[1]" required>
+        <select ng-model="rgCtrl.user.categories[1]" name="categories1" required>
                 <option value="" disabled selected>Select your category</option>
-                <option value="Food">Food</option>
-                <option value="Night Life">Night Life</option>
-                <option value="Historic Sites">Historic sites</option>
-                <option value="Attractions">Attractions</option>
-        </select><br/>
-        <div ng-show="form.$submitted || form.categories[1].$touched">
-        <div ng-show="form.categories[1].$error.required">Please enter your second category.</div>
+                <option ng-repeat="category in rgCtrl.categories" value="{{category.CategoryName}}">{{category.CategoryName}}</option>
+        </select>
+        <div ng-show="form.$submitted || form.categories1.$touched">
+        <div ng-show="form.categories1.$error.required">Please enter your second category.</div>
         </div><br>
     
         <label>First Question: What is your birth city?</label><br>
 
         <label>First answer:
-        <input type="text" ng-model="rgCtrl.user.answersForRecovery[0]" name="answersForRecovery[0]" required="" />
+        <input type="text" ng-model="rgCtrl.user.answersForRecovery[0]" name="answersForRecovery0" required="" />
         </label>
         <br />
-        <div ng-show="form.$submitted || form.answersForRecovery[0].$touched">
-        <div ng-show="form.answersForRecovery[0].$error.required">Please enter your answer to the first question.</div>
+        <div ng-show="form.$submitted || form.answersForRecovery0.$touched">
+        <div ng-show="form.answersForRecovery0.$error.required">Please enter your answer to the first question.</div>
         </div>
 
 
         <label>Second Question: What is your mother's maiden name?</label><br>
 
         <label>Second answer:
-        <input type="text" ng-model="rgCtrl.user.answersForRecovery[1]" name="answersForRecovery[1]" required="" />
+        <input type="text" ng-model="rgCtrl.user.answersForRecovery[1]" name="answersForRecovery1" required="" />
         </label>
-        <br />
-        <div ng-show="form.$submitted || form.answersForRecovery[1].$touched">
-        <div ng-show="form.answersForRecovery[1].$error.required">Please enter your answer to the first question.</div>
+        <br>
+        <div ng-show="form.$submitted || form.answersForRecovery1.$touched">
+        <div ng-show="form.answersForRecovery1.$error.required">Please enter your answer to the first question.</div>
         </div>
     </form>
  </div>
 
  <br>
-<button ng-click="form.$valid && rgCtrl.register()">Register</button>
+<button ng-click="rgCtrl.register()" ng-disabled="!form.$valid">Register</button>
 <span ng-bind="rgCtrl.register.content"></span>
 <br>

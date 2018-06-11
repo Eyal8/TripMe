@@ -9,14 +9,9 @@ var parseString = require('xml2js').parseString;
 router.get('/getCountries', function(req,res){
     fs.readFile('countries.xml', 'utf-8', function (err, data){
         if(err) console.log(err);
-        // we log out the readFile results    
-        console.log(data);
-    
         // we then pass the data to our method here
         parseString(data, function(err, result){
             if(err) console.log(err);
-            // here we log the results of our xml string conversion
-            console.log(result); 
             // save our json to a variable
             var json = result;
             var countries = [];
@@ -52,7 +47,6 @@ router.post('/register', function(req,res){
         categories[1] = req.body.categories[1];
    }
    var answersForRecovery = req.body.answersForRecovery;
-
     DButilsAzure.execQuery("SELECT TOP 1 UserName FROM RegisteredUsers WHERE UserName='"+UserName+"'").then(function (recordSet) {
         if(recordSet.length == 1){
             res.json({ success: false, message: 'UserName already exists.' });
@@ -74,7 +68,7 @@ router.post('/register', function(req,res){
         res.json({ success: false, message: 'Please enter only numbers and alphabet characters for your password.' });
    }   
    else if(Password != confirmedPassword){
-        res.status(500).send({error: 'Passwords doesn\'t match'})
+        res.json({ success: false, message: 'Passwords and confirmed password don\'t match.' });
     }
     else if(!validateEmail(Email))
     {
@@ -84,6 +78,10 @@ router.post('/register', function(req,res){
     else if(categories[0] == "" || categories[1] == "")
     {
         res.json({ success: false, message: 'Please choose two categories.' });
+    }
+    else if(categories[0] == categories[1])
+    {
+        res.json({ success: false, message: 'Please choose two different categories.' });
     }
    else{
         var promises = [];
