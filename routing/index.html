@@ -12,10 +12,11 @@
                 <li><a href="#/login">Login</a></li>
 				<li><a href="#/about">About</a></li>
 				<li><a href="#/service">Service</a></li>
-			</div>            
+			</div>
         <br>
         <br>
-        <div  ng-view></div>
+        <div ng-view></div>
+
         <div id="side_pois">
             <table>
                     <tr ng-repeat="(id, poi) in indxCtrl.pois" >
@@ -37,6 +38,7 @@
             </table>
         </div>
     Selected city: {{indxCtrl.selected}}
+
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
         <script src="node_modules/angular-local-storage/dist/angular-local-storage.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>       
@@ -45,11 +47,11 @@
         <script src="components/About/aboutController.js" ></script>
         <script src="components/Register/registerController.js" ></script>
         <script src="components/Login/loginController.js" ></script>
-        <script src="components/POI/poiCtrl.js" ></script>
         <script src="components/Services/serviceController.js" ></script>
         <script src="components/Services/localStorageModel.js"></script>
         <script src="components/SinglePOI/singlePOICtrl.js" ></script>
         <script src="components/RegisteredUsers/ruCtrl.js"></script>
+        <script src="components/Guest/guestCtrl.js"></script>
 
 
  

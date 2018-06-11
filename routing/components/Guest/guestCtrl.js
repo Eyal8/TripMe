@@ -1,19 +1,21 @@
 angular.module('TripMe')
- .controller('guestCtrl', ['$http', function($http) {
+ .controller('guestCtrl', ['$location', '$http', function($location, $http) {
   
     self = this;
 
     let serverUrl = 'http://localhost:3000/'
-
+   /* if(setHeadersToken.get() == undefined){
+         $location.path('/guest');
+    }*/
     self.get3PopRand = function(){
         // get 3 random popular pois
         $http.get(serverUrl + "poi/get3PopRand")
         .then(function (response) {
             //First function handles success
             let i = 0;
-                self.pois = {}
+                self.rand_pois = {}
                 for (poi in response.data){
-                    self.pois[i] = {name: response.data[i].POI_name, poi_img: response.data[i].PicturePath}
+                    self.rand_pois[i] = {name: response.data[i].POI_name, num_of_views: response.data[i].NumOfViews, poi_description: response.data[i].POI_description, poi_rank: response.data[i].POI_rank, poi_review1: response.data[i].Review1, poi_review2: response.data[i].Review2, poi_img: response.data[i].PicturePath}
                     i++;
                 }
         }, function (response) {
@@ -21,8 +23,8 @@ angular.module('TripMe')
             self.signUp.content = "Something went wrong";
         });
     }
-
-    
+    self.get3PopRand();
+    /*
     self.getOnePOI = function(){
         // register user
         $http.get(serverUrl + "poi/:name", user)
