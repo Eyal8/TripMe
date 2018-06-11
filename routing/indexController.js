@@ -23,8 +23,7 @@ angular.module('TripMe')
         }
         self.getAllPOIs();
     
-           self.selectedCity= function (id){
-
-        console.log (self.selected )
-    }
+        self.selectedCity= function (id){
+            console.log (self.selected )
+        }
     }]);
