@@ -11,6 +11,10 @@ angular.module('TripMe')
             console.log("set")
 
         }
+        this.get = function(){
+            let tok = $http.defaults.headers.common[ 'x-access-token' ];
+            return tok;
+        }
 
         this.userName='shir'
  

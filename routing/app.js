@@ -17,17 +17,17 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
             templateUrl: 'components/About/about.html',
             controller : 'aboutController as abtCtrl'
         })
-        .when('/poi', {
-            templateUrl: 'components/POI/poi.html',
-            controller : 'poiCtrl as poiCtrl'
+        .when('/guest', {
+            templateUrl: 'components/Guest/guest.html',
+            controller : 'guestCtrl as gstCtrl'
         })
         .when('/registered_users', {
             templateUrl: 'components/RegisteredUsers/ru.html',
             controller: 'ruCtrl as ruCtrl'
         })
-        .when('/singelPOI', {
+        .when('/singlePOI', {
             templateUrl: 'components/SinglePOI/singlePOI.html',
-            controller: 'SinglePOICtrl as sglCtrl'
+            controller: 'singlePOICtrl as sglCtrl'
         })
         .when('/service', {
             templateUrl: 'components/Services/service.html',

@@ -10,31 +10,31 @@
                 <li><a href="#/home">Home</a></li>
                 <li><a href="#/register">Register</a></li>
 				<li><a href="#/about">About</a></li>
-				<li><a href="#/poi">My POIs</a></li>
 				<li><a href="#/service">Service</a></li>
 			</div>            
         <br>
         <br>
         <div  ng-view></div>
-
-    <table>
-            <tr ng-repeat="(id, poi) in indxCtrl.pois" >
-                    <td>
-                           <a href="#/singlePOI"> <span ng-bind="poi.name"></span></a>
-                    <br> 
-                    <a href="#/singlePOI"><img ng-style="{'height': '100px','width': '170px', 'border-radius': '10px'}" ng-src="../../tokens{{poi.poi_img}}"></a>
+        <div id="side_pois">
+            <table>
+                    <tr ng-repeat="(id, poi) in indxCtrl.pois" >
+                            <td>
+                                <a href="#/singlePOI"> <span ng-bind="poi.name"></span></a>
+                            <br> 
+                            <a href="#/singlePOI"><img ng-style="{'height': '100px','width': '170px', 'border-radius': '10px'}" ng-src="../../tokens{{poi.poi_img}}"></a>
+                                    
+                            <br>
+                                
+                            </td>
+                            <td>
+                                    <!-- with radio button we would like one data model for each option -->
+                                    <input type="radio"  value="{{poi.name}}" ng-model="indxCtrl.selected" ng-change="indxCtrl.setCurrentPOI({{poi.name}})">
+                            </td>
+                    </tr>
                             
-                    <br>
-                        
-                    </td>
-                    <td>
-                            <!-- with radio button we would like one data model for each option -->
-                            <input type="radio"  value="{{poi.name}}_{{id}}" ng-model="indxCtrl.selected">
-                    </td>
-            </tr>
                     
-            
-    </table>
+            </table>
+        </div>
     Selected city: {{indxCtrl.selected}}
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
         <script src="node_modules/angular-local-storage/dist/angular-local-storage.min.js"></script>
@@ -43,7 +43,7 @@
         <script src="indexController.js" ></script>
         <script src="components/About/aboutController.js" ></script>
         <script src="components/Register/registerController.js" ></script>
-        <script src="components/POI/poiCtrl.js" ></script>
+        <script src="components/Guest/guestCtrl.js" ></script>
         <script src="components/Services/serviceController.js" ></script>
         <script src="components/Services/localStorageModel.js"></script>
         <script src="components/SinglePOI/singlePOICtrl.js" ></script>

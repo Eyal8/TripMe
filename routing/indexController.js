@@ -1,10 +1,20 @@
 angular.module('TripMe')
-    .controller('indexController', ['$http', 'setHeadersToken', function ($http, setHeadersToken) {
+    .service('singlePOIService',[ '$http', function ($http) {        
+        self.setCurrentPOI = function(poi){
+            this.cur_poi = poi;
+            console.log("current poi set")
+        }
+    }])
+    .controller('indexController', ['$location', '$http', 'singlePOIService', 'setHeadersToken', function ($location, $http, singlePOIService, setHeadersToken) {
 
 
         self = this;
-
-        self.userName = setHeadersToken.userName;
+        if(setHeadersToken.get() == undefined){
+            $location.path('/guest');
+        }
+        else{
+            $location.path('/registered_users');
+        }
         let serverUrl = 'http://localhost:3000/'
 
         self.getAllPOIs = function(){
@@ -24,6 +34,7 @@ angular.module('TripMe')
         self.getAllPOIs();
     
         self.selectedCity= function (id){
-            console.log (self.selected )
+            //console.log (self.selected )
+            singlePOIService.setCurrentPOI(self.selected)
         }
     }]);
