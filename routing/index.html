@@ -19,9 +19,25 @@
         <img ng-src="https://imgix.bustle.com/elite-daily/2017/05/08124701/aladdin-genie-prequel-2.jpg?w=998&h=598&fit=crop&crop=faces&auto=format&q=70" height="150px">
 
 
-    </div>
-
-        
+    <table>
+            <tr ng-repeat="(id, poi) in indxCtrl.pois" >
+                    <td>
+                           <a href="#/singlePOI"> <span ng-bind="poi.name"></span></a>
+                    <br> 
+                    <a href="#/singlePOI"><img ng-style="{'height': '100px','width': '170px', 'border-radius': '10px'}" ng-src="../../tokens{{poi.poi_img}}"></a>
+                            
+                    <br>
+                        
+                    </td>
+                    <td>
+                            <!-- with radio button we would like one data model for each option -->
+                            <input type="radio"  value="{{poi.name}}_{{id}}" ng-model="indxCtrl.selected">
+                    </td>
+            </tr>
+                    
+            
+    </table>
+    Selected city: {{indxCtrl.selected}}
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
         <script src="node_modules/angular-local-storage/dist/angular-local-storage.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>       
@@ -31,7 +47,8 @@
         <script src="components/POI/poiCtrl.js" ></script>
         <script src="components/Services/serviceController.js" ></script>
         <script src="components/Services/localStorageModel.js"></script>
-
+        <script src="components/Services/singlePOICtrl.js" ></script>
+        <script src="components/Services/ruCtrl.js"></script>
 
 
  

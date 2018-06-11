@@ -56,6 +56,13 @@
         <div ng-show="form.country.$error.required">Please enter your country.</div>
         </div>
 
+        <label>Country:
+            <select  ng-model="srvCtrl.user.country_xml" name="country" required="">
+                <option ng-repeat="country in srvCtrl.countries"></option>
+            </select>
+            </label>
+
+
         <label>E-mail:
         <input type="email" ng-model="srvCtrl.user.email" name="email" required="" />
         </label>
