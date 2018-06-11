@@ -7,8 +7,12 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
 
 
     $routeProvider.when('/', {
-        template: '<h1>This is the default route</h1>'
+       // template: '<h1>This is the default route</h1>'
     })
+        .when('/forgotPassword', {
+            templateUrl: 'components/ForgotPassword/forgotPassword.html',
+            controller : 'forgotPasswordController as frgtCtrl'
+        })
         .when('/login', {
             templateUrl: 'components/Login/login.html',
             controller : 'loginController as lgnCtrl'

@@ -1,6 +1,6 @@
-<h1>Please fill all the fields in order to login</h1>
+<h1 style="margin-left: 30%">Please fill all the fields in order to login</h1>
 <div>
-    <form name="form" novalidate>
+    <form style="margin-left: 30%" name="form" novalidate>
         <label>User Name:
         <input type="text" ng-model="lgnCtrl.user.userName" name="userName" required="" />
         </label>
@@ -20,36 +20,7 @@
  </div>
 
  <br>
-<button ng-click="lgnCtrl.login()" ng-disabled="!form.$valid">Login</button>
+<button style="margin-left: 30%" ng-click="lgnCtrl.login()" ng-disabled="!form.$valid">Login</button>
 <span ng-bind="lgnCtrl.login.content"></span>
 <br>
-
-<h1>Forget your password?</h1>
-
-<div>
-        <form name="form2" novalidate>
-            <label>First Question: What is your birth city?</label><br>
-            <label>Answer to the first question:
-            <input type="text" ng-model="lgnCtrl.user.firstAns" name="firstAns" required="" />
-            </label>
-            <br />
-            <div ng-show="form2.$submitted || form.firstAns.$touched">
-            <div ng-show="form2.firstAns.$error.required">Please enter an answer.</div>
-            </div>
-        
-            <label>Second Question: What is your mother's maiden name?</label><br>
-
-            <label>Answer to the second question:
-            <input type="text" ng-model="lgnCtrl.user.secondAns" name="secondAns" required="" />
-            </label>
-            <br />
-            <div ng-show="form2.$submitted || form2.secondAns.$touched">
-            <div ng-show="form2.secondAns.$error.required">Please enter a answer.</div>
-            </div>
-        </form>
-     </div>
-
-     <br>
-     <button ng-click="lgnCtrl.getPassword()" ng-disabled="!form2.$valid">Get my password</button>
-     <span ng-bind="lgnCtrl.getPassword.content"></span>
-     <br>
+<button style="margin-left: 30%" ng-click="lgnCtrl.forgotPassword()">Forgot my password</button>

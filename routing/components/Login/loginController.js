@@ -1,5 +1,5 @@
 angular.module('TripMe')
- .controller('loginController', ['$http', 'localStorageModel', function($http, localStorageModel) {
+ .controller('loginController', ['$http', 'localStorageModel', '$location', function($http, localStorageModel, $location) {
   
     self = this;
     let serverUrl = 'http://localhost:3000/'
@@ -17,6 +17,10 @@ angular.module('TripMe')
             });
     }
 
+    self.forgotPassword = function(){
+        $location.path('/forgotPassword');
+    }
+//TODO: מתי משתמשים?
     self.addTokenToLocalStorage = function () {
         localStorageModel.addLocalStorage('token', self.login.content)
     }
