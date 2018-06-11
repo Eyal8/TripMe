@@ -28,18 +28,6 @@ angular.module('TripMe')
 
         let serverUrl = 'http://localhost:3000/'
 
-            self.login = function () {
-            // register user
-            $http.post(serverUrl + "general/login", user)
-                .then(function (response) {
-                    //First function handles success
-                    self.login.content = response.data.token;
-                    setHeadersToken.set(self.login.content)
-                }, function (response) {
-                    //Second function handles error
-                    self.login.content = "Something went wrong";
-                });
-        }
 
   /*      self.reg = function () {
             // register user

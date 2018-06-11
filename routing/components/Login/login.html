@@ -1,0 +1,25 @@
+<h1>Please fill all the fields in order to login</h1>
+<div>
+    <form name="form" novalidate>
+        <label>User Name:
+        <input type="text" ng-model="lgnCtrl.user.userName" name="userName" required="" />
+        </label>
+        <br />
+        <div ng-show="form.$submitted || form.userName.$touched">
+        <div ng-show="form.userName.$error.required">Please enter a user name.</div>
+        </div>
+    
+        <label>Password:
+        <input type="password" ng-model="lgnCtrl.user.password" name="password" required="" />
+        </label>
+        <br />
+        <div ng-show="form.$submitted || form.password.$touched">
+        <div ng-show="form.password.$error.required">Please enter a password.</div>
+        </div>
+    </form>
+ </div>
+
+ <br>
+<button ng-click="lgnCtrl.login()" ng-disabled="!form.$valid">Login</button>
+<span ng-bind="lgnCtrl.login.content"></span>
+<br>

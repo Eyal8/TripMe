@@ -9,6 +9,10 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
     $routeProvider.when('/', {
         template: '<h1>This is the default route</h1>'
     })
+        .when('/login', {
+            templateUrl: 'components/Login/login.html',
+            controller : 'loginController as lgnCtrl'
+        })
         .when('/register', {
             templateUrl: 'components/Register/register.html',
             controller : 'registerController as rgCtrl'
