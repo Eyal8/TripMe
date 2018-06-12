@@ -198,25 +198,33 @@ router.post('/login',function(req,res){
 })
 
 router.post('/forgotpass',function(req,res){
-    var userName = req.body.userName;
+    var UserName = req.body.userName;
     var userAnswers = [];
     userAnswers[0] = req.body.answer[0];
     userAnswers[1] = req.body.answer[1];
-    DButilsAzure.execQuery("SELECT Answer1, Answer2, Pass FROM RegisteredUsers WHERE UserName='"+userName+"'").then(function (recordSet) {
-        if(userAnswers[0] == recordSet[0].Answer1 && userAnswers[1] == recordSet[0].Answer2){
-            console.log("hayushhhhshshshshs");
-            res.json({
-                success: true,
-                message: "Your password is:" + recordSet[0].Pass
-            })
+    DButilsAzure.execQuery("SELECT TOP 1 UserName FROM RegisteredUsers WHERE UserName='"+UserName+"'").then(function (recordSet) {
+        if(recordSet.length == 0){
+            res.send({success: false, message: 'UserName doesn\'t exist.'});
         }
         else
         {
-            console.log("elsee");
-            res.json({
-                success: false,
-                message: "Answers don\'t match"
-            })
+            DButilsAzure.execQuery("SELECT Answer1, Answer2, Pass FROM RegisteredUsers WHERE UserName='"+UserName+"'").then(function (recordSet) {
+                if(userAnswers[0] == recordSet[0].Answer1 && userAnswers[1] == recordSet[0].Answer2){
+                    res.json({
+                        success: true,
+                        message: "Your password is:" + recordSet[0].Pass
+                    })
+                }
+                else
+                {
+                    res.json({
+                        success: false,
+                        message: "Answers don\'t match"
+                    })
+                }
+                }).catch(function (err) {
+                    res.send(err);
+                        });
         }
     }).catch(function (err) {
         res.send(err);

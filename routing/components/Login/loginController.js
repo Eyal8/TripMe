@@ -8,11 +8,11 @@ angular.module('TripMe')
         // register user
         $http.post(serverUrl + "general/login", self.user)
             .then(function (response) {
-                //First function handles success
                 self.login.content = response.data.message;
                 setHeadersToken.set(response.data.token);
+                //self.addTokenToLocalStorage
+                $location.path('/registered_users');
             }, function (response) {
-                //Second function handles error
                 self.login.content = response.data.message;
             });
     }
