@@ -43,8 +43,8 @@ angular.module('TripMe')
         getAllPOIs();
 
     
-        self.selectedCity= function (id){
+       // self.selectedCity= function (id){
             //console.log (self.selected )
-            singlePOIService.setCurrentPOI(self.selected)
-        }
+         //   singlePOIService.setCurrentPOI(self.selected)
+       // }
     }]);

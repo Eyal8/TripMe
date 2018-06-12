@@ -1,6 +1,9 @@
 body{
 	background-image: url("img/background.png");
 }
+
+
+/**** GENERAL ****/
 #topnav
 {
 	z-index: 999;
@@ -34,13 +37,38 @@ body{
 	background-color: rgba(200,80,255,0.6);
 }
 
+#pois_table{
+	top:100px;
+	position: absolute;
+	overflow: auto;
+
+}
+
+#side_pois{
+}
+
+/**** GUEST ****/
+#guest_table{
+	width: 75%;
+	margin: 0 auto;
+}
+#guest_table tr td{
+	width:33.33%;
+}
+
+/**** ABOUT ****/
 #shivuk_img{
-    margin-left: 30%;
+    margin: 0 auto;
     width: 400px;
     height: 400px;
 
 }
-#pois_table{
-	top:100px;
-	position: absolute;
+
+
+/**** REGISTERED USERS ****/
+#ru_fav_table{
+
+}
+#ru_recent_table{
+	
 }
