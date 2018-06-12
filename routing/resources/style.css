@@ -1,6 +1,9 @@
 body{
-	background-image: url("background.jpg");
+	background-image: url("img/background.png");
 }
+
+
+/**** GENERAL ****/
 #topnav
 {
 	z-index: 999;
@@ -13,13 +16,13 @@ body{
 	overflow: hidden;
 	list-style-type: none;
     margin: auto;
-	width:950px;
+	width:60%;
     background-color: rgba(200,180,240,0.8);
     border-radius: 12px;
 }
 #topnav li{
 	float: left;
-	width:14.2857142857%;
+	width:20%;
 	font-weight:bold;
 }
 #topnav li a{
@@ -34,13 +37,38 @@ body{
 	background-color: rgba(200,80,255,0.6);
 }
 
+#pois_table{
+	top:100px;
+	position: absolute;
+	overflow: auto;
+
+}
+
+#side_pois{
+}
+
+/**** GUEST ****/
+#guest_table{
+	width: 75%;
+	margin: 0 auto;
+}
+#guest_table tr td{
+	width:33.33%;
+}
+
+/**** ABOUT ****/
 #shivuk_img{
-    margin-left: 30%;
+    margin: 0 auto;
     width: 400px;
     height: 400px;
 
 }
-#pois_table{
-	top:100px;
-	position: absolute;
+
+
+/**** REGISTERED USERS ****/
+#ru_fav_table{
+
+}
+#ru_recent_table{
+	
 }

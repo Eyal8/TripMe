@@ -1,1 +1,60 @@
 Hello <span ng-bind="ruCtrl.userName.content"></span>
+
+
+<table id="ru_fav_table">
+    <tr>
+            <td ng-repeat="(id, poi) in ruCtrl.fav_pois">
+                <a href="#/singlePOI"> <span ng-bind="poi.name"></span></a>
+                <br> 
+                <a href="#/singlePOI"><img ng-style="{'height': '100px','width': '150px', 'border-radius': '10px'}" ng-src="../../tokens{{poi.poi_img}}"></a>
+                <br>
+                Point rank: <span ng-bind="poi.poi_rank"></span>
+                <br>
+                <span ng-bind="poi.num_of_views"></span> People have viewed this point!
+                <br>
+                <span ng-bind="poi.poi_description"></span>
+                <br>
+                Point reviews:
+                <br>
+                Review 1: <span ng-bind="poi.poi_review1"></span>
+                <br>
+                Review 2: <span ng-bind="poi.poi_review2"></span>
+                <br>
+                </td>
+            <td>
+                    <!-- with radio button we would like one data model for each option -->
+                    <input type="radio"  value="{{poi.name}}" ng-model="ruCtrl.selected" ng-change="ruCtrl.setCurrentPOI({{poi.name}})">
+            </td>
+    </tr>
+            
+    
+</table>
+
+<!--
+<table id="ru_recent_table">
+    <tr>
+            <td ng-repeat="(id, poi) in ruCtrl.recent_pois">
+                <a href="#/singlePOI"> <span ng-bind="poi.name"></span></a>
+            <br> 
+            <a href="#/singlePOI"><img ng-style="{'height': '100px','width': '150px', 'border-radius': '10px'}" ng-src="../../tokens{{poi.poi_img}}"></a>
+            <br>
+            Point rank: <span ng-bind="poi.poi_rank"></span>
+            <br>
+            <span ng-bind="poi.num_of_views"></span> People have viewed this point!
+            <br>
+            <span ng-bind="poi.poi_description"></span>
+            <br>
+            Point reviews:
+            <br>
+            Review 1: <span ng-bind="poi.poi_review1"></span>
+            <br>
+            Review 2: <span ng-bind="poi.poi_review2"></span>
+            <br>
+            </td>
+            <td>
+                    <input type="radio"  value="{{poi.name}}" ng-model="ruCtrl.selected" ng-change="ruCtrl.setCurrentPOI({{poi.name}})">
+            </td>
+    </tr>
+            
+    
+</table>-->

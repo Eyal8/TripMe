@@ -19,7 +19,11 @@ angular.module('TripMe')
             var token = get();
             var user = {};
             user.token = token;
+<<<<<<< HEAD:routing/components/Services/serviceController.js
             $http.get("http://localhost:3000/registeredUsers/getUserName", user)
+=======
+            $http.get("http://localhost:3000/"+ "registeredUsers/getUserName", user)
+>>>>>>> aafc67859a7060ca8b44331fe66c82d953b6f0dc:routing/shared/Services/serviceController.js
             .then(function (response) {
                 self.userName.content = response.data.userName;
                 if(response.success == false)
