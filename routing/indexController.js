@@ -10,7 +10,7 @@ angular.module('TripMe')
 
         self = this;
         if(setHeadersToken.get() == undefined){
-           // $location.path('/guest');
+            $location.path('/guest');
         }
         else{
             $location.path('/registered_users');
