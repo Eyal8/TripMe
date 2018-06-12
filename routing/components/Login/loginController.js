@@ -1,5 +1,5 @@
 angular.module('TripMe')
- .controller('loginController', ['$http', 'localStorageModel', '$location', function($http, localStorageModel, $location) {
+ .controller('loginController', ['setHeadersToken', '$http', 'localStorageModel', '$location', function(setHeadersToken, $http, localStorageModel, $location) {
   
     self = this;
     let serverUrl = 'http://localhost:3000/'
