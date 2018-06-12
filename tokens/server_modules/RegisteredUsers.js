@@ -27,6 +27,7 @@ router.use('/', function (req, res, next) {
                 }
                 else{
                     req.decoded= decoded;
+                    req.token = token;
                     console.log(decoded.payload.userName);
                     req.userName = decoded.payload.userName;
                     console.log(decoded.header);
@@ -45,6 +46,14 @@ router.use('/', function (req, res, next) {
             message: 'No token provided.'
         });
     }
+
+})
+
+router.get('/getUserName', function(req,res){
+    console.log("hegiaaaaa");
+    console.log(req.token);
+    var decoded = jwt.decode(req.token, {complete: true});
+    res.send(decoded.payload);
 
 })
 
