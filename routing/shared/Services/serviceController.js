@@ -2,51 +2,34 @@ angular.module('TripMe')
     // .service('myService', function () { this.set = function() {return "hello"} })
     .service('setHeadersToken',[ '$http', function ($http) {
 
-        let token = ""
+        this.serverUrl = "http://localhost:3000/";
 
         this.set = function (t) {
-            token = t
-            $http.defaults.headers.common[ 'token' ] = t
+            $http.defaults.headers.common[ 'token' ] = t;
             // $httpProvider.defaults.headers.post[ 'x-access-token' ] = token
             console.log("set")
-
+            getUserName();
         }
-        this.get = function(){
+        function get(){
             let tok = $http.defaults.headers.common[ 'token' ];
             return tok;
         }
 
-        this.userName='shir'
- 
+        function getUserName() {
+            var token = get();
+            var user = {};
+            user.token = token;
+            $http.get(serverUrl + "registeredUsers/getUserName", user)
+            .then(function (response) {
+                self.userName.content = response.data.userName;
+            }, function (response) {
+                console.log("get user name failed");
+                self.getUserName.content = "Something went wrong";
+            });
+        }
 
     }])
 
-    
-    .controller('serviceController', ['$location', '$http', 'setHeadersToken','localStorageModel', function ($location, $http, setHeadersToken,localStorageModel) {
 
-
-        self = this;
-        self.directToPOI = function () {
-            $location.path('/poi')
-        }
-
-        let serverUrl = 'http://localhost:3000/'
-
-
-  /*      self.reg = function () {
-            // register user
-            $http.post(serverUrl + "reg/", user)
-                .then(function (response) {
-                    //First function handles success
-                    self.reg.content = response.data;
-
-                }, function (response) {
-                    self.reg.content = response.data
-                    //Second function handles error
-                    // self.reg.content = "Something went wrong";
-                });
-        }*/
-
-    }]);
 
 

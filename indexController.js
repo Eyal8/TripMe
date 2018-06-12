@@ -10,8 +10,6 @@ angular.module('TripMe')
 
         self = this;
 
-        let serverUrl = 'http://localhost:3000/'
-
         function authenticate(){
             let token = localStorageModel.getLocalStorage('token');
             if(token)
@@ -27,7 +25,7 @@ angular.module('TripMe')
 
 
         function getAllPOIs (){
-            $http.get(serverUrl + "poi/all")
+            $http.get(setHeadersToken.serverUrl + "poi/all")
             .then(function (response) {
                 let i = 0;
                 self.pois = {}
