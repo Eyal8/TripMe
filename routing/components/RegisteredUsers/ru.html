@@ -1,6 +1,10 @@
-Hello <span ng-bind="ruCtrl.userName.content"></span>
+Hello <span ng-bind="ruCtrl.userName.content"></span>!
 
-
+<br>
+<br>
+<br>
+2 hot point of interest from <span ng-bind="ruCtrl.userName.content"></span>'s favourite categories:
+<br>
 <table id="ru_fav_table">
     <tr>
             <td ng-repeat="(id, poi) in ruCtrl.fav_pois">
@@ -29,6 +33,8 @@ Hello <span ng-bind="ruCtrl.userName.content"></span>
             
     
 </table>
+<br>
+2 most recent points of interest saved by <span ng-bind="ruCtrl.userName.content"></span>:
 
 <!--
 <table id="ru_recent_table">

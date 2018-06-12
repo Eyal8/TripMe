@@ -9,7 +9,7 @@ angular.module('TripMe')
 
 
         self = this;
-
+        console.log("START INDEX CONTROLLER")
         function authenticate(){
             let token = localStorageModel.getLocalStorage('token');
             if(token)
@@ -33,6 +33,8 @@ angular.module('TripMe')
                     self.pois[i] = {name: response.data[i].POI_name, poi_img: response.data[i].PicturePath}
                     i++;
                 }
+                console.log("BEFORE AUTHENTICATE CALL")
+
                 authenticate();
             }, function (response) {
                 //Second function handles error
