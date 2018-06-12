@@ -12,7 +12,7 @@ router.use('/', function (req, res, next) {
     console.log("token " + token);
     // decode token
     if (token) {
-
+        console.log("hereeee");
         // verifies secret and checks exp
         jwt.verify(token, superSecret, function (err, decoded) {
             if (err) {
@@ -21,12 +21,17 @@ router.use('/', function (req, res, next) {
                 // if everything is good, save to request for use in other routes
                 // get the decoded payload and header
                 var decoded = jwt.decode(token, {complete: true});
-                req.decoded= decoded;
-                console.log( decoded.payload.userName);
-                req.userName = decoded.payload.userName;
-                console.log(decoded.header);
-                console.log(decoded.payload);
-                next();
+                if((decoded.payload.exp) < (Date.now()/1000)){
+                    return res.json({success: false, message: 'Token expired'});
+                }
+                else{
+                    req.decoded= decoded;
+                    console.log( decoded.payload.userName);
+                    req.userName = decoded.payload.userName;
+                    console.log(decoded.header);
+                    console.log(decoded.payload);
+                    next();
+                }
             }
         });
 

@@ -21,12 +21,7 @@ angular.module('TripMe')
                     self.pois[i] = {name: response.data[i].POI_name, poi_img: response.data[i].PicturePath}
                     i++;
                 }
-                if(setHeadersToken.get() == undefined){
-                     $location.path('/guest');
-                 }
-                 else{
-                     $location.path('/registered_users');
-                 }
+               
             }, function (response) {
                 //Second function handles error
                 self.signUp.content = "Something went wrong";
@@ -35,6 +30,12 @@ angular.module('TripMe')
         getAllPOIs();
 
 
+        if(setHeadersToken.get() == undefined){
+            $location.path('/guest');
+        }
+        else{
+            $location.path('/registered_users');
+        }
     
         self.selectedCity= function (id){
             //console.log (self.selected )

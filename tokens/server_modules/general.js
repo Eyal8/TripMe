@@ -182,7 +182,8 @@ router.post('/login',function(req,res){
                     //admin: user.isAdmin
                 }
                 var token = jwt.sign(payload, superSecret, {
-                    expiresIn: "1d" // expires in 24 hours
+                    expiresIn: "10m" // expires in 24 hours
+                    //"exp": (Date.now() / 1000) + 10
                 });
                 // return the information including token as JSON
                 res.json({
