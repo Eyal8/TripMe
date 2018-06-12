@@ -8,11 +8,12 @@ const superSecret = "OurSecretKeyIsTheBest!"; // secret variable
 router.use('/', function (req, res, next) {
 
     // check header or url parameters or post parameters for token
+
+
     var token = req.body.token || req.query.token || req.headers['token'];
-    console.log("token " + token);
+    console.log("token is " + token);
     // decode token
     if (token) {
-        console.log("hereeee");
         // verifies secret and checks exp
         jwt.verify(token, superSecret, function (err, decoded) {
             if (err) {
@@ -26,7 +27,7 @@ router.use('/', function (req, res, next) {
                 }
                 else{
                     req.decoded= decoded;
-                    console.log( decoded.payload.userName);
+                    console.log(decoded.payload.userName);
                     req.userName = decoded.payload.userName;
                     console.log(decoded.header);
                     console.log(decoded.payload);

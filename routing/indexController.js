@@ -5,12 +5,26 @@ angular.module('TripMe')
             console.log("current poi set")
         }
     }])
-    .controller('indexController', ['$location', '$http', 'singlePOIService', 'setHeadersToken', function ($location, $http, singlePOIService, setHeadersToken) {
+    .controller('indexController', ['localStorageModel', '$location', '$http', 'singlePOIService', 'setHeadersToken', function (localStorageModel, $location, $http, singlePOIService, setHeadersToken) {
 
 
         self = this;
 
         let serverUrl = 'http://localhost:3000/'
+
+        function authenticate(){
+            let token = localStorageModel.getLocalStorage('token');
+            if(token)
+            {
+                setHeadersToken.set(token);
+                $location.path('/registered_users');
+            }
+            else
+            {
+                $location.path('/guest');
+            }
+        }
+
 
         function getAllPOIs (){
             $http.get(serverUrl + "poi/all")
@@ -21,21 +35,15 @@ angular.module('TripMe')
                     self.pois[i] = {name: response.data[i].POI_name, poi_img: response.data[i].PicturePath}
                     i++;
                 }
-               
+                authenticate();
             }, function (response) {
                 //Second function handles error
                 self.signUp.content = "Something went wrong";
             });
         }
+
         getAllPOIs();
 
-
-        if(setHeadersToken.get() == undefined){
-            $location.path('/guest');
-        }
-        else{
-            $location.path('/registered_users');
-        }
     
         self.selectedCity= function (id){
             //console.log (self.selected )

@@ -6,13 +6,13 @@ angular.module('TripMe')
 
         this.set = function (t) {
             token = t
-            $http.defaults.headers.common[ 'x-access-token' ] = t
+            $http.defaults.headers.common[ 'token' ] = t
             // $httpProvider.defaults.headers.post[ 'x-access-token' ] = token
             console.log("set")
 
         }
         this.get = function(){
-            let tok = $http.defaults.headers.common[ 'x-access-token' ];
+            let tok = $http.defaults.headers.common[ 'token' ];
             return tok;
         }
 
