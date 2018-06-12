@@ -38,7 +38,7 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
             controller: 'singlePOICtrl as sglCtrl'
         })
         .when('/service', {
-            templateUrl: 'shared/Services/Services/service.html',
+            templateUrl: 'shared/Services/service.html',
             controller : 'serviceController as srvCtrl'
         })
         .otherwise({ redirectTo: '/' });
