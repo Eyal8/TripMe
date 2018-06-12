@@ -10,21 +10,21 @@ angular.module('TripMe')
 
         self = this;
 
-        function authenticate(){
-            let token = localStorageModel.getLocalStorage('token');
-            if(token)
-            {
-                setHeadersToken.set(token);
-                $location.path('/registered_users');
-            }
-            else
-            {
-                $location.path('/guest');
-            }
-        }
+        var authenticate = function(){              
+                    let token = localStorageModel.getLocalStorage('token');
+                    if(token)
+                    {
+                        setHeadersToken.set(token);
+                        $location.path('/registered_users');
+                    }
+                    else
+                    {
+                        $location.path('/guest');
+                    }
+        };
 
 
-        function getAllPOIs (){
+        var getAllPOIs = function(){
             $http.get(setHeadersToken.serverUrl + "poi/all")
             .then(function (response) {
                 let i = 0;
@@ -33,15 +33,13 @@ angular.module('TripMe')
                     self.pois[i] = {name: response.data[i].POI_name, poi_img: response.data[i].PicturePath}
                     i++;
                 }
-                authenticate();
+                return Promise.resolve();
             }, function (response) {
-                //Second function handles error
                 self.signUp.content = "Something went wrong";
-            });
+            })
+            .then(authenticate);
         }
-
         getAllPOIs();
-
     
         self.selectedCity= function (id){
             //console.log (self.selected )
