@@ -1,0 +1,62 @@
+
+<html ng-app="TripMe">
+    <head><title>Trip Me</title>
+        <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+    <body ng-controller="indexController as indxCtrl">
+     
+        <body>
+            <div id="topnav">
+                <li><a href="#/">Home</a></li>
+                <li><a href="#/register">Register</a></li>
+                <li><a href="#/login">Login</a></li>
+				<li><a href="#/about">About</a></li>
+            </div>
+        <br>
+        <br>
+        <div ng-view></div>
+
+        <div id="side_pois">
+            <table id="pois_table">
+                    <tr ng-repeat="(id, poi) in indxCtrl.pois" >
+                            <td>
+                                <a href="#/singlePOI"> <span ng-bind="poi.name"></span></a>
+                            <br> 
+                            <a href="#/singlePOI"><img ng-style="{'height': '100px','width': '170px', 'border-radius': '10px'}" ng-src="../../tokens{{poi.poi_img}}"></a>
+                                    
+                            <br>
+                                 
+                            </td>
+                            <td>
+                                    <!-- with radio button we would like one data model for each option -->
+                                    <input type="radio"  value="{{poi.name}}" ng-model="indxCtrl.selected" ng-change="indxCtrl.setCurrentPOI({{poi.name}})">
+                            </td>
+                    </tr>
+                            
+                    
+            </table>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <script src="node_modules/angular-local-storage/dist/angular-local-storage.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>       
+        <script src="app.js" ></script>
+        <script src="indexController.js" ></script>
+        <script src="components/About/aboutController.js" ></script>
+        <script src="components/Register/registerController.js" ></script>
+        <script src="components/Login/loginController.js" ></script>
+        <script src="components/ForgotPassword/forgotPasswordController.js" ></script>
+        <script src="components/Services/serviceController.js" ></script>
+        <script src="components/Services/localStorageModel.js"></script>
+        <script src="components/SinglePOI/singlePOICtrl.js" ></script>
+        <script src="components/RegisteredUsers/ruCtrl.js"></script>
+        <script src="components/Guest/guestCtrl.js"></script>
+
+
+ 
+    </body>
+    </html>
+    
+    
+
+    

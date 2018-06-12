@@ -23,8 +23,15 @@ angular.module("TripMe")
 
         self.updateLocalStorage = function (key,value)
         {
-            localStorageService.remove(key);
+            var dataVal = localStorageService.get(key);
+            if (dataVal)
+                localStorageService.remove(key);
             localStorageService.set(key,value);
+        }
+
+        self.deleteFromLocalStorage = function(key)
+        {
+            localStorageService.remove(key);
         }
 
 

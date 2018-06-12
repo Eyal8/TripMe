@@ -10,7 +10,7 @@ angular.module('TripMe')
             .then(function (response) {
                 self.login.content = response.data.message;
                 setHeadersToken.set(response.data.token);
-                addTokenToLocalStorage(response.data.token);
+                updateTokenInLocalStorage(response.data.token);
                 $location.path('/registered_users');
             }, function (response) {
                 self.login.content = response.data.message;
@@ -21,8 +21,8 @@ angular.module('TripMe')
         $location.path('/forgotPassword');
     }
 
-    addTokenToLocalStorage = function (token) {
-        localStorageModel.addLocalStorage('token', token);
+    updateTokenInLocalStorage = function (token) {
+        localStorageModel.updateLocalStorage('token', token);
     }
 
 }]);
