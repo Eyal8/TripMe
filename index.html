@@ -1,7 +1,7 @@
 
 <html ng-app="TripMe">
     <head><title>Trip Me</title>
-        <link rel="stylesheet" type="text/css" href="style.css" />
+        <link rel="stylesheet" type="text/css" href="routing/resources/style.css" />
 </head>
     <body ng-controller="indexController as indxCtrl">
      
@@ -40,19 +40,19 @@
     Selected city: {{indxCtrl.selected}}
 
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-        <script src="node_modules/angular-local-storage/dist/angular-local-storage.min.js"></script>
+        <script src="routing/node_modules/angular-local-storage/dist/angular-local-storage.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>       
-        <script src="app.js" ></script>
+        <script src="./routing/app.js" ></script>
         <script src="indexController.js" ></script>
-        <script src="components/About/aboutController.js" ></script>
-        <script src="components/Register/registerController.js" ></script>
-        <script src="components/Login/loginController.js" ></script>
-        <script src="components/ForgotPassword/forgotPasswordController.js" ></script>
-        <script src="components/Services/serviceController.js" ></script>
-        <script src="components/Services/localStorageModel.js"></script>
-        <script src="components/SinglePOI/singlePOICtrl.js" ></script>
-        <script src="components/RegisteredUsers/ruCtrl.js"></script>
-        <script src="components/Guest/guestCtrl.js"></script>
+        <script src="routing/components/About/aboutController.js" ></script>
+        <script src="routing/components/Register/registerController.js" ></script>
+        <script src="routing/components/Login/loginController.js" ></script>
+        <script src="routing/components/ForgotPassword/forgotPasswordController.js" ></script>
+        <script src="routing/shared/Services/serviceController.js" ></script>
+        <script src="routing/shared/Services/localStorageModel.js"></script>
+        <script src="routing/components/SinglePOI/singlePOICtrl.js" ></script>
+        <script src="routing/components/RegisteredUsers/ruCtrl.js"></script>
+        <script src="routing/components/Guest/guestCtrl.js"></script>
 
 
  
