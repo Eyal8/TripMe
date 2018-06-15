@@ -11,18 +11,8 @@ angular.module('TripMe')
         self = this;
 
         var authenticate = function(){              
-                    let token = localStorageModel.getLocalStorage('token');
-                    if(token)
-                    {
-                        setHeadersToken.set(token);
-                        $location.path('/registered_users');
-                    }
-                    else
-                    {
-                        $location.path('/guest');
-                    }
+            setHeadersToken.authenticate();
         };
-
 
         var getAllPOIs = function(){
             $http.get(setHeadersToken.serverUrl + "poi/all")

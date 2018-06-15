@@ -8,6 +8,7 @@ const superSecret = "OurSecretKeyIsTheBest!"; // secret variable
 router.use('/', function (req, res, next) {
 
     // check header or url parameters or post parameters for token
+    console.log("middlewareeeee!")
 
 
     var token = req.body.token || req.query.token || req.headers['token'];
@@ -17,6 +18,7 @@ router.use('/', function (req, res, next) {
         // verifies secret and checks exp
         jwt.verify(token, superSecret, function (err, decoded) {
             if (err) {
+                console.log("failed to authenticateeee  " + token);
                 return res.json({ success: false, message: 'Failed to authenticate token.' });
             } else {
                 // if everything is good, save to request for use in other routes
@@ -51,8 +53,7 @@ router.use('/', function (req, res, next) {
 
 router.get('/getUserName', function(req,res){
     var decoded = jwt.decode(req.token, {complete: true});
-    res.send(decoded.payload);
-
+    return res.json({ success: true, message: decoded.payload });
 })
 
 router.put('/reorder', function(req, res)
@@ -115,7 +116,6 @@ router.get('/getPOIs', function(req,res){
 })
 
 router.get('/get2MostPopularPOIs', function(req,res){
-    console.log("hereeeeeeeeeeeeeeeee!")
    DButilsAzure.execQuery("DECLARE @category VARCHAR(100), @poi_name1 VARCHAR(100), @poi_name2 VARCHAR(100); SELECT @poi_name1=POI_name, @category=POI.Category FROM CategoriesForUser JOIN POI ON CategoriesForUser.CategoryName = POI.Category WHERE UserName = '"+req.userName+"' AND POI_rank = (SELECT MAX(POI_rank) FROM CategoriesForUser JOIN POI ON CategoriesForUser.CategoryName = POI.Category); SELECT @poi_name2 = POI.POI_name FROM CategoriesForUser JOIN POI ON CategoriesForUser.CategoryName = POI.Category WHERE UserName = '"+req.userName+"' AND POI.Category <> @category AND POI_rank = (SELECT MAX(POI_rank) FROM CategoriesForUser JOIN POI ON CategoriesForUser.CategoryName = POI.Category WHERE POI.Category <> @category); SELECT * FROM POI WHERE POI_name=@poi_name1; SELECT * FROM POI WHERE POI_name=@poi_name2").then(function(recordSet){
         res.json(recordSet);
    }).catch(function (err) {
