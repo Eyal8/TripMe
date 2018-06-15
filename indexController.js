@@ -1,5 +1,6 @@
 angular.module('TripMe')
-    .service('singlePOIService',[ '$http', function ($http) {        
+    .service('singlePOIService',[ '$http', function ($http) {   
+             
         self.setCurrentPOI = function(poi){
             this.cur_poi = poi;
             console.log("current poi set")
@@ -14,25 +15,9 @@ angular.module('TripMe')
             setHeadersToken.authenticate();
         };
 
-        var getAllPOIs = function(){
-            $http.get(setHeadersToken.serverUrl + "poi/all")
-            .then(function (response) {
-                let i = 0;
-                self.pois = {}
-                for (poi in response.data){
-                    self.pois[i] = {name: response.data[i].POI_name, poi_img: response.data[i].PicturePath}
-                    i++;
-                }
-                return Promise.resolve();
-            }, function (response) {
-                //Second function handles error
-            })
-           .then(self.authenticate());
-        }
 
-        getAllPOIs();
+        self.authenticate();
 
-    
        // self.selectedCity= function (id){
             //console.log (self.selected )
          //   singlePOIService.setCurrentPOI(self.selected)

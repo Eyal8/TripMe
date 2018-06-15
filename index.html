@@ -7,32 +7,14 @@
         <div id="topnav">
             <li><a ng-click="indxCtrl.authenticate()">Home</a></li>
             <li><a href="#/register">Register</a></li>
+            <li><a href="#/login">Login</a></li>
             <li><a href="#/about">About</a></li>
-            <li><a href="#/service">Service</a></li>
+            <li><a href="#/pois">Our points of interest</a></li>
         </div>
         <br>
         <br>
         <div ng-view></div>
-
-        <table id="pois_table">
-                <tr ng-repeat="(id, poi) in indxCtrl.pois" >
-                        <td>
-                            <a href="#/singlePOI"> <span ng-bind="poi.name"></span></a>
-                        <br> 
-                        <a href="#/singlePOI"><img ng-style="{'height': '100px','width': '170px', 'border-radius': '10px'}" ng-src="../../tokens{{poi.poi_img}}"></a>
-                                
-                        <br>
-                                
-                        </td>
-                        <td>
-                                <!-- with radio button we would like one data model for each option -->
-                                <input type="radio"  value="{{poi.name}}" ng-model="indxCtrl.selected" ng-change="indxCtrl.setCurrentPOI({{poi.name}})">
-                        </td>
-                </tr>
-                        
-                
-        </table>
-
+        
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
         <script src="routing/node_modules/angular-local-storage/dist/angular-local-storage.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>       
@@ -47,6 +29,8 @@
         <script src="routing/components/SinglePOI/singlePOICtrl.js" ></script>
         <script src="routing/components/RegisteredUsers/ruCtrl.js"></script>
         <script src="routing/components/Guest/guestCtrl.js"></script>
+        <script src="routing/components/POIS/poisController.js"></script>
+
 
 
  
