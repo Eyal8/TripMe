@@ -1,5 +1,5 @@
 angular.module('TripMe')
- .controller('registeredUsersCtrl', ['localStorageModel','setHeadersToken','$http', function(localStorageModel,setHeadersToken, $http) {
+ .controller('registeredUsersCtrl', ['$location','localStorageModel','setHeadersToken','$http', function($location, localStorageModel,setHeadersToken, $http) {
  
     self = this;
 
@@ -8,39 +8,45 @@ angular.module('TripMe')
     }
     self.userName();
     
+    self.logout = function()
+    {
+        console.log("nihnas lalogouht");
+        removeTokenFromLocalStorage();
+        $http.defaults.headers.common['token'] = "";
+        $location.path('/guest');
+    }
+
+    removeTokenFromLocalStorage = function () {
+        localStorageModel.deleteFromLocalStorage('token');
+    }
+
     self.reorder = function(){
         $http.get(setHeadersToken.serverUrl + "registeredUsers/reorder", user)
         .then(function (response) {
-            self.signUp.content = response.data;
+           // self.signUp.content = response.data;
         }, function (response) {
-            self.signUp.content = "Something went wrong";
+          //  self.signUp.content = "Something went wrong";
         });
     }
 
     self.savePOI = function(){
         $http.get(setHeadersToken.serverUrl + "registeredUsers/savePOI", user)
         .then(function (response) {
-            self.signUp.content = response.data;
         }, function (response) {
-            self.signUp.content = "Something went wrong";
         });
     }
 
     self.removePOI = function(){
         $http.get(setHeadersToken.serverUrl + "registeredUsers/removePOI", user)
         .then(function (response) {
-            self.signUp.content = response.data;
         }, function (response) {
-            self.signUp.content = "Something went wrong";
         });
     }
 
     self.getPOIsForUser = function(){
         $http.get(setHeadersToken.serverUrl + "registeredUsers/getPOIs", user)
         .then(function (response) {
-            self.signUp.content = response.data;
         }, function (response) {
-            self.signUp.content = "Something went wrong";
         });
     }
 
@@ -55,10 +61,6 @@ angular.module('TripMe')
                 i++;
             }
         }, function (response) {
-            if(response.success == false)
-            {
-                removeTokenFromLocalStorage();
-            }
         });
     }
 
@@ -75,7 +77,6 @@ angular.module('TripMe')
             }
         }, function (response) {
             //Second function handles error
-            self.signUp.content = "Something went wrong";
         });
     }
 
@@ -84,10 +85,8 @@ angular.module('TripMe')
         $http.get(setHeadersToken.serverUrl + "registeredUsers/reviewPOI", user)
         .then(function (response) {
             //First function handles success
-            self.signUp.content = response.data;
         }, function (response) {
             //Second function handles error
-            self.signUp.content = "Something went wrong";
         });
     }
 
@@ -95,10 +94,8 @@ angular.module('TripMe')
         $http.get(setHeadersToken.serverUrl + "registeredUsers/rankPOI", user)
         .then(function (response) {
             //First function handles success
-            self.signUp.content = response.data;
         }, function (response) {
             //Second function handles error
-            self.signUp.content = "Something went wrong";
         });
     }
         get2MostPopularPOIs()

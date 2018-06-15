@@ -7,6 +7,11 @@ angular.module('TripMe')
    /* if(setHeadersToken.get() == undefined){
          $location.path('/guest');
     }*/
+
+    self.login = function(){
+        $location.path('/login');
+    }
+
     self.get3PopRand = function(){
         // get 3 random popular pois
         $http.get(serverUrl + "poi/get3PopRand")

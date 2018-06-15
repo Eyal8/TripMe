@@ -38,13 +38,10 @@ body{
 }
 
 #pois_table{
-	top:100px;
+	top:150px;
 	position: absolute;
 	overflow: auto;
 
-}
-
-#side_pois{
 }
 
 /**** GUEST ****/
