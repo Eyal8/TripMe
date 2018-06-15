@@ -4,16 +4,25 @@ angular.module('TripMe')
     self = this;
     let serverUrl = 'http://localhost:3000/'
 
+    check = function(){
+        if(setHeadersToken.authenticate())
+            $location.path('/registered_users');
+    }
+
+    check();
+
     self.login = function () {
         // register user
         $http.post(serverUrl + "general/login", self.user)
             .then(function (response) {
-                self.login.content = response.data.message;
+                if(response.data.success == true)
+                {
                 setHeadersToken.set(response.data.token);
                 updateTokenInLocalStorage(response.data.token);
                 $location.path('/registered_users');
-            }, function (response) {
+                }
                 self.login.content = response.data.message;
+
             });
     }
 

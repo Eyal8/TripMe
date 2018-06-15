@@ -1,5 +1,5 @@
 angular.module('TripMe')
- .controller('poisController', ['setHeadersToken', '$http', function(setHeadersToken,$http) {
+ .controller('poisController', ['$location', 'localStorageModel', 'setHeadersToken', '$http', function($location, localStorageModel, setHeadersToken,$http) {
   
     self = this;
 
@@ -37,7 +37,7 @@ angular.module('TripMe')
             let i = 0;
             self.pois = {};
             for (poi in response.data){
-                self.pois[i] = {name: response.data[i].POI_name, poi_img: response.data[i].PicturePath, rank: response.data[i].POI_rank};
+                self.pois[i] = {name: response.data[i].POI_name, num_of_views: response.data[i].NumOfViews, poi_description: response.data[i].POI_description, poi_rank: response.data[i].POI_rank, poi_review1: response.data[i].Review1, poi_review2: response.data[i].Review2, poi_img: response.data[i].PicturePath}
                 addPOItoCategory(self.pois[i], response.data[i].Category);
                 i++;
             }
@@ -48,7 +48,7 @@ angular.module('TripMe')
 
     getCategories();
 
-    self.sortByCategory = function(){
+    self.filterByCategory = function(){
         for(var i = 0; i < self.categories.length; i++)
         {
             if(self.categories[i].value == self.chosenCategory)
@@ -58,18 +58,38 @@ angular.module('TripMe')
         }
     }
 
-
-
     self.sortByRank = function(){
-        self.sortable = [];
-        for (var i = 0; i <self.pois.length; i ++) {
-            self.sortable.push([self.pois[i].rank, self.pois[self.pois[i].rank]]);
-        }
-        self.sortable.sort(function(a, b) {
-            return a[1] - b[1];
+        self.poisArray = Object.values(self.pois);
+        self.poisArray.sort(function(obj1, obj2) {
+            return obj2.poi_rank - obj1.poi_rank;
         });
-        console.log(self.sortable);
-    
+    }
+
+    self.searchByName = function(){
+        $http.get(setHeadersToken.serverUrl + "poi/" + self.poiName)
+        .then(function (response) {
+            if(response.data.success == true)
+            {
+            self.searchedPoi = response.data;
+            self.showme = true;
+            }
+            else
+            {
+                self.searchByName.content = response.data.message;
+                self.showme = false;
+            }
+        })
+    }
+
+    self.goToFavorites = function()
+    {
+        $location.path('/favorites');
+    }
+
+      self.guest = !setHeadersToken.authenticate();
+
+      getTokenFromLocalStorage = function () {
+        return localStorageModel.getLocalStorage('token');
     }
 
 }]);

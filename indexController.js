@@ -11,12 +11,12 @@ angular.module('TripMe')
 
         self = this;
 
-        self.authenticate = function(){              
-            setHeadersToken.authenticate();
+        self.route = function(){              
+            setHeadersToken.route();
         };
 
 
-        self.authenticate();
+        self.route();
 
        // self.selectedCity= function (id){
             //console.log (self.selected )

@@ -8,17 +8,38 @@ angular.module('TripMe')
             $http.defaults.headers.common[ 'token' ] = t;
           //   $httpProvider.defaults.headers.post[ 'token' ] = token
             console.log("set")
-            getUserName();
+            //getUserName();
         }
 
         this.authenticate = function(){              
-            let token = getTokenFromLocalStorage();
-            if(token)
+            let jwt = getTokenFromLocalStorage();
+            if(jwt)
             {
-               //if(get() == token)
-                 //   return true;
-                this.set(token);
-             //   return false;
+                var tokens = jwt.split(".");
+                var obj = JSON.parse(atob(tokens[1]));
+                this.userName = obj.userName;
+                if(obj.exp >= (Date.now()/1000))
+                {
+                    this.set(jwt);
+                    return true;
+                }
+                else 
+                {
+                    removeTokenFromLocalStorage();
+                    return false;   
+                }
+            }
+            else
+            {
+                return false;
+            }           
+        }
+
+        this.route = function()
+        {
+            if(this.authenticate())
+            {
+                $location.path('/registered_users');
             }
             else
             {
@@ -48,7 +69,6 @@ angular.module('TripMe')
                      $location.path('/registered_users');
                 }
             }, function (response) {
-                console.log("matai megia lepo?!?!? line 50 service controller");
                 $location.path('/guest');
             });
         }

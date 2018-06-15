@@ -36,7 +36,7 @@ router.get('/:name', function(req,res){
         console.log(recordSet);
         if(recordSet[0].length == 0)
         {
-            res.send("There is no such point of interest");
+            res.json({success: false, message:"There is no such point of interest"});
         }
         else
         {
