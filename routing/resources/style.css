@@ -89,3 +89,6 @@ body{
 #ru_recent_table tr td{
 	width:33.33%;
 }
+.favs{
+	cursor: pointer;
+}
