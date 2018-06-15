@@ -2,8 +2,8 @@ Hello <span ng-bind="ruCtrl.userName.content"></span>!
 <br>
 <button ng-click="ruCtrl.logout()">Logout</button>
 <br>
-<p style="margin-left: 30%"> 2 most popular points of interest from <span ng-bind="ruCtrl.userName.content"></span>'s favourite categories: </p>
-<table style="margin-left: 30%" id="ru_fav_table">
+<p class="side_spans">2 most popular points of interest from <span ng-bind="ruCtrl.userName.content"></span>'s favourite categories: </p>
+<table id="ru_fav_table">
     <tr>
             <td ng-repeat="(id, poi) in ruCtrl.fav_pois">
                 <a href="#/singlePOI"> <span ng-bind="poi.name"></span></a>
@@ -32,7 +32,7 @@ Hello <span ng-bind="ruCtrl.userName.content"></span>!
     
 </table>
 <br>
-<p style="margin-left: 30%">2 most recent points of interest saved by <span ng-bind="ruCtrl.userName.content"></span>'s favourite categories:</p>
+<p class="side_spans">2 most recent points of interest saved by <span ng-bind="ruCtrl.userName.content"></span>'s favourite categories:</p>
 
 <!--
 <table id="ru_recent_table">

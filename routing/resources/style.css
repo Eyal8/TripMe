@@ -24,6 +24,7 @@ body{
 	float: left;
 	width:20%;
 	font-weight:bold;
+	cursor: pointer;
 }
 #topnav li a{
 	display: block;
@@ -48,14 +49,25 @@ body{
 #guest_table{
 	width: 75%;
 	margin: 0 auto;
+	position: relative;
+	bottom: 0px;
+
 }
 #guest_table tr td{
 	width:33.33%;
 }
-
+#register_cheering{
+	margin-left: 30%;
+	width:500px;
+	height:300px;
+	cursor: pointer;
+}
+.side_spans{
+	margin-left: 10%
+}
 /**** ABOUT ****/
 #shivuk_img{
-    margin: 0 auto;
+    margin-left: 30% ;
     width: 400px;
     height: 400px;
 

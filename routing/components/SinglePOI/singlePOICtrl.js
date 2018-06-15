@@ -5,8 +5,7 @@ angular.module('TripMe')
     self.current_poi = singlePOIService.cur_poi
     let serverUrl = 'http://localhost:3000/'
 
-    console.log(singlePOIService.cur_poi)
-
+    alert(self.current_poi)
     self.getOnePOI = function(){
         $http.get(serverUrl + "poi/:name")
         .then(function (response) {

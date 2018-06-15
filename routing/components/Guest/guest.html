@@ -3,15 +3,16 @@ Hello guest!
 <button ng-click="gstCtrl.login()">Login</button>
 <br>
 <br>
-<img src="../../routing/resources/img/cheers.jpg" style="margin-left: 30%; width:300px; height:200px;">
-
+<img id="register_cheering" ng-click="gstCtrl.register()" ng-src="../../routing/resources/img/cheers.jpg">
+<br>
 <div id="random_pois">
         <table id="guest_table">
+                <span class="side_spans">Explore popular points of interest at our website:</span>
                 <tr>
                         <td ng-repeat="(id, poi) in gstCtrl.rand_pois">
-                                <a href="#/singlePOI"> <span ng-bind="poi.name"></span></a>
+                                <a ng-click="gstCtrl.singlePOI(poi.name)" href="#/singlePOI" target="_new"> <span ng-bind="poi.name"></span></a>
                                 <br> 
-                                <a href="#/singlePOI"><img ng-style="{'height': '100px','width': '150px', 'border-radius': '10px'}" ng-src="../../tokens{{poi.poi_img}}"></a>
+                                <a ng-click="gstCtrl.singlePOI(poi.name)" href="#/singlePOI" target="_new"><img ng-style="{'height': '100px','width': '150px', 'border-radius': '10px'}" ng-src="../../tokens{{poi.poi_img}}"></a>
                                 <br>
                                 Point rank: <span ng-bind="poi.poi_rank"></span>
                                 <br>
@@ -26,12 +27,9 @@ Hello guest!
                                 Review 2: <span ng-bind="poi.poi_review2"></span>
                                 <br>
                                 </td>
-                        <td>
-                                <!-- with radio button we would like one data model for each option -->
-                                <input type="radio"  value="{{poi.name}}" ng-model="gstCtrl.selected" ng-change="gstCtrl.setCurrentPOI({{poi.name}})">
-                        </td>
                 </tr>
                         
                 
         </table>
     </div>
+ 

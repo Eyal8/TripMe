@@ -1,5 +1,5 @@
 angular.module('TripMe')
- .controller('guestCtrl', ['$location', '$http', function($location, $http) {
+ .controller('guestCtrl', ['singlePOIService', '$location', '$http', function(singlePOIService, $location, $http) {
   
     self = this;
 
@@ -11,7 +11,9 @@ angular.module('TripMe')
     self.login = function(){
         $location.path('/login');
     }
-
+    self.register = function(){
+        $location.path('/register');
+    }
     self.get3PopRand = function(){
         // get 3 random popular pois
         $http.get(serverUrl + "poi/get3PopRand")
@@ -29,6 +31,9 @@ angular.module('TripMe')
         });
     }
     self.get3PopRand();
+    self.singlePOI = function(poi_name){
+        singlePOIService.cur_poi = poi_name;
+    }
     /*
     self.getOnePOI = function(){
         // register user

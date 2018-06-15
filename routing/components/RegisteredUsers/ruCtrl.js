@@ -10,7 +10,6 @@ angular.module('TripMe')
     
     self.logout = function()
     {
-        console.log("nihnas lalogouht");
         removeTokenFromLocalStorage();
         $http.defaults.headers.common['token'] = "";
         $location.path('/guest');
