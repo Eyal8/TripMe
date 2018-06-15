@@ -1,4 +1,6 @@
-<button ng-click="poiCtrl.goToFavorites()" ng-disabled="poiCtrl.guest">Go to favorites points of interest</button>
+<div ng-show="!poiCtrl.guest">
+<button ng-click="poiCtrl.goToFavorites()">Go to favorites points of interest</button>
+</div>
 
 <div ng-repeat="c in poiCtrl.categories">
     <h2 ng-bind="c.value"></h2>

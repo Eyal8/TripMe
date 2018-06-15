@@ -5,7 +5,6 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
 
     $locationProvider.hashPrefix('');
 
-
     $routeProvider
         .when('/forgotPassword', {
             templateUrl: 'routing/components/ForgotPassword/forgotPassword.html',
@@ -51,7 +50,7 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
             templateUrl: 'shared/Services/service.html',
             controller : 'serviceController as srvCtrl'
         })
-        .otherwise({ redirectTo: '/' });
+        .otherwise({ redirectTo: '/registered_users'});
 
         
 }]);

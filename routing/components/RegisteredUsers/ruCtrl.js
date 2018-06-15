@@ -3,7 +3,15 @@ angular.module('TripMe')
  
     self = this;
 
+    self.route = function()
+    {
+        setHeadersToken.route();
+    }
+
+    self.route();
+    
     self.userName = setHeadersToken.userName;
+
    
     self.logout = function()
     {
