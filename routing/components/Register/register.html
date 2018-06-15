@@ -68,25 +68,18 @@
         <span ng-show="form.email.$error.required">Please enter your email.</span>
         <span ng-show="form.email.$error.email">This is not a valid email.</span>
         </div>
+        <br>
 
-        <label>First Category:
-        <select ng-model="rgCtrl.user.categories[0]" name="categories0" required>
-            <option value="" disabled selected>Select your category</option>
-            <option ng-repeat="category in rgCtrl.categories" value="{{category.CategoryName}}">{{category.CategoryName}}</option>
-        </select>
+        Categories:
+        <br>
+        <label ng-repeat="category in rgCtrl.categories">
+        <input type="checkbox" ng-model="rgCtrl.categories[$index].checked">
+        {{category.value}}
+        <br>
         </label>
+        <br/>
+
         <br />
-        <div ng-show="form.$submitted || form.categories0.$touched">
-        <div ng-show="form.categories0.$error.required">Please enter your first category.</div>
-        </div>
-        Second Category:
-        <select ng-model="rgCtrl.user.categories[1]" name="categories1" required>
-                <option value="" disabled selected>Select your category</option>
-                <option ng-repeat="category in rgCtrl.categories" value="{{category.CategoryName}}">{{category.CategoryName}}</option>
-        </select>
-        <div ng-show="form.$submitted || form.categories1.$touched">
-        <div ng-show="form.categories1.$error.required">Please enter your second category.</div>
-        </div><br>
     
         <label>First Question: What is your birth city?</label><br>
 

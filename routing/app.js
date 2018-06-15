@@ -6,9 +6,7 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
     $locationProvider.hashPrefix('');
 
 
-    $routeProvider.when('/', {
-        controller : 'indexController as indxCtrl'
-        })
+    $routeProvider
         .when('/forgotPassword', {
             templateUrl: 'routing/components/ForgotPassword/forgotPassword.html',
             controller : 'forgotPasswordController as frgtCtrl'
@@ -16,6 +14,10 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
         .when('/login', {
             templateUrl: 'routing/components/Login/login.html',
             controller : 'loginController as lgnCtrl'
+        })
+        .when('/logout', {
+            templateUrl: 'routing/components/Logout/logout.html',
+            controller : 'logoutController as lgtCtrl'
         })
         .when('/register', {
             templateUrl: 'routing/components/Register/register.html',

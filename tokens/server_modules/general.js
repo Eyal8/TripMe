@@ -41,10 +41,11 @@ router.post('/register', function(req,res){
    var Country = req.body.country;
    var Email = req.body.email;
    var categories = [];
-   if(req.body.categories[0] && req.body.categories[1])
+    var validCategories = true;
+   for(var i = 0; i < req.body.categories.length; i++)
    {
-        categories[0] = req.body.categories[0];
-        categories[1] = req.body.categories[1];
+        categories[i] = req.body.categories[i];
+        console.log(categories[i]);
    }
    var answersForRecovery = req.body.answersForRecovery;
     DButilsAzure.execQuery("SELECT TOP 1 UserName FROM RegisteredUsers WHERE UserName='"+UserName+"'").then(function (recordSet) {
@@ -71,13 +72,9 @@ router.post('/register', function(req,res){
             res.json({ success: false, message: 'Please enter valid email.' });
     
         }
-        else if(categories[0] == "" || categories[1] == "")
+        else if(categories.length < 2)
         {
-            res.json({ success: false, message: 'Please choose two categories.' });
-        }
-        else if(categories[0] == categories[1])
-        {
-            res.json({ success: false, message: 'Please choose two different categories.' });
+            res.json({ success: false, message: 'Please choose at least two categories.' });
         }
        else{
             var promises = [];

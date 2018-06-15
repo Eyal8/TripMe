@@ -5,6 +5,7 @@ angular.module('TripMe')
     let serverUrl = 'http://localhost:3000/'
     self.categories = []
     self.countries = [];
+    self.user = {};
 
     self.getCountries = function(){
         $http.get(serverUrl + "general/getCountries")
@@ -24,7 +25,7 @@ angular.module('TripMe')
         .then(function (response) {
             let i = 0;
             for (categories in response.data){
-                self.categories[i] = response.data[i];
+                self.categories[i] = {checked: false, value: response.data[i].CategoryName};
                 i++;
             }
         }, function (response) {
@@ -33,17 +34,27 @@ angular.module('TripMe')
         });
     }
 
+    validateCategories = function(){
+        var index = 0;
+        self.user.categories = [];
+        for (var i = 0; i < self.categories.length; i ++){
+            if(self.categories[i].checked == true)
+            {
+                self.user.categories[index] = self.categories[i].value;
+                index++;
+            }
+        }
+        if(index < 2)
+            self.register.content = "Please choose at least two categories";
+    }
+
 
     self.register = function () {
-        // register user
+        validateCategories();
         $http.post(serverUrl + "general/register", self.user)
             .then(function (response) {
                 //First function handles success
                 self.register.content = response.data.message;
-                if(response.data.success == true)
-                {
-                    $location.path('/registered_users')
-                }
             }, function (response) {
                 //Second function handles error
                 self.register.content = response.data.message;

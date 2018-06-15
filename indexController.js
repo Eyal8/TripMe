@@ -25,11 +25,12 @@ angular.module('TripMe')
                 }
                 console.log("BEFORE AUTHENTICATE CALL")
 
-                authenticate();
+                return Promise.resolve();
             }, function (response) {
                 //Second function handles error
                 self.signUp.content = "Something went wrong";
-            });
+            })
+           .then(authenticate);
         }
 
         getAllPOIs();

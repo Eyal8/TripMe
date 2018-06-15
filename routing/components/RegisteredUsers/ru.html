@@ -1,5 +1,6 @@
 Hello <span ng-bind="ruCtrl.userName.content"></span>!
-
+<br>
+<p style="margin-left: 30%"> 2 most popular points of interest from <span ng-bind="ruCtrl.userName.content"></span>'s favourite categories: </p>
 <table style="margin-left: 30%" id="ru_fav_table">
     <tr>
             <td ng-repeat="(id, poi) in ruCtrl.fav_pois">
@@ -29,7 +30,7 @@ Hello <span ng-bind="ruCtrl.userName.content"></span>!
     
 </table>
 <br>
-2 most recent points of interest saved by <span ng-bind="ruCtrl.userName.content"></span>'s favourite categories:
+<p style="margin-left: 30%">2 most recent points of interest saved by <span ng-bind="ruCtrl.userName.content"></span>'s favourite categories:</p>
 
 <!--
 <table id="ru_recent_table">
