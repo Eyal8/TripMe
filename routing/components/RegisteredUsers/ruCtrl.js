@@ -14,7 +14,6 @@ angular.module('TripMe')
 
     self.fav_pois = []
 
-    self.userName();
     self.saved = []
     self.logout = function()
     {
