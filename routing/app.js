@@ -35,6 +35,10 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
             templateUrl: 'routing/components/RegisteredUsers/ru.html',
             controller: 'registeredUsersCtrl as ruCtrl'
         })
+        .when('/pois', {
+            templateUrl: 'routing/components/POIS/pois.html',
+            controller: 'poisController as poiCtrl'
+        })
         .when('/singlePOI', {
             templateUrl: 'routing/components/SinglePOI/singlePOI.html',
             controller: 'singlePOICtrl as sglCtrl'

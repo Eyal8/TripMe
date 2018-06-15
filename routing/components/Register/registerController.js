@@ -1,14 +1,13 @@
 angular.module('TripMe')
- .controller('registerController', ['$location','$http', function($location, $http) {
+ .controller('registerController', ['setHeadersToken','$location','$http', function(setHeadersToken,$location, $http) {
   
     self = this;
-    let serverUrl = 'http://localhost:3000/'
-    self.categories = []
+    self.categories = [];
     self.countries = [];
     self.user = {};
 
     self.getCountries = function(){
-        $http.get(serverUrl + "general/getCountries")
+        $http.get(setHeadersToken.serverUrl + "general/getCountries")
         .then(function (response) {
             var i = 0;
             for (countries in response.data){
@@ -21,7 +20,7 @@ angular.module('TripMe')
     }
 
     self.getCategories = function(){
-        $http.get(serverUrl + "general/getCategories")
+        $http.get(setHeadersToken.serverUrl + "general/getCategories")
         .then(function (response) {
             let i = 0;
             for (categories in response.data){
@@ -51,7 +50,7 @@ angular.module('TripMe')
 
     self.register = function () {
         validateCategories();
-        $http.post(serverUrl + "general/register", self.user)
+        $http.post(setHeadersToken.serverUrl + "general/register", self.user)
             .then(function (response) {
                 //First function handles success
                 self.register.content = response.data.message;

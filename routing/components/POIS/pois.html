@@ -1,0 +1,38 @@
+<div ng-repeat="c in poiCtrl.categories">
+    <h2 ng-bind="c.value"></h2>
+    <span ng-repeat="poi in c.pois" >
+            <span ng-bind="poi.name"></span>
+            <img ng-style="{'height': '50px','width': '100px', 'border-radius': '10px'}" ng-src="../../tokens{{poi.poi_img}}">
+    </span>
+</div>
+
+<form name="form" novalidate>
+<h1>Sort by category:</h1>
+<select ng-model="poiCtrl.chosenCategory" name="category" required>
+        <option value="" disabled selected>Select your category</option>
+        <option ng-repeat="category in poiCtrl.categories" value="{{category.value}}">{{category.value}}</option>
+</select>
+<br />
+<div ng-show="form.$submitted || form.category.$touched">
+<div ng-show="form.category.$error.required">Please choose category.</div>
+</div><br>
+<button ng-click="poiCtrl.sortByCategory()" ng-disabled="!form.$valid">Sort</button>
+<span ng-bind="poiCtrl.sort.content"></span>
+</form>
+</div>
+
+<div ng-repeat="p in poiCtrl.poisToShow">
+        <h2 ng-bind="p.value"></h2>
+                <span ng-bind="p.name"></span>
+                <img ng-style="{'height': '50px','width': '100px', 'border-radius': '10px'}" ng-src="../../tokens{{p.poi_img}}">
+        </span>
+</div>
+
+<button ng-click="poiCtrl.sortByRank()">Sort by rank</button>
+
+<div ng-repeat="po in poiCtrl.sortable">
+        <h2 ng-bind="po.value"></h2>
+                <span ng-bind="po.name"></span>
+                <img ng-style="{'height': '50px','width': '100px', 'border-radius': '10px'}" ng-src="../../tokens{{po.poi_img}}">
+        </span>
+</div>

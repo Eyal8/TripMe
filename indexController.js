@@ -1,8 +1,15 @@
 angular.module('TripMe')
+<<<<<<< HEAD
     .service('singlePOIService',[ '$http', function ($http) {
         this.cur_poi ="";        
         self.setCurrentPOI = function(poi_name){
             this.cur_poi = poi_name;
+=======
+    .service('singlePOIService',[ '$http', function ($http) {   
+             
+        self.setCurrentPOI = function(poi){
+            this.cur_poi = poi;
+>>>>>>> b38ea249ef51728b185cdac76b90515b9f199eb6
             console.log("current poi set")
         }
     }])
@@ -15,6 +22,7 @@ angular.module('TripMe')
             setHeadersToken.authenticate();
         };
 
+<<<<<<< HEAD
         self.singlePOI = function(poi_name){
             alert(poi_name);
         }
@@ -33,10 +41,11 @@ angular.module('TripMe')
             })
            .then(self.authenticate());
         }
+=======
+>>>>>>> b38ea249ef51728b185cdac76b90515b9f199eb6
 
-        getAllPOIs();
+        self.authenticate();
 
-    
        // self.selectedCity= function (id){
             //console.log (self.selected )
          //   singlePOIService.setCurrentPOI(self.selected)
