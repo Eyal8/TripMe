@@ -10,7 +10,7 @@ angular.module('TripMe')
 
         self = this;
 
-        var authenticate = function(){              
+        self.authenticate = function(){              
             setHeadersToken.authenticate();
         };
 
@@ -27,7 +27,7 @@ angular.module('TripMe')
             }, function (response) {
                 //Second function handles error
             })
-           .then(authenticate);
+           .then(self.authenticate());
         }
 
         getAllPOIs();
