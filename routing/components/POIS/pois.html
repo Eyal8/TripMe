@@ -1,8 +1,20 @@
+<button ng-click="poiCtrl.goToFavorites()" ng-disabled="poiCtrl.guest">Go to favorites points of interest</button>
+
 <div ng-repeat="c in poiCtrl.categories">
     <h2 ng-bind="c.value"></h2>
     <span ng-repeat="poi in c.pois" >
             <span ng-bind="poi.name"></span>
-            <img ng-style="{'height': '50px','width': '100px', 'border-radius': '10px'}" ng-src="../../tokens{{poi.poi_img}}">
+            <img ng-style="{'height': '50px','width': '100px', 'border-radius': '10px'}" ng-src="../../tokens{{poi.poi_img}}"><br>
+            <span ng-bind="poi.num_of_views"></span> People have viewed this point!
+            <br>
+            <span ng-bind="poi.poi_description"></span>
+            <br>
+            Point reviews:
+            <br>
+            Review 1: <span ng-bind="poi.poi_review1"></span>
+            <br>
+            Review 2: <span ng-bind="poi.poi_review2"></span>
+            <br>
     </span>
 </div>
 
@@ -16,7 +28,7 @@
 <div ng-show="form.$submitted || form.category.$touched">
 <div ng-show="form.category.$error.required">Please choose category.</div>
 </div><br>
-<button ng-click="poiCtrl.sortByCategory()" ng-disabled="!form.$valid">Sort</button>
+<button ng-click="poiCtrl.filterByCategory()" ng-disabled="!form.$valid">Filter by category</button>
 <span ng-bind="poiCtrl.sort.content"></span>
 </form>
 </div>
@@ -24,15 +36,68 @@
 <div ng-repeat="p in poiCtrl.poisToShow">
         <h2 ng-bind="p.value"></h2>
                 <span ng-bind="p.name"></span>
-                <img ng-style="{'height': '50px','width': '100px', 'border-radius': '10px'}" ng-src="../../tokens{{p.poi_img}}">
-        </span>
+                <img ng-style="{'height': '50px','width': '100px', 'border-radius': '10px'}" ng-src="../../tokens{{p.poi_img}}"><br>
+                Point rank: <span ng-bind="p.poi_rank"></span>
+                <br>
+                <span ng-bind="p.num_of_views"></span> People have viewed this point!
+                <br>
+                <span ng-bind="p.poi_description"></span>
+                <br>
+                Point reviews:
+                <br>
+                Review 1: <span ng-bind="p.poi_review1"></span>
+                <br>
+                Review 2: <span ng-bind="p.poi_review2"></span>
+                <br>
 </div>
 
 <button ng-click="poiCtrl.sortByRank()">Sort by rank</button>
 
-<div ng-repeat="po in poiCtrl.sortable">
+<div ng-repeat="po in poiCtrl.poisArray">
         <h2 ng-bind="po.value"></h2>
                 <span ng-bind="po.name"></span>
                 <img ng-style="{'height': '50px','width': '100px', 'border-radius': '10px'}" ng-src="../../tokens{{po.poi_img}}">
-        </span>
+                <br>
+                Point rank: <span ng-bind="po.poi_rank"></span>
+                <br>
+                <span ng-bind="po.num_of_views"></span> People have viewed this point!
+                <br>
+                <span ng-bind="po.poi_description"></span>
+                <br>
+                Point reviews:
+                <br>
+                Review 1: <span ng-bind="po.poi_review1"></span>
+                <br>
+                Review 2: <span ng-bind="po.poi_review2"></span>
+                <br>
+</div>
+
+<div>
+    <h3>Search point of interst by name</h3>
+    <input type="text" placeholder="Enter point of interest's name" ng-model="poiCtrl.poiName"></input>
+    <button ng-click="poiCtrl.searchByName()">Search</button>
+
+    <div ng-show="poiCtrl.showme">
+    <span ng-bind="poiCtrl.searchedPoi.POI_name"></span>
+    <img ng-style="{'height': '50px','width': '100px', 'border-radius': '10px'}" ng-src="../../tokens{{poiCtrl.searchedPoi.PicturePath
+    }}">
+    <br>
+    Point rank: <span ng-bind="poiCtrl.searchedPoi.POI_rank"></span>
+    <br>
+    <span ng-bind="poiCtrl.searchedPoi.NumOfViews"></span> People have viewed this point!
+    <br>
+    <span ng-bind="poiCtrl.searchedPoi.POI_description"></span>
+    <br>
+    Point reviews:
+    <br>
+    Review 1: <span ng-bind="poiCtrl.searchedPoi.Review1"></span>
+    <br>
+    Review 2: <span ng-bind="poiCtrl.searchedPoi.Review2"></span>
+    <br>
+    </div>
+
+    <div ng-show="!poiCtrl.showme">
+    <span ng-bind="poiCtrl.searchByName.content"></span>
+    <div></div>
+
 </div>

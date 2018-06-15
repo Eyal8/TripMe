@@ -8,12 +8,14 @@ angular.module('TripMe')
         // register user
         $http.post(serverUrl + "general/login", self.user)
             .then(function (response) {
-                self.login.content = response.data.message;
+                if(response.data.success == true)
+                {
                 setHeadersToken.set(response.data.token);
                 updateTokenInLocalStorage(response.data.token);
                 $location.path('/registered_users');
-            }, function (response) {
+                }
                 self.login.content = response.data.message;
+
             });
     }
 
