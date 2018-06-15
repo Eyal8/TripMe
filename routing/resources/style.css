@@ -67,8 +67,16 @@ body{
 
 /**** REGISTERED USERS ****/
 #ru_fav_table{
-
+	width: 75%;
+	margin: 0 auto;
+}
+#ru_fav_table tr td{
+	width:33.33%;
 }
 #ru_recent_table{
-	
+	width: 75%;
+	margin: 0 auto;
+}
+#ru_recent_table tr td{
+	width:33.33%;
 }

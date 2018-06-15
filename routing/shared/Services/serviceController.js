@@ -34,7 +34,11 @@ angular.module('TripMe')
             var token = get();
             var user = {};
             user.token = token;
+<<<<<<< HEAD
             $http.get("http://localhost:3000/registeredUsers/getUserName", user)
+=======
+            $http.get("http://localhost:3000/"+ "registeredUsers/getUserName", user)
+>>>>>>> ad7b3fb1646661964e92820f47c10c1a8e4a9d9c
             .then(function (response) {
                 if(response.data.success == false)
                 {
