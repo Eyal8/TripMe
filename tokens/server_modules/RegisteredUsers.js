@@ -34,6 +34,7 @@ router.use('/', function (req, res, next) {
                     req.userName = decoded.payload.userName;
                     console.log(decoded.header);
                     console.log(decoded.payload);
+                    console.log("NEXT");
                     next();
                 }
             }
@@ -53,6 +54,7 @@ router.use('/', function (req, res, next) {
 
 router.get('/getUserName', function(req,res){
     var decoded = jwt.decode(req.token, {complete: true});
+    console.log("after getusername in server")
     return res.json({ success: true, message: decoded.payload });
 })
 
@@ -76,16 +78,27 @@ router.put('/reorder', function(req, res)
 
 router.post('/savePOI', function(req,res){
     var poi_name = req.body.poi_name;
-    DButilsAzure.execQuery("IF NOT EXISTS (SELECT POI_name FROM POIsForUser WHERE POI_name = '"+poi_name+"' AND UserName = '"+req.userName+"') BEGIN UPDATE RegisteredUsers SET NumOfFavorites = NumOfFavorites + 1 WHERE UserName = '"+req.userName+"' END").then(function (recordSet) {   
-    }).catch(function (err) {
-        res.send(err);
-            });
+    DButilsAzure.execQuery("SELECT * FROM POIsForUser WHERE POI_name = '"+poi_name+"' AND UserName = '"+req.userName+"'").then(function (recordSet) {   
+        if(recordSet == 0){
+            DButilsAzure.execQuery("UPDATE RegisteredUsers SET NumOfFavorites = NumOfFavorites + 1 WHERE UserName = '"+req.userName+"'").then(function (recordSet) {   
+            }).catch(function (err) {
+                res.send(err);
+                    });
+            DButilsAzure.execQuery("INSERT INTO POIsForUser (POI_name, UserName, CreatedAt) VALUES ('"+poi_name+"','"+req.userName+"', GETDATE())").then(function (recordSet) {   
+                res.json({ success: true, message: 'Point of interest is saved to favorites.' });
+            }).catch(function (err) {
+               res.send(err);
+               });
+        }
+        else{
+            res.json({success: false, message: "cannot save point"});
+        }
+    }).catch(function(err){
+        res.send(err)
+    })
+   
 
-    DButilsAzure.execQuery("INSERT INTO POIsForUser (POI_name, UserName, CreatedAt) VALUES ('"+poi_name+"','"+req.userName+"', GETDATE())").then(function (recordSet) {   
-        res.json({ success: true, message: 'Point of interest is saved to favorites.' });
-    }).catch(function (err) {
-       res.send(err);
-       });
+    
 })
 
 router.delete('/removePOI', function(req,res){
@@ -115,6 +128,18 @@ router.get('/getPOIs', function(req,res){
         });
 })
 
+router.get('/getSinglePOIForUser', function(req,res){
+    DButilsAzure.execQuery("SELECT * FROM POIsForUser WHERE POI_name = '"+poi_name+"' AND UserName = '"+req.userName+"'").then(function (recordSet) {   
+        if(recordSet == 0){
+            res.json({ success: true, message: 'Point of interest is saved already in user\'s favorites.' });
+        }
+        else{
+            res.json({ success: false, message: 'Point of interest not saved in user\'s favorites.' });
+        }
+    }).catch(function(err){
+        res.send(err);
+    })
+})
 router.get('/get2MostPopularPOIs', function(req,res){
    DButilsAzure.execQuery("DECLARE @category VARCHAR(100), @poi_name1 VARCHAR(100), @poi_name2 VARCHAR(100); SELECT @poi_name1=POI_name, @category=POI.Category FROM CategoriesForUser JOIN POI ON CategoriesForUser.CategoryName = POI.Category WHERE UserName = '"+req.userName+"' AND POI_rank = (SELECT MAX(POI_rank) FROM CategoriesForUser JOIN POI ON CategoriesForUser.CategoryName = POI.Category); SELECT @poi_name2 = POI.POI_name FROM CategoriesForUser JOIN POI ON CategoriesForUser.CategoryName = POI.Category WHERE UserName = '"+req.userName+"' AND POI.Category <> @category AND POI_rank = (SELECT MAX(POI_rank) FROM CategoriesForUser JOIN POI ON CategoriesForUser.CategoryName = POI.Category WHERE POI.Category <> @category); SELECT * FROM POI WHERE POI_name=@poi_name1; SELECT * FROM POI WHERE POI_name=@poi_name2").then(function(recordSet){
         res.json(recordSet);

@@ -7,6 +7,7 @@ Hello <span ng-bind="ruCtrl.userName.content"></span>!
     <tr>
             <td ng-repeat="(id, poi) in ruCtrl.fav_pois">
                 <a href="#/singlePOI"> <span ng-bind="poi.name"></span></a>
+                <a ng-click="ruCtrl.savePOI(poi.name)"><img class="favs" ng-style="{'height': '20px','width': '20px'}" ng-src="../../routing/resources/img/{{poi.poi_saved}}.png"/></a><span ng-show="ruCtrl.saved[{{id}}]">Point already saved</span>
                 <br> 
                 <a href="#/singlePOI"><img ng-style="{'height': '100px','width': '150px', 'border-radius': '10px'}" ng-src="../../tokens{{poi.poi_img}}"></a>
                 <br>
