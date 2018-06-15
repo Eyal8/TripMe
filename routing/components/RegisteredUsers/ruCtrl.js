@@ -3,11 +3,8 @@ angular.module('TripMe')
  
     self = this;
 
-    self.userName = function(){
-        setHeadersToken.authenticate();
-    }
-    self.userName();
-    
+    self.userName = setHeadersToken.userName;
+   
     self.logout = function()
     {
         removeTokenFromLocalStorage();

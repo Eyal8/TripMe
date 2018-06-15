@@ -1,5 +1,3 @@
-import jwt from 'jsonwebtoken';
-
 angular.module('TripMe')
  .controller('poisController', ['$location', 'localStorageModel', 'setHeadersToken', '$http', function($location, localStorageModel, setHeadersToken,$http) {
   
@@ -88,20 +86,7 @@ angular.module('TripMe')
         $location.path('/favorites');
     }
 
-    function checkAuth() {
-        var token = getTokenFromLocalStorage();
-        if (token)
-        {
-            jwt.check(token, function callback (isValid, err) {
-            if (isValid) 
-                self.guest = false;
-            else 
-                self.guest = true;          
-            });
-        }
-        else 
-            self.guest = true;
-      }
+      self.guest = !setHeadersToken.authenticate();
 
       getTokenFromLocalStorage = function () {
         return localStorageModel.getLocalStorage('token');
