@@ -9,31 +9,12 @@ angular.module('TripMe')
 
 
         self = this;
-<<<<<<< HEAD
 
         var authenticate = function(){              
             setHeadersToken.authenticate();
         };
 
         var getAllPOIs = function(){
-=======
-        console.log("START INDEX CONTROLLER")
-        function authenticate(){
-            let token = localStorageModel.getLocalStorage('token');
-            if(token)
-            {
-                setHeadersToken.set(token);
-                $location.path('/registered_users');
-            }
-            else
-            {
-                $location.path('/guest');
-            }
-        }
-
-
-        function getAllPOIs (){
->>>>>>> ad7b3fb1646661964e92820f47c10c1a8e4a9d9c
             $http.get(setHeadersToken.serverUrl + "poi/all")
             .then(function (response) {
                 let i = 0;
