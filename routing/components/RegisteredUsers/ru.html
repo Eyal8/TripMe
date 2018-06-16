@@ -8,10 +8,10 @@ Hello <span ng-bind="ruCtrl.userName"></span>!
             <td ng-repeat="(id, poi) in ruCtrl.two_fav_pois">
                 <a href="#/singlePOI"> <span ng-bind="poi.name"></span></a>
                 
-                <div ng-show="ruCtrl.saved">
+                <div ng-show="poi.poi_saved=='full_heart'">
                     <a ng-click="ruCtrl.removePOI(poi.name)"><img class="favs" ng-style="{'height': '20px','width': '20px'}" ng-src="../../routing/resources/img/{{poi.poi_saved}}.png"/></a>
                 </div>
-                <div ng-show="!ruCtrl.saved">
+                <div ng-show="poi.poi_saved=='empty_heart'">
                         <a ng-click="ruCtrl.savePOI(poi.name)"><img class="favs" ng-style="{'height': '20px','width': '20px'}" ng-src="../../routing/resources/img/{{poi.poi_saved}}.png"/></a>
                     </div>
                 <br> 

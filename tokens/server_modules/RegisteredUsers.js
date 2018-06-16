@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var DButilsAzure = require('../DButils');
 var jwt = require('jsonwebtoken');
+var bodyParser = require('body-parser');
 const superSecret = "OurSecretKeyIsTheBest!"; // secret variable
 
 // route middleware to verify a token
@@ -80,6 +81,7 @@ router.put('/reorder', function(req, res)
 
 router.post('/savePOI', function(req,res){
     var poi_name = req.body.poi_name;
+    console.log("SAVE POI: "+ poi_name);
     DButilsAzure.execQuery("SELECT * FROM POIsForUser WHERE POI_name = '"+poi_name+"' AND UserName = '"+req.userName+"'").then(function (recordSet) {   
         if(recordSet == 0){
             DButilsAzure.execQuery("UPDATE RegisteredUsers SET NumOfFavorites = NumOfFavorites + 1 WHERE UserName = '"+req.userName+"'").then(function (recordSet) {   
@@ -103,9 +105,10 @@ router.post('/savePOI', function(req,res){
     
 })
 
-router.delete('/removePOI/:name', function(req,res){
-    var poi_name = req.params.poi_name;
-    console.log("nihnassss " + req.params.poi_name + req.body.poi_name);
+router.delete('/removePOI', function(req,res){
+    var poi_name = req.headers['poi_name'];
+    console.log("DELETE POI1: "+ poi_name);
+
     DButilsAzure.execQuery("IF EXISTS (SELECT POI_name FROM POIsForUser WHERE POI_name = '"+poi_name+"' AND UserName = '"+req.userName+"') BEGIN UPDATE RegisteredUsers SET NumOfFavorites = NumOfFavorites - 1 WHERE UserName = '"+req.userName+"' END").then(function (recordSet) {   
     }).catch(function (err) {
         res.send(err);

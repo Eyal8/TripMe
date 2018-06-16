@@ -53,15 +53,15 @@ angular.module('TripMe')
         setHeadersToken.route();
         $http.post(setHeadersToken.serverUrl + "registeredUsers/savePOI", point)
         .then(function (response) {
-            if(response.data.success == false){
+            /*if(response.data.success == false){
                 let i = 0;
                 for(i = 0; self.two_fav_pois.length; i++){
                     if(self.two_fav_pois[i].name == poi){
                         self.removePOI(point);
                     }
                 }
-            }
-            else
+            }*/
+            if(response.data.success == true)
             {
                 let i = 0;
                 for(i = 0; self.two_fav_pois.length; i++){
@@ -70,14 +70,19 @@ angular.module('TripMe')
                     }
                 }
             }
+            else{
+                self.savePOI.content = response.data.message;
+            }
         }, function (response) {
             alert("cannot save point.")
         });
-        self.saved(poi);
+        //self.saved(poi);
     }
 
     self.removePOI = function(poi){
-        $http.delete(setHeadersToken.serverUrl + "registeredUsers/removePOI/" + poi)
+        $http.defaults.headers.common[ 'poi_name' ] = poi;
+
+        $http.delete(setHeadersToken.serverUrl + "registeredUsers/removePOI")
         .then(function (response) {
             if(response.data.success == false){
                 self.removePOI.content = response.data.message;
@@ -86,15 +91,16 @@ angular.module('TripMe')
             {
                 let i = 0;
                 for(i = 0; self.two_fav_pois.length; i++){
-                    if(self.two_fav_pois[i].name == point.poi_name){
+                    if(self.two_fav_pois[i].name == poi){
                         self.two_fav_pois[i].poi_saved = "empty_heart";
                     }
                 }
             }
 
         }, function (response) {
+            console.log('cannot delete point');
         });
-        self.saved(poi);
+       // self.saved(poi);
     }
 
     self.getPOIsForUser = function(){
