@@ -99,3 +99,8 @@ body{
 	width:100px;
 	height:100px;
 }
+
+/**** POIS PAGE ****/
+.pois_img{
+	cursor: pointer;
+}

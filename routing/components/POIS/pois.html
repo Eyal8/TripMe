@@ -6,7 +6,7 @@
     <h2 ng-bind="c.value"></h2>
     <span ng-repeat="poi in c.pois" >
         <a ng-click="poiCtrl.singlePOI(poi.name)"><span ng-bind="poi.name"></span></a>
-        <a ng-click="poiCtrl.singlePOI(poi.name)"><img ng-style="{'height': '50px','width': '100px', 'border-radius': '10px'}" ng-src="../../tokens{{poi.poi_img}}"></a>
+        <a ng-click="poiCtrl.singlePOI(poi.name)"><img class="pois_img" ng-style="{'height': '50px','width': '100px', 'border-radius': '10px'}" ng-src="../../tokens{{poi.poi_img}}"></a>
     </span>
 </span>
 
