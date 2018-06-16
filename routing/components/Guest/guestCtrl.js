@@ -25,14 +25,12 @@ angular.module('TripMe')
                     self.rand_pois[i] = {name: response.data[i].POI_name, num_of_views: response.data[i].NumOfViews, poi_description: response.data[i].POI_description, poi_rank: response.data[i].POI_rank, poi_review1: response.data[i].Review1, poi_review2: response.data[i].Review2, poi_img: response.data[i].PicturePath}
                     i++;
                 }
-        }, function (response) {
-            //Second function handles error
-            self.signUp.content = "Something went wrong";
         });
     }
     self.get3PopRand();
     self.singlePOI = function(poi_name){
-        singlePOIService.cur_poi = poi_name;
+        singlePOIService.setCurrentPOI(poi_name);
+        $location.path('/singlePOI');
     }
     /*
     self.getOnePOI = function(){

@@ -10,21 +10,9 @@ Hello guest!
                 <span class="side_spans">Explore popular points of interest at our website:</span>
                 <tr>
                         <td ng-repeat="(id, poi) in gstCtrl.rand_pois">
-                                <a ng-click="gstCtrl.singlePOI(poi.name)" href="#/singlePOI" target="_new"> <span ng-bind="poi.name"></span></a>
+                                <a ng-click="gstCtrl.singlePOI(poi.name)"> <span ng-bind="poi.name"></span></a>
                                 <br> 
-                                <a ng-click="gstCtrl.singlePOI(poi.name)" href="#/singlePOI" target="_new"><img ng-style="{'height': '100px','width': '150px', 'border-radius': '10px'}" ng-src="../../tokens{{poi.poi_img}}"></a>
-                                <br>
-                                Point rank: <span ng-bind="poi.poi_rank"></span>
-                                <br>
-                                <span ng-bind="poi.num_of_views"></span> People have viewed this point!
-                                <br>
-                                <span ng-bind="poi.poi_description"></span>
-                                <br>
-                                Point reviews:
-                                <br>
-                                Review 1: <span ng-bind="poi.poi_review1"></span>
-                                <br>
-                                Review 2: <span ng-bind="poi.poi_review2"></span>
+                                <a ng-click="gstCtrl.singlePOI(poi.name)"><img ng-style="{'height': '100px','width': '150px', 'border-radius': '10px'}" ng-src="../../tokens{{poi.poi_img}}"></a>
                                 <br>
                                 </td>
                 </tr>

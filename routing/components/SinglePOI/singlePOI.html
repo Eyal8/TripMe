@@ -1,6 +1,28 @@
-<h1>
-    HELLO. THIS IS SINGLE POI PAGE
-    <span ng-bind="sglCtrl.current_poi">
-        
-    </span>
+<h1 style="margin-left: 30%">
+   Deatils about...
+    <span ng-bind="sglCtrl.current_poi.name">
+    </span>!
 </h1>
+
+<div style="margin-left: 30%">
+    <table>
+            <tr>
+                <span ng-bind="sglCtrl.current_poi.name"></span>
+                <br> 
+                <img ng-style="{'height': '100px','width': '150px', 'border-radius': '10px'}" ng-src="../../tokens{{sglCtrl.current_poi.poi_img}}">
+                <br>
+                Point rank: <span ng-bind="sglCtrl.current_poi.poi_rank"></span>
+                <br>
+                <span ng-bind="sglCtrl.current_poi.num_of_views"></span> People have viewed this point!
+                <br>
+                <span ng-bind="sglCtrl.current_poi.poi_description"></span>
+                <br>
+                Point reviews:
+                <br>
+                Review 1: <span ng-bind="sglCtrl.current_poi.poi_review1"></span>
+                <br>
+                Review 2: <span ng-bind="sglCtrl.current_poi.poi_review2"></span>
+                <br>
+            </tr>
+    </table>
+</div>

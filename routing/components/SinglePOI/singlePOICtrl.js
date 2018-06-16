@@ -1,20 +1,20 @@
 angular.module('TripMe')
- .controller('singlePOICtrl', ['$http', 'singlePOIService', function($http, singlePOIService) {
+ .controller('singlePOICtrl', ['setHeadersToken','$http', 'singlePOIService', function(setHeadersToken, $http, singlePOIService) {
   
     self = this;
-    self.current_poi = singlePOIService.cur_poi
-    let serverUrl = 'http://localhost:3000/'
+    self.current_poi = {};
+    self.current_poi.name = singlePOIService.cur_poi;
 
-    alert(self.current_poi)
-    self.getOnePOI = function(){
-        $http.get(serverUrl + "poi/:name")
+    getOnePOI = function(){
+        $http.get(setHeadersToken.serverUrl + "poi/" + self.current_poi.name)
         .then(function (response) {
-            //First function handles success
-            self.signUp.content = response.data;
+            if(response.data.success == true)
+                self.current_poi = {name: response.data.POI_name, num_of_views: response.data.NumOfViews, poi_description: response.data.POI_description, poi_rank: response.data.POI_rank, poi_review1: response.data.Review1, poi_review2: response.data.Review2, poi_img: response.data.PicturePath};
         }, function (response) {
-            //Second function handles error
-            self.signUp.content = "Something went wrong";
+            getOnePOI.content = response.data.message;
         });
     }
+
+    getOnePOI();
 
 }]);
