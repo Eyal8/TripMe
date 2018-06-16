@@ -9,6 +9,8 @@ router.use('/', function (req, res, next) {
 
     // check header or url parameters or post parameters for token
     console.log("middlewareeeee!")
+    if(req.body.poi_name)
+        console.log(req.body.poi_name);
 
 
     var token = req.body.token || req.query.token || req.headers['token'];
@@ -91,7 +93,7 @@ router.post('/savePOI', function(req,res){
                });
         }
         else{
-            res.json({success: false, message: "cannot save point"});
+            res.json({success: false, message: "Point of interest already exists"});
         }
     }).catch(function(err){
         res.send(err)
@@ -101,14 +103,15 @@ router.post('/savePOI', function(req,res){
     
 })
 
-router.delete('/removePOI', function(req,res){
-    var poi_name = req.body.poi_name;
+router.delete('/removePOI/:name', function(req,res){
+    var poi_name = req.params.poi_name;
+    console.log("nihnassss " + req.params.poi_name + req.body.poi_name);
     DButilsAzure.execQuery("IF EXISTS (SELECT POI_name FROM POIsForUser WHERE POI_name = '"+poi_name+"' AND UserName = '"+req.userName+"') BEGIN UPDATE RegisteredUsers SET NumOfFavorites = NumOfFavorites - 1 WHERE UserName = '"+req.userName+"' END").then(function (recordSet) {   
     }).catch(function (err) {
         res.send(err);
             });
     DButilsAzure.execQuery("DELETE FROM POIsForUser WHERE POI_name = '"+poi_name+"' AND UserName = '"+req.userName+"'; SELECT @@rowcount 'rowCount'").then(function (recordSet) {   
-        if(recordSet[0].rowCount == 1){
+         if(recordSet[0].rowCount == 1){
             res.json({ success: true, message: 'Point of interest is removed from favorites.' });
         }
         else{

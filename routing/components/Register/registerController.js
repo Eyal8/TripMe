@@ -44,20 +44,26 @@ angular.module('TripMe')
             }
         }
         if(index < 2)
+        {
             self.register.content = "Please choose at least two categories";
+            return false;
+        }
+        return true;
     }
 
 
     self.register = function () {
-        validateCategories();
-        $http.post(setHeadersToken.serverUrl + "general/register", self.user)
-            .then(function (response) {
-                //First function handles success
-                self.register.content = response.data.message;
-            }, function (response) {
-                //Second function handles error
-                self.register.content = response.data.message;
-            });
+        if(validateCategories())
+        {
+            $http.post(setHeadersToken.serverUrl + "general/register", self.user)
+                .then(function (response) {
+                    //First function handles success
+                    self.register.content = response.data.message;
+                }, function (response) {
+                    //Second function handles error
+                    self.register.content = response.data.message;
+                });
+        }
     }
     self.getCountries();
     self.getCategories();

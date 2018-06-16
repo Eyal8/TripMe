@@ -5,10 +5,17 @@ Hello <span ng-bind="ruCtrl.userName"></span>!
 <p class="side_spans">2 most popular points of interest from <span ng-bind="ruCtrl.userName.content"></span>'s favourite categories: </p>
 <table id="ru_fav_table">
     <tr>
-            <td ng-repeat="(id, poi) in ruCtrl.fav_pois">
+            <td ng-repeat="(id, poi) in ruCtrl.two_fav_pois">
                 <a href="#/singlePOI"> <span ng-bind="poi.name"></span></a>
-                <a ng-click="ruCtrl.savePOI(poi.name)"><img class="favs" ng-style="{'height': '20px','width': '20px'}" ng-src="../../routing/resources/img/{{poi.poi_saved}}.png"/></a><span ng-show="ruCtrl.saved[{{id}}]">Point already saved</span>
+                
+                <div ng-show="ruCtrl.saved">
+                    <a ng-click="ruCtrl.removePOI(poi.name)"><img class="favs" ng-style="{'height': '20px','width': '20px'}" ng-src="../../routing/resources/img/{{poi.poi_saved}}.png"/></a>
+                </div>
+                <div ng-show="!ruCtrl.saved">
+                        <a ng-click="ruCtrl.savePOI(poi.name)"><img class="favs" ng-style="{'height': '20px','width': '20px'}" ng-src="../../routing/resources/img/{{poi.poi_saved}}.png"/></a>
+                    </div>
                 <br> 
+
                 <a href="#/singlePOI"><img ng-style="{'height': '100px','width': '150px', 'border-radius': '10px'}" ng-src="../../tokens{{poi.poi_img}}"></a>
                 <br>
                 Point rank: <span ng-bind="poi.poi_rank"></span>
@@ -24,10 +31,6 @@ Hello <span ng-bind="ruCtrl.userName"></span>!
                 Review 2: <span ng-bind="poi.poi_review2"></span>
                 <br>
                 </td>
-            <td>
-                    <!-- with radio button we would like one data model for each option -->
-                    <input type="radio"  value="{{poi.name}}" ng-model="ruCtrl.selected" ng-change="ruCtrl.setCurrentPOI({{poi.name}})">
-            </td>
     </tr>
             
     

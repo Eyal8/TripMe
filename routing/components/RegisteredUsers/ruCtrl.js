@@ -3,13 +3,30 @@ angular.module('TripMe')
  
     self = this;
 
-    self.fav_pois = []
-
-    self.userName = function(){
-        setHeadersToken.authenticate();
+    self.route = function()
+    {
+        setHeadersToken.route();
     }
-    self.userName();
-    self.saved = []
+    
+    self.route();
+
+
+    self.userName = setHeadersToken.userName;
+
+    self.two_fav_pois = [];
+
+    self.saved = function(poi_name)
+    {
+        let i = 0;
+        for(i = 0; self.two_fav_pois.length; i++){
+            if(self.two_fav_pois[i].name == poi_name){
+                if(self.two_fav_pois[i].poi_saved = "empty_heart")
+                    return true;
+            }
+        }
+        return false;
+    }
+
     self.logout = function()
     {
         removeTokenFromLocalStorage();
@@ -31,40 +48,53 @@ angular.module('TripMe')
     }
 
     self.savePOI = function(poi){
-        point = {}
-        point.poi_name = poi
-        setHeadersToken.authenticate();
+        var point = {};
+        point.poi_name = poi;
+        setHeadersToken.route();
         $http.post(setHeadersToken.serverUrl + "registeredUsers/savePOI", point)
         .then(function (response) {
-            for(var i = 0; self.fav_pois.length; i++){
-                if(self.fav_pois[i].name == poi){
-                    if(self.fav_pois[i].poi_saved == "full_heart"){
-                        self.saved[i] = true;
-                    }
-                }
-            }
             if(response.data.success == false){
-                self.content.poi = true;
-            }
-            else{
                 let i = 0;
-                for(i = 0; self.fav_pois.length; i++){
-                    if(self.fav_pois[i].name == poi){
-                        self.fav_pois[i].poi_saved = "full_heart"
+                for(i = 0; self.two_fav_pois.length; i++){
+                    if(self.two_fav_pois[i].name == poi){
+                        self.removePOI(point);
                     }
                 }
-                self.content.poi = true;
+            }
+            else
+            {
+                let i = 0;
+                for(i = 0; self.two_fav_pois.length; i++){
+                    if(self.two_fav_pois[i].name == poi){
+                        self.two_fav_pois[i].poi_saved = "full_heart";
+                    }
+                }
             }
         }, function (response) {
             alert("cannot save point.")
         });
+        self.saved(poi);
     }
 
-    self.removePOI = function(){
-        $http.get(setHeadersToken.serverUrl + "registeredUsers/removePOI", user)
+    self.removePOI = function(poi){
+        $http.delete(setHeadersToken.serverUrl + "registeredUsers/removePOI/" + poi)
         .then(function (response) {
+            if(response.data.success == false){
+                self.removePOI.content = response.data.message;
+            }
+            else
+            {
+                let i = 0;
+                for(i = 0; self.two_fav_pois.length; i++){
+                    if(self.two_fav_pois[i].name == point.poi_name){
+                        self.two_fav_pois[i].poi_saved = "empty_heart";
+                    }
+                }
+            }
+
         }, function (response) {
         });
+        self.saved(poi);
     }
 
     self.getPOIsForUser = function(){
@@ -73,16 +103,17 @@ angular.module('TripMe')
         }, function (response) {
         });
     }
-    var user_pois = []
+    var user_pois = [];
     get2MostPopularPOIs = function(){
         $http.get(setHeadersToken.serverUrl + "registeredUsers/getPOIs")
         .then(function (response2) {
             for(var j = 0; j < response2.data.length;j++){
                 user_pois[j] = response2.data[j].POI_name;
             }
+            return Promise.resolve()})
+        .then(function () {
             $http.get(setHeadersToken.serverUrl + "registeredUsers/get2MostPopularPOIs")
-        .then(function (response) {
-           
+            .then(function (response) {
             let i = 0;
             for (poi in response.data){
                 var exists = false;
@@ -92,22 +123,15 @@ angular.module('TripMe')
                     }
                 }
                 if(exists == true){
-                    self.fav_pois[i] = {name: response.data[i].POI_name, num_of_views: response.data[i].NumOfViews, poi_description: response.data[i].POI_description, poi_rank: response.data[i].POI_rank, poi_review1: response.data[i].Review1, poi_review2: response.data[i].Review2, poi_img: response.data[i].PicturePath, poi_saved: "full_heart"}
+                    self.two_fav_pois[i] = {name: response.data[i].POI_name, num_of_views: response.data[i].NumOfViews, poi_description: response.data[i].POI_description, poi_rank: response.data[i].POI_rank, poi_review1: response.data[i].Review1, poi_review2: response.data[i].Review2, poi_img: response.data[i].PicturePath, poi_saved: "full_heart"}
                 }
                 else{
-                    self.fav_pois[i] = {name: response.data[i].POI_name, num_of_views: response.data[i].NumOfViews, poi_description: response.data[i].POI_description, poi_rank: response.data[i].POI_rank, poi_review1: response.data[i].Review1, poi_review2: response.data[i].Review2, poi_img: response.data[i].PicturePath, poi_saved: "empty_heart"}
+                    self.two_fav_pois[i] = {name: response.data[i].POI_name, num_of_views: response.data[i].NumOfViews, poi_description: response.data[i].POI_description, poi_rank: response.data[i].POI_rank, poi_review1: response.data[i].Review1, poi_review2: response.data[i].Review2, poi_img: response.data[i].PicturePath, poi_saved: "empty_heart"}
                 }
                 i++;
             }
-            for(var m = 0; self.fav_pois.length; m++){
-                    self.saved[m] = false;
-                
-            }
-        }, function (response) {
-        });
-        }, function (response2) {
-        });
-        
+            });
+        });       
     }
 
     get2MostRecentPOIs = function(){

@@ -15,9 +15,7 @@ angular.module('TripMe')
             setHeadersToken.route();
         };
 
-
-        self.route();
-
+      //  self.route()
        // self.selectedCity= function (id){
             //console.log (self.selected )
          //   singlePOIService.setCurrentPOI(self.selected)
