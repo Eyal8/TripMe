@@ -1,5 +1,5 @@
 angular.module('TripMe')
- .controller('poisController', ['$location', 'localStorageModel', 'setHeadersToken', '$http', function($location, localStorageModel, setHeadersToken,$http) {
+ .controller('poisController', ['singlePOIService', '$location', 'localStorageModel', 'setHeadersToken', '$http', function(singlePOIService, $location, localStorageModel, setHeadersToken,$http) {
   
     self = this;
 
@@ -90,6 +90,11 @@ angular.module('TripMe')
 
       getTokenFromLocalStorage = function () {
         return localStorageModel.getLocalStorage('token');
+    }
+
+    self.singlePOI = function(poi_name){
+        singlePOIService.setCurrentPOI(poi_name);
+        $location.path('/singlePOI');
     }
 
 }]);
