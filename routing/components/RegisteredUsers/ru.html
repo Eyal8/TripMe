@@ -6,7 +6,7 @@ Hello <span ng-bind="ruCtrl.userName"></span>!
 <table id="ru_fav_table">
     <tr>
             <td ng-repeat="(id, poi) in ruCtrl.two_fav_pois">
-                <a href="#/singlePOI"> <span ng-bind="poi.name"></span></a>
+                <a ng-click="ruCtrl.singlePOI(poi.name)"> <span class="pois_click" ng-bind="poi.name"></span></a>
                 
                 <span ng-show="poi.poi_saved=='full_heart'">
                     <a ng-click="ruCtrl.removePOI('favs', poi.name)"><img class="favs" ng-style="{'height': '20px','width': '20px'}" ng-src="../../routing/resources/img/{{poi.poi_saved}}.png"/></a>
@@ -16,7 +16,7 @@ Hello <span ng-bind="ruCtrl.userName"></span>!
                 </span>
                 <br> 
 
-                <a href="#/singlePOI"><img ng-style="{'height': '100px','width': '150px', 'border-radius': '10px'}" ng-src="../../tokens{{poi.poi_img}}"></a>
+                <a ng-click="ruCtrl.singlePOI(poi.name)"><img class="pois_click" ng-style="{'height': '100px','width': '150px', 'border-radius': '10px'}" ng-src="../../tokens{{poi.poi_img}}"></a>
                 <br>
                
                 </td>
@@ -31,7 +31,7 @@ Hello <span ng-bind="ruCtrl.userName"></span>!
 <table id="ru_recent_table">
     <tr>
             <td ng-repeat="(id, poi) in ruCtrl.two_recent_pois">
-                <a href="#/singlePOI"> <span ng-bind="poi.name"></span></a>
+                <a ng-click="ruCtrl.singlePOI(poi.name)"> <span class="pois_click" ng-bind="poi.name"></span></a>
                 <span ng-show="poi.poi_saved=='full_heart'">
                     <a ng-click="ruCtrl.removePOI('recent', poi.name)"><img class="favs" ng-style="{'height': '20px','width': '20px'}" ng-src="../../routing/resources/img/{{poi.poi_saved}}.png"/></a>
                 </span>
@@ -40,7 +40,7 @@ Hello <span ng-bind="ruCtrl.userName"></span>!
                 </span>
                 <br> 
                 <br> 
-                <a href="#/singlePOI"><img ng-style="{'height': '100px','width': '150px', 'border-radius': '10px'}" ng-src="../../tokens{{poi.poi_img}}"></a>
+                <a ng-click="ruCtrl.singlePOI(poi.name)"><img class="pois_click" ng-style="{'height': '100px','width': '150px', 'border-radius': '10px'}" ng-src="../../tokens{{poi.poi_img}}"></a>
                 <br>
                
             </td>

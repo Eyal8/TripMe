@@ -1,5 +1,5 @@
 angular.module('TripMe')
- .controller('registeredUsersCtrl', ['$location','localStorageModel','setHeadersToken','$http', function($location, localStorageModel,setHeadersToken, $http) {
+ .controller('registeredUsersCtrl', ['singlePOIService', '$location','localStorageModel','setHeadersToken','$http', function(singlePOIService, $location, localStorageModel,setHeadersToken, $http) {
  
     self = this;
 
@@ -142,10 +142,10 @@ angular.module('TripMe')
                     }
                 }
                 if(exists == true){
-                    self.two_fav_pois[i] = {name: response.data[i].POI_name, num_of_views: response.data[i].NumOfViews, poi_description: response.data[i].POI_description, poi_rank: response.data[i].POI_rank, poi_review1: response.data[i].Review1, poi_review2: response.data[i].Review2, poi_img: response.data[i].PicturePath, poi_saved: "full_heart"}
+                    self.two_fav_pois[i] = {name: response.data[i].POI_name, poi_img: response.data[i].PicturePath, poi_saved: "full_heart"}
                 }
                 else{
-                    self.two_fav_pois[i] = {name: response.data[i].POI_name, num_of_views: response.data[i].NumOfViews, poi_description: response.data[i].POI_description, poi_rank: response.data[i].POI_rank, poi_review1: response.data[i].Review1, poi_review2: response.data[i].Review2, poi_img: response.data[i].PicturePath, poi_saved: "empty_heart"}
+                    self.two_fav_pois[i] = {name: response.data[i].POI_name, poi_img: response.data[i].PicturePath, poi_saved: "empty_heart"}
                 }
                 i++;
             }
@@ -163,7 +163,7 @@ angular.module('TripMe')
                 self.noPoisForUser = false;
                 console.log("not empty");
                 for (poi in response.data.data){
-                    self.two_recent_pois[i] = {name: response.data.data[i].POI_name, num_of_views: response.data.data[i].NumOfViews, poi_description: response.data.data[i].POI_description, poi_rank: response.data.data[i].POI_rank, poi_review1: response.data.data[i].Review1, poi_review2: response.data.data[i].Review2, poi_img: response.data.data[i].PicturePath, poi_saved: "full_heart"}
+                    self.two_recent_pois[i] = {name: response.data.data[i].POI_name, poi_img: response.data.data[i].PicturePath, poi_saved: "full_heart"}
                     i++;
                 }
             }
@@ -199,5 +199,10 @@ angular.module('TripMe')
 
         getTokenFromLocalStorage = function () {
             return localStorageModel.getLocalStorage('token');
+        }
+        self.singlePOI = function(poi_name){
+            singlePOIService.setCurrentPOI(poi_name);
+            $location.path('/singlePOI');
+
         }
 }]);

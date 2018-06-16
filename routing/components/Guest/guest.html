@@ -10,9 +10,9 @@ Hello guest!
                 <span class="side_spans">Explore popular points of interest at our website:</span>
                 <tr>
                         <td ng-repeat="(id, poi) in gstCtrl.rand_pois">
-                                <a ng-click="gstCtrl.singlePOI(poi.name)"> <span ng-bind="poi.name"></span></a>
+                                <a ng-click="gstCtrl.singlePOI(poi.name)"> <span class="pois_click" ng-bind="poi.name"></span></a>
                                 <br> 
-                                <a ng-click="gstCtrl.singlePOI(poi.name)"><img ng-style="{'height': '100px','width': '150px', 'border-radius': '10px'}" ng-src="../../tokens{{poi.poi_img}}"></a>
+                                <a ng-click="gstCtrl.singlePOI(poi.name)"><img class="pois_click" ng-style="{'height': '100px','width': '150px', 'border-radius': '10px'}" ng-src="../../tokens{{poi.poi_img}}"></a>
                                 <br>
                                 </td>
                 </tr>

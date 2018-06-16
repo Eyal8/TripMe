@@ -1,5 +1,5 @@
 angular.module('TripMe')
- .controller('favoritesController',['setHeadersToken','$http', function(setHeadersToken, $http) {
+ .controller('favoritesController',['$location','singlePOIService', 'setHeadersToken','$http', function($location, singlePOIService, setHeadersToken, $http) {
   
     self = this;
 
@@ -70,6 +70,10 @@ angular.module('TripMe')
             console.log('cannot delete point');
         });
     }
+    self.singlePOI = function(poi_name){
+        singlePOIService.setCurrentPOI(poi_name);
+        $location.path('/singlePOI');
 
+    }
     getPOIsForUser();
 }]);
