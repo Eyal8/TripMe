@@ -8,28 +8,17 @@ Hello <span ng-bind="ruCtrl.userName"></span>!
             <td ng-repeat="(id, poi) in ruCtrl.two_fav_pois">
                 <a href="#/singlePOI"> <span ng-bind="poi.name"></span></a>
                 
-                <div ng-show="poi.poi_saved=='full_heart'">
-                    <a ng-click="ruCtrl.removePOI(poi.name)"><img class="favs" ng-style="{'height': '20px','width': '20px'}" ng-src="../../routing/resources/img/{{poi.poi_saved}}.png"/></a>
-                </div>
-                <div ng-show="poi.poi_saved=='empty_heart'">
-                        <a ng-click="ruCtrl.savePOI(poi.name)"><img class="favs" ng-style="{'height': '20px','width': '20px'}" ng-src="../../routing/resources/img/{{poi.poi_saved}}.png"/></a>
-                    </div>
+                <span ng-show="poi.poi_saved=='full_heart'">
+                    <a ng-click="ruCtrl.removePOI('favs', poi.name)"><img class="favs" ng-style="{'height': '20px','width': '20px'}" ng-src="../../routing/resources/img/{{poi.poi_saved}}.png"/></a>
+                </span>
+                <span ng-show="poi.poi_saved=='empty_heart'">
+                        <a ng-click="ruCtrl.savePOI('favs', poi.name)"><img class="favs" ng-style="{'height': '20px','width': '20px'}" ng-src="../../routing/resources/img/{{poi.poi_saved}}.png"/></a>
+                </span>
                 <br> 
 
                 <a href="#/singlePOI"><img ng-style="{'height': '100px','width': '150px', 'border-radius': '10px'}" ng-src="../../tokens{{poi.poi_img}}"></a>
                 <br>
-                Point rank: <span ng-bind="poi.poi_rank"></span>
-                <br>
-                <span ng-bind="poi.num_of_views"></span> People have viewed this point!
-                <br>
-                <span ng-bind="poi.poi_description"></span>
-                <br>
-                Point reviews:
-                <br>
-                Review 1: <span ng-bind="poi.poi_review1"></span>
-                <br>
-                Review 2: <span ng-bind="poi.poi_review2"></span>
-                <br>
+               
                 </td>
     </tr>
             
@@ -38,31 +27,25 @@ Hello <span ng-bind="ruCtrl.userName"></span>!
 <br>
 <p class="side_spans">2 most recent points of interest saved by <span ng-bind="ruCtrl.userName.content"></span>'s favourite categories:</p>
 
-<!--
+
 <table id="ru_recent_table">
     <tr>
-            <td ng-repeat="(id, poi) in ruCtrl.recent_pois">
+            <td ng-repeat="(id, poi) in ruCtrl.two_recent_pois">
                 <a href="#/singlePOI"> <span ng-bind="poi.name"></span></a>
-            <br> 
-            <a href="#/singlePOI"><img ng-style="{'height': '100px','width': '150px', 'border-radius': '10px'}" ng-src="../../tokens{{poi.poi_img}}"></a>
-            <br>
-            Point rank: <span ng-bind="poi.poi_rank"></span>
-            <br>
-            <span ng-bind="poi.num_of_views"></span> People have viewed this point!
-            <br>
-            <span ng-bind="poi.poi_description"></span>
-            <br>
-            Point reviews:
-            <br>
-            Review 1: <span ng-bind="poi.poi_review1"></span>
-            <br>
-            Review 2: <span ng-bind="poi.poi_review2"></span>
-            <br>
-            </td>
-            <td>
-                    <input type="radio"  value="{{poi.name}}" ng-model="ruCtrl.selected" ng-change="ruCtrl.setCurrentPOI({{poi.name}})">
+                <span ng-show="poi.poi_saved=='full_heart'">
+                    <a ng-click="ruCtrl.removePOI('recent', poi.name)"><img class="favs" ng-style="{'height': '20px','width': '20px'}" ng-src="../../routing/resources/img/{{poi.poi_saved}}.png"/></a>
+                </span>
+                <span ng-show="poi.poi_saved=='empty_heart'">
+                        <a ng-click="ruCtrl.savePOI('recent', poi.name)"><img class="favs" ng-style="{'height': '20px','width': '20px'}" ng-src="../../routing/resources/img/{{poi.poi_saved}}.png"/></a>
+                </span>
+                <br> 
+                <br> 
+                <a href="#/singlePOI"><img ng-style="{'height': '100px','width': '150px', 'border-radius': '10px'}" ng-src="../../tokens{{poi.poi_img}}"></a>
+                <br>
+               
             </td>
     </tr>
             
     
-</table>-->
+</table>
+<span class="side_spans" ng-show="ruCtrl.noPoisForUser"><img id="balloon" ng-src="../../routing/resources/img/hot-air-balloon.png"/>We recommend you start saving some points... :)</span>

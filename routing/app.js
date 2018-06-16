@@ -1,7 +1,8 @@
 let app = angular.module('TripMe', ["ngRoute", 'LocalStorageModule']);
 
-app.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider)  {
+app.config(['$locationProvider', '$routeProvider','$qProvider', function($locationProvider, $routeProvider, $qProvider)  {
 
+    $qProvider.errorOnUnhandledRejections(false);
 
     $locationProvider.hashPrefix('');
 

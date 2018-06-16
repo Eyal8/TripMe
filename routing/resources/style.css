@@ -16,7 +16,7 @@ body{
 	overflow: hidden;
 	list-style-type: none;
     margin: auto;
-	width:60%;
+	width:85%;
     background-color: rgba(200,180,240,0.8);
     border-radius: 12px;
 }
@@ -91,4 +91,11 @@ body{
 }
 .favs{
 	cursor: pointer;
+}
+#noPoisForUser{
+
+}
+#balloon{
+	width:100px;
+	height:100px;
 }

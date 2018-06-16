@@ -2,6 +2,7 @@ angular.module('TripMe')
  .controller('favoritesController',['setHeadersToken','$http', function(setHeadersToken, $http) {
   
     self = this;
+
     self.authenticate = function()
     {
         setHeadersToken.authenticate();
@@ -23,5 +24,52 @@ angular.module('TripMe')
         }, function (response) {
         });
     }
+    
+    self.savePOI = function(poi){
+        var point = {};
+        point.poi_name = poi;
+        setHeadersToken.route();
+        $http.post(setHeadersToken.serverUrl + "registeredUsers/savePOI", point)
+        .then(function (response) {
+            if(response.data.success == true)
+            {
+                let i = 0;
+                for(i = 0; self.fav_pois.length; i++){
+                    if(self.fav_pois[i].name == poi){
+                        self.fav_pois[i].poi_saved = "full_heart";
+                    }
+                }
+            }
+            else{
+                self.savePOI.content = response.data.message;
+            }
+        }, function (response) {
+            alert("cannot save point.")
+        });
+    }
+
+    self.removePOI = function(poi){
+        $http.defaults.headers.common[ 'poi_name' ] = poi;
+
+        $http.delete(setHeadersToken.serverUrl + "registeredUsers/removePOI")
+        .then(function (response) {
+            if(response.data.success == false){
+                self.removePOI.content = response.data.message;
+            }
+            else
+            {
+                let i = 0;
+                for(i = 0; self.fav_pois.length; i++){
+                    if(self.fav_pois[i].name == poi){
+                        self.fav_pois[i].poi_saved = "empty_heart";
+                    }
+                }
+            }
+
+        }, function (response) {
+            console.log('cannot delete point');
+        });
+    }
+
     getPOIsForUser();
 }]);

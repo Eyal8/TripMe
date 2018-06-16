@@ -157,9 +157,9 @@ router.get('/get2MostPopularPOIs', function(req,res){
 router.get('/get2MostRecentPOIs', function(req,res){
     DButilsAzure.execQuery("SELECT POI.POI_name, NumOfViews, POI_description, POI_rank, Review1, Review2, PicturePath, Category, CreatedAt FROM POIsForUser JOIN POI ON POIsForUser.POI_name=POI.POI_name WHERE CreatedAt = (SELECT MAX(CreatedAt) FROM POIsForUser WHERE UserName='"+req.userName+"'); SELECT POI.POI_name, NumOfViews, POI_description, POI_rank, Review1, Review2, PicturePath, Category FROM POIsForUser JOIN POI ON POIsForUser.POI_name=POI.POI_name WHERE CreatedAt = (SELECT MAX(CreatedAt) FROM POIsForUser WHERE UserName='"+req.userName+"' AND CreatedAt < (SELECT MAX(CreatedAt) FROM POIsForUser WHERE UserName='"+req.userName+"'))").then(function(recordSet){
         if(recordSet.length == 0)
-            res.json("You didnt save any point of interest");
+            res.json({success:true, isEmpty:true, message:'You didnt save any point of interest.'});
         else
-            res.json(recordSet);
+            res.json({isEmpty:false, data:recordSet});
     }).catch(function (err) {
      res.send(err);
          });    
