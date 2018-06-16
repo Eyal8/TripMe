@@ -1,1 +1,27 @@
-Favorites!!
+<p class="side_spans"> <span ng-bind="fvrtlCtrl.userName"></span>'s favourite points: </p>
+
+<table id="fav_fav_table">
+    <tr>
+            <td ng-repeat="(id, poi) in fvrtlCtrl.fav_pois">
+                <a href="#/singlePOI"> <span ng-bind="poi.name"></span></a>
+                <a ng-click="fvrtlCtrl.savePOI(poi.name)"><img class="favs" ng-style="{'height': '20px','width': '20px'}" ng-src="../../routing/resources/img/{{poi.poi_saved}}.png"/></a><span ng-show="poi.poi_saved=full_heart"></span>
+                <br> 
+                <a href="#/singlePOI"><img ng-style="{'height': '100px','width': '150px', 'border-radius': '10px'}" ng-src="../../tokens{{poi.poi_img}}"></a>
+                <br>
+                Point rank: <span ng-bind="poi.poi_rank"></span>
+                <br>
+                <span ng-bind="poi.num_of_views"></span> People have viewed this point!
+                <br>
+                <span ng-bind="poi.poi_description"></span>
+                <br>
+                Point reviews:
+                <br>
+                Review 1: <span ng-bind="poi.poi_review1"></span>
+                <br>
+                Review 2: <span ng-bind="poi.poi_review2"></span>
+                <br>
+                </td>
+    </tr>
+            
+    
+</table>
