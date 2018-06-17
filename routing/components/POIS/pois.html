@@ -14,7 +14,7 @@
             <span ng-show="poi.poi_saved=='empty_heart'">
                 <a ng-click="poiCtrl.savePOI(poi.name)"><img class="favs" ng-style="{'height': '20px','width': '20px'}" ng-src="../../routing/resources/img/{{poi.poi_saved}}.png"/></a>
             </span>
-            <img class="review_img" ng-src="../../routing/resources/img/review.png"/>
+            <a ng-click="poiCtrl.rankAndReview(poi.name)"><img class="review_img" ng-src="../../routing/resources/img/review.png"/></a>
         </span>
         </span>
 </span>
@@ -63,3 +63,47 @@
     <div></div>
 
 </div>
+
+
+
+
+<!-- Trigger/Open The Modal -->
+<button id="myBtn">Review and rank</button>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <form name="form2" novalidate>
+        <!-- !!!TODO!!! Selected poi-->
+        <label>Rank:
+        <select id="selectRank" ng-model="poiCtrl.modal.rank" name="rankSelect" required>
+                <option value="" disabled selected>Select your rank</option>
+                <option ng-repeat="n in [] | range:5" value="{{$index + 1}}">{{$index + 1}}</option>
+        </select>
+        </label>
+
+        <div ng-show="form2.$submitted || form2.rankSelect.$touched">
+        <div ng-show="form2.rankSelect.$error.required">Please choose rank in order to submit.</div>
+        </div><br>
+        <button ng-click="poiCtrl.setRank()" ng-disabled="!form2.$valid">Submit rank</button>
+        <span ng-bind="poiCtrl.setRank.content"></span>
+    </form>
+
+    <form name="form3" novalidate>
+    <label>Review:
+    <input id="review" type="text" name="review" ng-model="poiCtrl.modal.review" required="" placeholder="Enter your review...">
+    </label>
+
+    <div ng-show="form3.$submitted || form3.review.$touched">
+    <div ng-show="form3.review.$error.required">Please enter your review in order to submit.</div>
+    </div><br>
+    <button ng-click="poiCtrl.setReview()" ng-disabled="!form3.$valid">Submit review</button>
+    <span ng-bind="poiCtrl.setReview.content"></span>
+    </form>
+
+
+        </div>
+  </div>
