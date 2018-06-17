@@ -2,7 +2,7 @@ angular.module('TripMe')
  .controller('favoritesController',['registeredUsersService', '$location','singlePOIService', 'setHeadersToken','$http', function(registeredUsersService, $location, singlePOIService, setHeadersToken, $http) {
   
     self = this;
-
+    self.sortMode = false;
     authenticate = function()
     {
         var connected = setHeadersToken.authenticate();
@@ -12,7 +12,8 @@ angular.module('TripMe')
     }
 
     authenticate();
-    
+    self.stam = [];
+
     self.userName = setHeadersToken.userName;
     self.fav_pois = [];
     self.poisNotOnLocalStorage = [];
@@ -21,6 +22,7 @@ angular.module('TripMe')
         $http.get(setHeadersToken.serverUrl + "poi/all")
         .then(function (response) {
                 let i = 0;
+                let stamIndex = 0;
                 let indexToAddPoi = 0;
                 var local_storage_pois = registeredUsersService.poisInLocalStorage();
                 
@@ -29,8 +31,9 @@ angular.module('TripMe')
                         if(local_storage_pois[j].name == response.data[i].POI_name)
                         {
                             self.fav_pois[indexToAddPoi] = {name: response.data[i].POI_name, poi_img: response.data[i].PicturePath, poi_saved: "full_heart"}
-                            self.stam[i] = {checked: false, value: response.data[i].POI_name};
+                            self.stam[stamIndex] = {checked: false, value: response.data[i].POI_name};
                             indexToAddPoi++;
+                            stamIndex++;
                         }              
                     }
                     i++;
@@ -150,7 +153,6 @@ angular.module('TripMe')
             })
     }
 
-    self.stam = [];
 
     self.disableNewOrder = true;
     self.insert = function(poi)
@@ -164,4 +166,9 @@ angular.module('TripMe')
         if(counter == self.stam.length)
             self.disableNewOrder = false;
     }
+
+    self.goToSortMode = function(){
+        self.sortMode = true;
+    }
+
 }]);
