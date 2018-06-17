@@ -1,5 +1,5 @@
 angular.module('TripMe')
- .controller('loginController', ['setHeadersToken', '$http', 'localStorageModel', '$location', function(setHeadersToken, $http, localStorageModel, $location) {
+ .controller('loginController', ['registeredUsersService', 'setHeadersToken', '$http', 'localStorageModel', '$location', function(registeredUsersService, setHeadersToken, $http, localStorageModel, $location) {
   
     self = this;
     let serverUrl = 'http://localhost:3000/'
@@ -8,7 +8,6 @@ angular.module('TripMe')
         if(setHeadersToken.authenticate())
             $location.path('/registered_users');
     }
-
     check();
 
     self.login = function () {
@@ -23,7 +22,18 @@ angular.module('TripMe')
                 }
                 self.login.content = response.data.message;
 
-            });
+            })
+            .then(function(){
+                //save user's pois from server to local storage.
+                $http.get(setHeadersToken.serverUrl + "registeredUsers/getPOIs")
+                .then(function (response2) {
+                    for(var j = 0; j < response2.data.length;j++){
+                        registeredUsersService.savePOI(response2.data[j].POI_name);
+                    }
+                }, function (response2) {
+                });
+            })
+
     }
 
     self.forgotPassword = function(){

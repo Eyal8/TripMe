@@ -19,6 +19,7 @@ angular.module('TripMe')
     self.logout = function()
     {
         removeTokenFromLocalStorage();
+        removePoisFromLocalStorage();
         $http.defaults.headers.common['token'] = "";
         $location.path('/guest');
     }
@@ -26,7 +27,9 @@ angular.module('TripMe')
     removeTokenFromLocalStorage = function () {
         localStorageModel.deleteFromLocalStorage('token');
     }
-
+    removePoisFromLocalStorage = function(){
+        localStorageModel.deleteFromLocalStorage('user saved pois');
+    }
     self.reorder = function(){
         $http.get(setHeadersToken.serverUrl + "registeredUsers/reorder", user)
         .then(function (response) {
@@ -151,7 +154,7 @@ angular.module('TripMe')
     }
 
     self.getPOIsForUser = function(){
-        $http.get(setHeadersToken.serverUrl + "registeredUsers/getPOIs", user)
+        $http.get(setHeadersToken.serverUrl + "registeredUsers/getPOIs")
         .then(function (response) {
         }, function (response) {
         });
@@ -170,9 +173,10 @@ angular.module('TripMe')
             .then(function (response) {
             let i = 0;
             for (poi in response.data){
-               /* for(var k = 0; k < user_pois.length; k++){
+                //save poi to local storage
+                /*for(var k = 0; k < user_pois.length; k++){
                     if(response.data[i].POI_name == user_pois[k]){
-                        exists = true;
+                        registeredUsersService.savePOI(response.data[i].POI_name);
                     }
                 }*/
                 if(registeredUsersService.inLocalStorage(response.data[i].POI_name)){
@@ -189,25 +193,70 @@ angular.module('TripMe')
 
     get2MostRecentPOIs = function(){
         setHeadersToken.route();
-        $http.get(setHeadersToken.serverUrl + "registeredUsers/get2MostRecentPOIs")
+   /*     $http.get(setHeadersToken.serverUrl + "registeredUsers/get2MostRecentPOIs")
         .then(function (response) {
             //First function handles success
             let i = 0;
+            let numOfPoisInLocalStorage = 0;
             if(response.data.isEmpty==false){
                 self.noPoisForUser = false;
-                console.log("not empty");
                 for (poi in response.data.data){
-                    self.two_recent_pois[i] = {name: response.data.data[i].POI_name, poi_img: response.data.data[i].PicturePath, poi_saved: "full_heart"}
-                    i++;
-                }
+                    if(registeredUsersService.inLocalStorage(response.data.data[i].POI_name)){
+                        self.two_recent_pois[i] = {name: response.data.data[i].POI_name, poi_img: response.data.data[i].PicturePath, poi_saved: "full_heart"};
+                        numOfPoisInLocalStorage++;
+                    }*/
+                /* else{
+                        self.two_recent_pois[i] = {name: response.data.data[i].POI_name, poi_img: response.data.data[i].PicturePath, poi_saved: "empty_heart"}
+                    }*/
+                 //   i++;
+                //   self.two_recent_pois[i] = {name: response.data.data[i].POI_name, poi_img: response.data.data[i].PicturePath, poi_saved: "full_heart"}
+                //    i++;
+                    //save poi to local storage
+                // registeredUsersService.savePOI(response.data.data[i].POI_name);
+      /*          }
             }
             else{
                 self.noPoisForUser = true;
-                console.log("empty");
             }
-        }, function (response) {
-            //Second function handles error
+            if(numOfPoisInLocalStorage == 0){
+                self.noPoisForUser = true;
+            }
+            return Promise.resolve()})
+*/
+       
+        
+        //.then(function () {
+        $http.get(setHeadersToken.serverUrl + "poi/all")
+        .then(function (response) {
+                let i = 0;
+                var local_storage_pois = registeredUsersService.poisInLocalStorage();
+                var firstPoiInLocalStorage;
+                var secondPoiInLocalStorage;
+                if(local_storage_pois[0] != undefined){
+                    firstPoiInLocalStorage = local_storage_pois[0].name;
+                }
+                if(local_storage_pois[1] != undefined){
+                    secondPoiInLocalStorage = local_storage_pois[1].name;
+                }
+                
+                for (poi in response.data){
+                    //check if saved in local storage
+                    if(firstPoiInLocalStorage == response.data[i].POI_name){
+                        self.two_recent_pois[0] = {name: response.data[i].POI_name, poi_img: response.data[i].PicturePath, poi_saved: "full_heart"}
+                    }
+                    if(secondPoiInLocalStorage == response.data[i].POI_name){
+                        self.two_recent_pois[1] = {name: response.data[i].POI_name, poi_img: response.data[i].PicturePath, poi_saved: "full_heart"}
+                    }
+                    i++;
+                }
+
+            }, function (response) {
+                //Second function handles error
+           // })
+
         });
+
+            
     }
 
     self.reviewPOI = function(){

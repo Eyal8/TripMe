@@ -15,10 +15,6 @@ app.config(['$locationProvider', '$routeProvider','$qProvider', function($locati
             templateUrl: 'routing/components/Login/login.html',
             controller : 'loginController as lgnCtrl'
         })
-        .when('/logout', {
-            templateUrl: 'routing/components/Logout/logout.html',
-            controller : 'logoutController as lgtCtrl'
-        })
         .when('/register', {
             templateUrl: 'routing/components/Register/register.html',
             controller : 'registerController as rgCtrl'

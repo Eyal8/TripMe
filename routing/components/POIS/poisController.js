@@ -56,15 +56,15 @@ angular.module('TripMe')
 
     var getAllPOIsForRegisteredUsers = function(){
         setHeadersToken.authenticate();
-        $http.get(setHeadersToken.serverUrl + "registeredUsers/getPOIs")
+      /*  $http.get(setHeadersToken.serverUrl + "registeredUsers/getPOIs")
         .then(function (response2) {
             for(var j = 0; j < response2.data.length;j++){
                 registered_user_pois[j] = response2.data[j].POI_name;
             }
             return Promise.resolve()})
-        .then(function () {
-            $http.get(setHeadersToken.serverUrl + "poi/all")
-            .then(function (response) {
+        .then(function () {*/
+        $http.get(setHeadersToken.serverUrl + "poi/all")
+        .then(function (response) {
             let i = 0;
             for (poi in response.data){
                 var exists = false;
@@ -79,8 +79,8 @@ angular.module('TripMe')
                 }
                 i++;
             }
-            });
-        });       
+        });
+      //  });       
     }
 
     self.savePOI = function(poi){
