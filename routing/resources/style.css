@@ -104,3 +104,10 @@ body{
 .pois_click{
 	cursor: pointer;
 }
+.review_img{
+	cursor: pointer;
+	
+}
+#pois_table{
+	width:100%;
+}

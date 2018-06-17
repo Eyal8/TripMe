@@ -1,10 +1,11 @@
 angular.module('TripMe')
- .controller('poisController', ['singlePOIService', '$location', 'localStorageModel', 'setHeadersToken', '$http', function(singlePOIService, $location, localStorageModel, setHeadersToken,$http) {
+ .controller('poisController', ['registeredUsersService', 'singlePOIService', '$location', 'localStorageModel', 'setHeadersToken', '$http', function(registeredUsersService, singlePOIService, $location, localStorageModel, setHeadersToken,$http) {
   
     self = this;
 
     self.categories = [];
-
+    self.pois = [];
+    var registered_user_pois = [];
     getCategories = function(){
         $http.get(setHeadersToken.serverUrl + "general/getCategories")
         .then(function (response) {
@@ -18,7 +19,15 @@ angular.module('TripMe')
             //Second function handles error
             self.signUp.content = "Something went wrong";
         })
-        .then(getAllPOIs());
+        .then(function(){
+            if(!self.guest){
+                getAllPOIsForRegisteredUsers();
+            }
+            else{
+                getAllPOIsForguests();
+            }
+        });
+           
     }
 
     var addPOItoCategory = function(POI, Category){
@@ -31,13 +40,12 @@ angular.module('TripMe')
         }
     }
     
-    var getAllPOIs = function(){
+    var getAllPOIsForguests = function(){
         $http.get(setHeadersToken.serverUrl + "poi/all")
         .then(function (response) {
             let i = 0;
-            self.pois = {};
             for (poi in response.data){
-                self.pois[i] = {name: response.data[i].POI_name, num_of_views: response.data[i].NumOfViews, poi_description: response.data[i].POI_description, poi_rank: response.data[i].POI_rank, poi_review1: response.data[i].Review1, poi_review2: response.data[i].Review2, poi_img: response.data[i].PicturePath}
+                self.pois[i] = {name: response.data[i].POI_name, poi_img: response.data[i].PicturePath};
                 addPOItoCategory(self.pois[i], response.data[i].Category);
                 i++;
             }
@@ -45,6 +53,58 @@ angular.module('TripMe')
             //Second function handles error
         })
     }
+
+    var getAllPOIsForRegisteredUsers = function(){
+        setHeadersToken.authenticate();
+        $http.get(setHeadersToken.serverUrl + "registeredUsers/getPOIs")
+        .then(function (response2) {
+            for(var j = 0; j < response2.data.length;j++){
+                registered_user_pois[j] = response2.data[j].POI_name;
+            }
+            return Promise.resolve()})
+        .then(function () {
+            $http.get(setHeadersToken.serverUrl + "poi/all")
+            .then(function (response) {
+            let i = 0;
+            for (poi in response.data){
+                var exists = false;
+                //check if saved in local storage
+                if(registeredUsersService.inLocalStorage(response.data[i].POI_name)){
+                    self.pois[i] = {name: response.data[i].POI_name, poi_img: response.data[i].PicturePath, poi_saved: "full_heart"}
+                    addPOItoCategory(self.pois[i], response.data[i].Category);
+                }
+                else{
+                    self.pois[i] = {name: response.data[i].POI_name, poi_img: response.data[i].PicturePath, poi_saved: "empty_heart"}
+                    addPOItoCategory(self.pois[i], response.data[i].Category);
+                }
+                i++;
+            }
+            });
+        });       
+    }
+
+    self.savePOI = function(poi){
+        registeredUsersService.savePOI(poi);
+        for(var i = 0; i < self.categories.length; i++){
+            for(var j = 0; j < self.categories[i].pois.length; j++){
+                if(self.categories[i].pois[j].name==poi){
+                    self.categories[i].pois[j].poi_saved = "full_heart";
+                }
+            }
+        }
+    }
+    self.removePOI = function(poi){
+        registeredUsersService.removePOI(poi);
+        for(var i = 0; i < self.categories.length; i++){
+            for(var j = 0; j < self.categories[i].pois.length; j++){
+                if(self.categories[i].pois[j].name==poi){
+                    self.categories[i].pois[j].poi_saved = "empty_heart";
+                }
+            }
+        }
+    }
+
+
 
     getCategories();
 
