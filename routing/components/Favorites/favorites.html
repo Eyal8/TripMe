@@ -13,7 +13,7 @@
                 <br> 
                 <a ng-click="fvrtlCtrl.singlePOI(poi.name)"><img class="pois_click" ng-style="{'height': '100px','width': '150px', 'border-radius': '10px'}" ng-src="../../tokens{{poi.poi_img}}"></a>
                 <br>
-                <span  ng-show="fvrtlCtrl.sortMode"></span><input ng-click="fvrtlCtrl.insert(poi.name)" type = "checkbox">Select point</input></span>
+                <span ng-show="fvrtlCtrl.sortMode"><input ng-click="fvrtlCtrl.insert(poi.name)" type = "checkbox">Select point</input></span>
                 </td>
     </tr>
             
@@ -26,7 +26,7 @@
 <img id="save_favs_img" ng-show="!fvrtlCtrl.noPoisForUser" ng-click="fvrtlCtrl.saveFavoritesToDB()" ng-src="../../routing/resources/img/book-bag.png"/>
 <br>
 <br>
-<img ng-click="fvrtlCtrl.goToSortMode()" id="sortFavs" ng-src="../../routing/resources/img/sort.png"/>
+<img ng-click="fvrtlCtrl.goToSortMode()" ng-show="!fvrtlCtrl.noPoisForUser" id="sortFavs" ng-src="../../routing/resources/img/sort.png"/>
 
 <span ng-show="!fvrtlCtrl.noPoisForUser && fvrtlCtrl.sortMode">
 

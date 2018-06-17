@@ -2,7 +2,6 @@ angular.module('TripMe')
  .controller('favoritesController',['registeredUsersService', '$location','singlePOIService', 'setHeadersToken','$http', function(registeredUsersService, $location, singlePOIService, setHeadersToken, $http) {
   
     self = this;
-    self.sortMode = false;
     authenticate = function()
     {
         var connected = setHeadersToken.authenticate();
@@ -19,6 +18,7 @@ angular.module('TripMe')
     self.poisNotOnLocalStorage = [];
     //get all saved points of user
     getPOIsForUser = function(){
+        self.sortMode = false;
         $http.get(setHeadersToken.serverUrl + "poi/all")
         .then(function (response) {
                 let i = 0;
@@ -103,9 +103,11 @@ angular.module('TripMe')
 
     //save changes in user's favorites to DB
     self.saveFavoritesToDB = function(){
-        for(i = 0; i < self.fav_pois.length; i++){
+        var local_storage_pois = registeredUsersService.poisInLocalStorage();
+        for(var i = 0; i < local_storage_pois.length; i++){
+       // for(i = 0; i < self.fav_pois.length; i++){
             var point = {};
-            point.poi_name = self.fav_pois[i].name;
+            point.poi_name = self.local_storage_pois[i].name;
             setHeadersToken.authenticate();
             $http.post(setHeadersToken.serverUrl + "registeredUsers/savePOI", point)
             .then(function (response) {
@@ -185,7 +187,16 @@ angular.module('TripMe')
         .then(function (response) {
                 self.saveNewOrder.content = response.data.message;
         });
+        var local_storage_pois = registeredUsersService.poisInLocalStorage();
+        for(var j = 0; j < self.order.length; j++){
+            for(var i = 0; i < local_storage_pois.length; i++){
+                if(local_storage_pois[i].name == self.order[j]){
+                    local_storage_pois[i].position = j;
+                }
+            }
+        }
+        registeredUsersService.savePoisToLocalStorage(local_storage_pois);
         getPOIsForUser();
     }
-
+    
 }]);

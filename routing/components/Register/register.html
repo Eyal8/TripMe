@@ -1,110 +1,176 @@
 <h1 style="margin-left: 30%">Please fill all the fields in order to register</h1>
-<div>
-    <form style="margin-left: 30%" name="form" novalidate>
-        <label>User Name:
-        <input type="text" ng-model="rgCtrl.user.userName" name="userName" required="" />
-        </label>
-        <br />
-        <div ng-show="form.$submitted || form.userName.$touched">
-        <div ng-show="form.userName.$error.required">Please enter a user name.</div>
-        </div>
-    
-        <label>Password:
-        <input type="password" ng-model="rgCtrl.user.password" name="password" required="" />
-        </label>
-        <br />
-        <div ng-show="form.$submitted || form.password.$touched">
-        <div ng-show="form.password.$error.required">Please enter a password.</div>
-        </div>
-    
-        <label>Confirmed Password:
-        <input type="password" ng-model="rgCtrl.user.confirmedPassword" name="confirmedPassword" required="" />
-        </label>
-        <br />
-        <div ng-show="form.$submitted || form.confirmedPassword.$touched">
-        <div ng-show="form.confirmedPassword.$error.required">Please enter the password again.</div>
-        </div>
 
-        <label>First Name:
-        <input type="text" ng-model="rgCtrl.user.firstName" name="firstName" required="" />
-        </label>
-        <br />
-        <div ng-show="form.$submitted || form.firstName.$touched">
-        <div ng-show="form.firstName.$error.required">Please enter your first name.</div>
-        </div>
-
-        <label>Last Name:
-        <input type="text" ng-model="rgCtrl.user.lastName" name="lastName" required="" />
-        </label>
-        <br />
-        <div ng-show="form.$submitted || form.lastName.$touched">
-        <div ng-show="form.lastName.$error.required">Please enter your last name.</div>
-        </div>
-
-        <label>City:
-        <input type="text" ng-model="rgCtrl.user.city" name="city" required="" />
-        </label>
-        <br />
-        <div ng-show="form.$submitted || form.city.$touched">
-        <div ng-show="form.city.$error.required">Please enter your city.</div>
-        </div>
-
-        <label>Country:
-        <select ng-model="rgCtrl.user.country" name="country" required>
-                <option value="" disabled selected>Select your country</option>
-                <option ng-repeat="country in rgCtrl.countries" value="{{country}}">{{country}}</option>
-        </select>
-        </label>
-        <br />
-        <div ng-show="form.$submitted || form.country.$touched">
-        <div ng-show="form.country.$error.required">Please enter your country.</div>
-        </div><br>
-
-        <label>E-mail:
-        <input type="email" ng-model="rgCtrl.user.email" name="email" required="" />
-        </label>
-        <br />
-        <div ng-show="form.$submitted || form.email.$touched">
-        <span ng-show="form.email.$error.required">Please enter your email.</span>
-        <span ng-show="form.email.$error.email">This is not a valid email.</span>
-        </div>
-        <br>
-
-        Categories (At least two):
-        <br>
-        <label ng-repeat="category in rgCtrl.categories">
-        <input type="checkbox" ng-model="rgCtrl.categories[$index].checked">
-        {{category.value}}
-        <br>
-        </label>
-        <br/>
-
-        <br />
-    
-        <label>First Question: What is your birth city?</label><br>
-
-        <label>First answer:
-        <input type="text" ng-model="rgCtrl.user.answersForRecovery[0]" name="answersForRecovery0" required="" />
-        </label>
-        <br />
-        <div ng-show="form.$submitted || form.answersForRecovery0.$touched">
-        <div ng-show="form.answersForRecovery0.$error.required">Please enter your answer to the first question.</div>
-        </div>
+<form style="margin-left: 30%" name="form" novalidate>
+    <table>
+        <tr>
+            <td>
+                User Name
+            </td>
+            <td>
+                <label>
+                   <input type="text" ng-model="rgCtrl.user.userName" name="userName" required="" />
+                </label>
+                <br/>
+                <div ng-show="form.$submitted || form.userName.$touched">
+                <div ng-show="form.userName.$error.required">Please enter a user name.</div>
+                </div>
+            </td>
+        </tr>
 
 
-        <label>Second Question: What is your mother's maiden name?</label><br>
+        <tr>
+            <td>
+                Password
+            </td>
+            <td>
+                <label>
+                    <input type="password" ng-model="rgCtrl.user.password" name="password" required="" />
+                </label>
+                <br />
+                <div ng-show="form.$submitted || form.password.$touched">
+                <div ng-show="form.password.$error.required">Please enter a password.</div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+                <td>
+                    Confirm password
+                </td>
+                <td>
+                    <label>
+                        <input type="password" ng-model="rgCtrl.user.confirmedPassword" name="confirmedPassword" required="" />
+                    </label>
+                    <br />
+                    <div ng-show="form.$submitted || form.confirmedPassword.$touched">
+                    <div ng-show="form.confirmedPassword.$error.required">Please enter the password again.</div>
+                    </div>
+                </td>
+            </tr>
+        <tr>
+            <td>
+                First Name
+            </td>
+            <td>
+                <label>
+                        <input type="text" ng-model="rgCtrl.user.firstName" name="firstName" required="" />
+                </label>
+                <br />
+                <div ng-show="form.$submitted || form.firstName.$touched">
+                <div ng-show="form.firstName.$error.required">Please enter your first name.</div>
+                </div>
+            </td>
+        </tr>
 
-        <label>Second answer:
-        <input type="text" ng-model="rgCtrl.user.answersForRecovery[1]" name="answersForRecovery1" required="" />
-        </label>
-        <br>
-        <div ng-show="form.$submitted || form.answersForRecovery1.$touched">
-        <div ng-show="form.answersForRecovery1.$error.required">Please enter your answer to the first question.</div>
-        </div>
-    </form>
- </div>
+        <tr>
+            <td>
+                Last Name
+            </td>
+            <td>
+                <label>
+                    <input type="text" ng-model="rgCtrl.user.lastName" name="lastName" required="" />
+                </label>
+                <br />
+                <div ng-show="form.$submitted || form.lastName.$touched">
+                    <div ng-show="form.lastName.$error.required">Please enter your last name.</div>
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                City
+            </td>
+            <td>
+                <input type="text" ng-model="rgCtrl.user.city" name="city" required="" />
+                <br />
+                <div ng-show="form.$submitted || form.city.$touched">
+                    <div ng-show="form.city.$error.required">Please enter your city.</div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Country
+            </td>
+            <td>
+                <select ng-model="rgCtrl.user.country" name="country" required>
+                        <option value="" disabled selected>Select your country</option>
+                        <option ng-repeat="country in rgCtrl.countries" value="{{country}}">{{country}}</option>
+                </select>
+                <br />
+                <div ng-show="form.$submitted || form.country.$touched">
+                    <div ng-show="form.country.$error.required">Please enter your country.</div>
+                </div>
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                E-mail
+            </td>
+            <td>
+                <input type="email" ng-model="rgCtrl.user.email" name="email" required="" />
+                <br/>
+                <div ng-show="form.$submitted || form.email.$touched">
+                    <span ng-show="form.email.$error.required">Please enter your email.</span>
+                    <span ng-show="form.email.$error.email">This is not a valid email.</span>
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Categories (At least two)
+            </td>
+            <td>
+                <label ng-repeat="category in rgCtrl.categories">
+                <input type="checkbox" ng-model="rgCtrl.categories[$index].checked">
+                {{category.value}}
+                <br>
+                </label>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                First Question: What is your birth city?
+            </td>
+        </tr>
+        <tr>
+            <td>
+                First answer
+            </td>
+            <td>
+                <input type="text" ng-model="rgCtrl.user.answersForRecovery[0]" name="answersForRecovery0" required="" />    
+                <br />
+                <div ng-show="form.$submitted || form.answersForRecovery0.$touched">
+                <div ng-show="form.answersForRecovery0.$error.required">Please enter your answer to the first question.</div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Second Question: What is your mother's maiden name?
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Second answer
+            </td>
+            <td>
+                <input type="text" ng-model="rgCtrl.user.answersForRecovery[1]" name="answersForRecovery1" required="" />
+                <br>
+                <div ng-show="form.$submitted || form.answersForRecovery1.$touched">
+                <div ng-show="form.answersForRecovery1.$error.required">Please enter your answer to the first question.</div>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <button class="formbutton" style="margin-left: 30%" ng-click="rgCtrl.register()" ng-disabled="!form.$valid">Register</button>
+    <span ng-bind="rgCtrl.register.content"></span>
+</form>
 
  <br>
-<button style="margin-left: 30%" ng-click="rgCtrl.register()" ng-disabled="!form.$valid">Register</button>
-<span ng-bind="rgCtrl.register.content"></span>
+
 <br>

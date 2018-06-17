@@ -73,5 +73,7 @@ angular.module('TripMe')
               return -1;
             return 0;
         }
-          
+        self.savePoisToLocalStorage = function(pois_to_save){
+            localStorageModel.updateLocalStorage('user saved pois', pois_to_save);
+        }
     }]);

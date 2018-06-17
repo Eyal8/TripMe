@@ -1,5 +1,7 @@
 body{
 	background-image: url("img/background.png");
+	font-family: 'Raleway', sans-serif;
+
 }
 
 
@@ -44,7 +46,10 @@ body{
 	overflow: auto;
 
 }
-
+/**** REGISTER ****/
+.formbutton{
+	
+}
 /**** GUEST ****/
 #guest_table{
 	width: 75%;
