@@ -195,8 +195,10 @@ self.setReview = function(){
 self.rankAndReview = function(poi) {
     self.modal.poi = poi;
     modal.style.display = "block";
-    document.getElementById("selectRank").selectedIndex = "0";
-    document.getElementById("review").value = "";
+    if(document.getElementById("selectRank"))
+     document.getElementById("selectRank").selectedIndex = "0";
+    if(document.getElementById("review"))
+        document.getElementById("review").value = "";
     self.setRank.content = "";
     self.setReview.content = "";
 }

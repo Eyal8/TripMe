@@ -65,19 +65,14 @@
 </div>
 
 
-
-
-<!-- Trigger/Open The Modal -->
-<button id="myBtn">Review and rank</button>
-
 <!-- The Modal -->
 <div id="myModal" class="modal">
-
   <!-- Modal content -->
   <div class="modal-content">
     <span class="close">&times;</span>
     <form name="form2" novalidate>
-        <!-- !!!TODO!!! Selected poi-->
+        <b>Rank and review <span ng-bind="poiCtrl.modal.poi"></span>!</b>
+        <br><br>
         <label>Rank:
         <select id="selectRank" ng-model="poiCtrl.modal.rank" name="rankSelect" required>
                 <option value="" disabled selected>Select your rank</option>

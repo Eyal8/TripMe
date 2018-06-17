@@ -14,7 +14,7 @@ Hello <span ng-bind="ruCtrl.userName"></span>!
                 <span ng-show="poi.poi_saved=='empty_heart'">
                         <a ng-click="ruCtrl.savePOI('favs', poi.name)"><img class="favs" ng-style="{'height': '20px','width': '20px'}" ng-src="../../routing/resources/img/{{poi.poi_saved}}.png"/></a>
                 </span>
-                <img class="review_img" ng-src="../../routing/resources/img/review.png"/>
+                <a ng-click="ruCtrl.rankAndReview(poi.name)"><img class="review_img" ng-src="../../routing/resources/img/review.png"/></a>
                 <br> 
 
                 <a ng-click="ruCtrl.singlePOI(poi.name)"><img class="pois_click" ng-style="{'height': '100px','width': '150px', 'border-radius': '10px'}" ng-src="../../tokens{{poi.poi_img}}"></a>
@@ -38,7 +38,7 @@ Hello <span ng-bind="ruCtrl.userName"></span>!
                 <span ng-show="poi.poi_saved=='empty_heart'">
                         <a ng-click="ruCtrl.savePOI('recent', poi.name)"><img class="favs" ng-style="{'height': '20px','width': '20px'}" ng-src="../../routing/resources/img/{{poi.poi_saved}}.png"/></a>
                 </span>
-                <img class="review_img" ng-src="../../routing/resources/img/review.png"/>
+                <a ng-click="ruCtrl.rankAndReview(poi.name)"><img class="review_img" ng-src="../../routing/resources/img/review.png"/></a>
                 <br> 
                 <br> 
                 <a ng-click="ruCtrl.singlePOI(poi.name)"><img class="pois_click" ng-style="{'height': '100px','width': '150px', 'border-radius': '10px'}" ng-src="../../tokens{{poi.poi_img}}"></a>
@@ -49,3 +49,42 @@ Hello <span ng-bind="ruCtrl.userName"></span>!
     
 </table>
 <span class="side_spans" ng-show="ruCtrl.noPoisForUser"><img id="balloon" ng-src="../../routing/resources/img/hot-air-balloon.png"/>We recommend you start saving some points... :)</span>
+
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <form name="form2" novalidate>
+              <b>Rank and review <span ng-bind="ruCtrl.modal.poi"></span>!</b>
+              <br><br>
+              <label>Rank:
+              <select id="selectRank" ng-model="ruCtrl.modal.rank" name="rankSelect" required>
+                      <option value="" disabled selected>Select your rank</option>
+                      <option ng-repeat="n in [] | range:5" value="{{$index + 1}}">{{$index + 1}}</option>
+              </select>
+              </label>
+      
+              <div ng-show="form2.$submitted || form2.rankSelect.$touched">
+              <div ng-show="form2.rankSelect.$error.required">Please choose rank in order to submit.</div>
+              </div><br>
+              <button ng-click="ruCtrl.setRank()" ng-disabled="!form2.$valid">Submit rank</button>
+              <span ng-bind="ruCtrl.setRank.content"></span>
+          </form>
+      
+          <form name="form3" novalidate>
+          <label>Review:
+          <input id="review" type="text" name="review" ng-model="ruCtrl.modal.review" required="" placeholder="Enter your review...">
+          </label>
+      
+          <div ng-show="form3.$submitted || form3.review.$touched">
+          <div ng-show="form3.review.$error.required">Please enter your review in order to submit.</div>
+          </div><br>
+          <button ng-click="ruCtrl.setReview()" ng-disabled="!form3.$valid">Submit review</button>
+          <span ng-bind="ruCtrl.setReview.content"></span>
+          </form>
+      
+      
+              </div>
+        </div>

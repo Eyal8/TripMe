@@ -45,3 +45,43 @@
 <button ng-click="fvrtlCtrl.saveNewOrder()" ng-disabled="fvrtlCtrl.disableNewOrder">Save new order</button>
 <span ng-bind="fvrtlCtrl.saveNewOrder.content"></span>
 </span>
+
+
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <form name="form2" novalidate>
+              <b>Rank and review <span ng-bind="fvrtlCtrl.modal.poi"></span>!</b>
+              <br><br>
+              <label>Rank:
+              <select id="selectRank" ng-model="fvrtlCtrl.modal.rank" name="rankSelect" required>
+                      <option value="" disabled selected>Select your rank</option>
+                      <option ng-repeat="n in [] | range:5" value="{{$index + 1}}">{{$index + 1}}</option>
+              </select>
+              </label>
+      
+              <div ng-show="form2.$submitted || form2.rankSelect.$touched">
+              <div ng-show="form2.rankSelect.$error.required">Please choose rank in order to submit.</div>
+              </div><br>
+              <button ng-click="fvrtlCtrl.setRank()" ng-disabled="!form2.$valid">Submit rank</button>
+              <span ng-bind="fvrtlCtrl.setRank.content"></span>
+          </form>
+      
+          <form name="form3" novalidate>
+          <label>Review:
+          <input id="review" type="text" name="review" ng-model="fvrtlCtrl.modal.review" required="" placeholder="Enter your review...">
+          </label>
+      
+          <div ng-show="form3.$submitted || form3.review.$touched">
+          <div ng-show="form3.review.$error.required">Please enter your review in order to submit.</div>
+          </div><br>
+          <button ng-click="fvrtlCtrl.setReview()" ng-disabled="!form3.$valid">Submit review</button>
+          <span ng-bind="fvrtlCtrl.setReview.content"></span>
+          </form>
+      
+      
+              </div>
+        </div>

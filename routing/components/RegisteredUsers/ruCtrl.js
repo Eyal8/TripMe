@@ -294,4 +294,74 @@ angular.module('TripMe')
             $location.path('/singlePOI');
 
         }
-}]);
+
+        // Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+
+//ranks and review
+
+self.modal = {};
+self.modal.rank="";
+self.modal.review = "";
+
+self.setRank = function()
+{
+    var body = {};
+    body.poi_name = self.modal.poi;
+    body.rank = self.modal.rank;
+    $http.put(setHeadersToken.serverUrl + "registeredUsers/rankPOI", body)
+    .then(function (response) {
+        self.setRank.content = response.data.message;
+    });
+}
+
+self.setReview = function(){
+    var body = {};
+    body.poi_name = self.modal.poi;
+    body.review = self.modal.review;
+    $http.put(setHeadersToken.serverUrl + "registeredUsers/reviewPOI", body)
+    .then(function (response) {
+        self.setReview.content = response.data.message;
+    });
+}
+
+// When the user clicks on the button, open the modal 
+self.rankAndReview = function(poi) {
+    self.modal.poi = poi;
+    modal.style.display = "block";
+    if(document.getElementById("selectRank"))
+     document.getElementById("selectRank").selectedIndex = "0";
+    if(document.getElementById("review"))
+        document.getElementById("review").value = "";
+    self.setRank.content = "";
+    self.setReview.content = "";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+}])
+
+.filter('range', function() {
+    return function(list, total) {
+      total = parseInt(total, 10);
+      
+      for (var i = 0; i < total; i++) {
+        list.push(i);
+      }
+      return list;
+    };
+  });
