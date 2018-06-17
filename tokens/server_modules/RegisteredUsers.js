@@ -178,7 +178,8 @@ router.get('/get2MostRecentPOIs', function(req,res){
 router.put('/rankPOI', function(req,res){
     var poi_name = req.body.poi_name;
     var rank = req.body.rank;
-    var rankAsNum = parseFloat(rank);
+    var rankAsNum = parseFloat(rank) * 20;
+    rank = rankAsNum;
     if(rankAsNum < 0 || rankAsNum > 100){
         res.json({ success: false, message: 'Please enter a number between 0 to 100.' });
     }
