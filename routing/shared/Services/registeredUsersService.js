@@ -1,9 +1,9 @@
 angular.module('TripMe')
     .service('registeredUsersService',[ '$location', '$http', 'localStorageModel', function ($location, $http, localStorageModel) {
         self = this
-        self.savePOI = function(poi){
+        self.savePOI = function(poi, poi_position){
             var user_poi_object = {};
-            user_poi_object = {name: poi, timestamp: Date.now()}; 
+            user_poi_object = {name: poi, timestamp: Date.now(), position: poi_position}; 
             if(localStorageModel.getLocalStorage('user saved pois')==undefined){
                 var user_saved_pois = [];
                 user_saved_pois.push(user_poi_object);

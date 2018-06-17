@@ -28,7 +28,7 @@ angular.module('TripMe')
                 $http.get(setHeadersToken.serverUrl + "registeredUsers/getPOIs")
                 .then(function (response2) {
                     for(var j = 0; j < response2.data.length;j++){
-                        registeredUsersService.savePOI(response2.data[j].POI_name);
+                        registeredUsersService.savePOI(response2.data[j].POI_name, response2.data[j].Position);
                     }
                 }, function (response2) {
                 });

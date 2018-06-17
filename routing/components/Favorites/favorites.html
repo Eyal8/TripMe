@@ -13,7 +13,7 @@
                 <br> 
                 <a ng-click="fvrtlCtrl.singlePOI(poi.name)"><img class="pois_click" ng-style="{'height': '100px','width': '150px', 'border-radius': '10px'}" ng-src="../../tokens{{poi.poi_img}}"></a>
                 <br>
-                <input ng-show="fvrtlCtrl.sortMode" ng-click="fvrtlCtrl.insert(poi.name)" ng-model="fvrtlCtrl.stam[$index].checked" type = "checkbox">Select point</input>
+                <span  ng-show="fvrtlCtrl.sortMode"></span><input ng-click="fvrtlCtrl.insert(poi.name)" type = "checkbox">Select point</input></span>
                 </td>
     </tr>
             
@@ -31,11 +31,12 @@
 <span ng-show="!fvrtlCtrl.noPoisForUser && fvrtlCtrl.sortMode">
 
 <h3>Order of POIS</h3>
-<table ng-repeat="x in fvrtlCtrl.stam">
-        <tr ng-show="x.checked">
-          <td>{{ x.value }}</td>
+<table id="newOrder" ng-repeat="x in fvrtlCtrl.order">
+        <tr >
+          <td>{{ x }}</td>
         </tr>
 </table>
 
 <button ng-click="fvrtlCtrl.saveNewOrder()" ng-disabled="fvrtlCtrl.disableNewOrder">Save new order</button>
+<span ng-bind="fvrtlCtrl.saveNewOrder.content"></span>
 </span>

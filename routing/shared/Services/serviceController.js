@@ -25,7 +25,7 @@ angular.module('TripMe')
                 }
                 else 
                 {
-                    removeTokenFromLocalStorage();
+                    removeFromLocalStorage();
                     return false;   
                 }
             }
@@ -73,8 +73,10 @@ angular.module('TripMe')
             });
         }
 
-        removeTokenFromLocalStorage = function () {
+        removeFromLocalStorage = function () {
             localStorageModel.deleteFromLocalStorage('token');
+            localStorageModel.deleteFromLocalStorage('single poi');
+            localStorageModel.deleteFromLocalStorage('user saved pois');
         }
 
         getTokenFromLocalStorage = function () {

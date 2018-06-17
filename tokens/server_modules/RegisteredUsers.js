@@ -126,7 +126,7 @@ router.delete('/removePOI/:name', function(req,res){
 })
 
 router.get('/getPOIs', function(req,res){
-    DButilsAzure.execQuery("SELECT POI.POI_name, NumOfViews, POI_description, POI_rank, Review1, Review2, PicturePath, Category FROM POIsForUser JOIN POI ON POIsForUser.POI_name=POI.POI_name WHERE UserName = '"+req.userName+"'").then(function (recordSet) {   
+    DButilsAzure.execQuery("SELECT POI.POI_name, NumOfViews, POI_description, POI_rank, Review1, Review2, PicturePath, Category, Position FROM POIsForUser JOIN POI ON POIsForUser.POI_name=POI.POI_name WHERE UserName = '"+req.userName+"'").then(function (recordSet) {   
         res.json(recordSet);
    }).catch(function (err) {
     res.send(err);

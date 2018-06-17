@@ -12,7 +12,7 @@ angular.module('TripMe')
     }
 
     authenticate();
-    self.stam = [];
+    self.set = new Set();
 
     self.userName = setHeadersToken.userName;
     self.fav_pois = [];
@@ -22,21 +22,23 @@ angular.module('TripMe')
         $http.get(setHeadersToken.serverUrl + "poi/all")
         .then(function (response) {
                 let i = 0;
-                let stamIndex = 0;
                 let indexToAddPoi = 0;
                 var local_storage_pois = registeredUsersService.poisInLocalStorage();
                 
-                for (poi in response.data){
+                local_storage_pois.sort(function(obj1, obj2) {
+                    return obj1.position - obj2.position;
+                });
+
                     for(var j = 0; j < local_storage_pois.length; j++){
-                        if(local_storage_pois[j].name == response.data[i].POI_name)
-                        {
-                            self.fav_pois[indexToAddPoi] = {name: response.data[i].POI_name, poi_img: response.data[i].PicturePath, poi_saved: "full_heart"}
-                            self.stam[stamIndex] = {checked: false, value: response.data[i].POI_name};
-                            indexToAddPoi++;
-                            stamIndex++;
-                        }              
+                        for (poi in response.data){
+                            if(local_storage_pois[j].name == response.data[i].POI_name)
+                            {
+                                self.fav_pois[indexToAddPoi] = {checked: false, name: response.data[i].POI_name, poi_img: response.data[i].PicturePath, poi_saved: "full_heart"}
+                                indexToAddPoi++;
+                            }              
+                            i++;
                     }
-                    i++;
+                    i=0;
                     /*
                     //check if saved in local storage
                     if(firstPoiInLocalStorage == response.data[i].POI_name){
@@ -157,18 +159,33 @@ angular.module('TripMe')
     self.disableNewOrder = true;
     self.insert = function(poi)
     {
-        var counter = 0;
-        for(var i = 0; i < self.stam.length; i ++)
+        if(self.set.has(poi))
         {
-            if(self.stam[i].checked == true)
-                counter++;
+            self.set.delete(poi);
         }
-        if(counter == self.stam.length)
+        else
+        {
+            self.set.add(poi);
+        }
+
+        self.order = Array.from(self.set);
+
+        if(self.fav_pois.length == self.set.size)
             self.disableNewOrder = false;
     }
 
     self.goToSortMode = function(){
         self.sortMode = true;
+    }
+
+    self.saveNewOrder = function(){
+        var body = {};
+        body.pois = self.order;
+        $http.put(setHeadersToken.serverUrl + "registeredUsers/reorder", body)
+        .then(function (response) {
+                self.saveNewOrder.content = response.data.message;
+        });
+        getPOIsForUser();
     }
 
 }]);
