@@ -23,10 +23,15 @@
 <br>
 <br>
 <br>
-<img id="save_favs_img" ng-show="!fvrtlCtrl.noPoisForUser" ng-click="fvrtlCtrl.saveFavoritesToDB()" ng-src="../../routing/resources/img/book-bag.png"/>
-<br>
-<br>
-<img ng-click="fvrtlCtrl.goToSortMode()" ng-show="!fvrtlCtrl.noPoisForUser" id="sortFavs" ng-src="../../routing/resources/img/sort.png"/>
+<span id="save_favs_img" class="tooltip">
+    <img ng-show="!fvrtlCtrl.noPoisForUser" ng-click="fvrtlCtrl.saveFavoritesToDB()" ng-src="../../routing/resources/img/book-bag.png"/>
+    <span class="tooltiptext">Save your favorite points.</span>
+</span>
+
+<span id="sortFavs" class="tooltip">
+<img ng-click="fvrtlCtrl.goToSortMode()" ng-show="!fvrtlCtrl.noPoisForUser" ng-src="../../routing/resources/img/sort.png"/>
+<span class="tooltiptext">Plan your trip by setting an order to your points.</span>
+</span>
 
 <span ng-show="!fvrtlCtrl.noPoisForUser && fvrtlCtrl.sortMode">
 

@@ -18,6 +18,7 @@ angular.module('TripMe')
     self.poisNotOnLocalStorage = [];
     //get all saved points of user
     getPOIsForUser = function(){
+        self.fav_pois = [];
         self.sortMode = false;
         $http.get(setHeadersToken.serverUrl + "poi/all")
         .then(function (response) {
@@ -107,7 +108,7 @@ angular.module('TripMe')
         for(var i = 0; i < local_storage_pois.length; i++){
        // for(i = 0; i < self.fav_pois.length; i++){
             var point = {};
-            point.poi_name = self.local_storage_pois[i].name;
+            point.poi_name = local_storage_pois[i].name;
             setHeadersToken.authenticate();
             $http.post(setHeadersToken.serverUrl + "registeredUsers/savePOI", point)
             .then(function (response) {
@@ -155,6 +156,7 @@ angular.module('TripMe')
                     });
                 }
             })
+            getPOIsForUser();
     }
 
 
