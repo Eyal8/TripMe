@@ -112,7 +112,6 @@ body{
 	width:100%;
 }
 
-<<<<<<< HEAD
 
 /**** FAVS ****/
 #fav_fav_table{
@@ -123,8 +122,10 @@ body{
 #save_favs_img{
 	margin-left: 50% ;
 	cursor: pointer;
-=======
+}
 /* The Modal (background) */
+
+
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -160,5 +161,4 @@ body{
     color: black;
     text-decoration: none;
     cursor: pointer;
->>>>>>> 6abb33af40fb97b42a57e1c0ac4567ffd51bb48e
 }

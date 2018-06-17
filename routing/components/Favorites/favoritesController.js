@@ -29,12 +29,9 @@ angular.module('TripMe')
                         if(local_storage_pois[j].name == response.data[i].POI_name)
                         {
                             self.fav_pois[indexToAddPoi] = {name: response.data[i].POI_name, poi_img: response.data[i].PicturePath, poi_saved: "full_heart"}
-                            //exists = true;
+                            self.stam[i] = {checked: false, value: response.data[i].POI_name};
                             indexToAddPoi++;
-                        }
-                        //j = 0;
-                        //i++;
-                        
+                        }              
                     }
                     i++;
                     /*
@@ -153,4 +150,18 @@ angular.module('TripMe')
             })
     }
 
+    self.stam = [];
+
+    self.disableNewOrder = true;
+    self.insert = function(poi)
+    {
+        var counter = 0;
+        for(var i = 0; i < self.stam.length; i ++)
+        {
+            if(self.stam[i].checked == true)
+                counter++;
+        }
+        if(counter == self.stam.length)
+            self.disableNewOrder = false;
+    }
 }]);

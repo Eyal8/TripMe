@@ -11,9 +11,9 @@
                         <a ng-click="fvrtlCtrl.savePOI(poi.name)"><img class="favs" ng-style="{'height': '20px','width': '20px'}" ng-src="../../routing/resources/img/{{poi.poi_saved}}.png"/></a>
                 </span>
                 <br> 
-                <br> 
                 <a ng-click="fvrtlCtrl.singlePOI(poi.name)"><img class="pois_click" ng-style="{'height': '100px','width': '150px', 'border-radius': '10px'}" ng-src="../../tokens{{poi.poi_img}}"></a>
                 <br>
+                <input ng-click="fvrtlCtrl.insert(poi.name)" ng-model="fvrtlCtrl.stam[$index].checked" type = "checkbox">Select point</input>
                 </td>
     </tr>
             
@@ -23,4 +23,17 @@
 <br>
 <br>
 <br>
-<img id="save_favs_img" ng-show="!fvrtlCtrl.noPoisForUser" ng-click="fvrtlCtrl.saveFavoritesToDB()" ng-src="../../routing/resources/img/book-bag.png"/>
+<span ng-show="!fvrtlCtrl.noPoisForUser">
+
+<img id="save_favs_img" ng-click="fvrtlCtrl.saveFavoritesToDB()" ng-src="../../routing/resources/img/book-bag.png"/>
+
+<span class="side_spans"><img id="sortFavs" ng-src="../../routing/resources/img/sort.png"/></span>
+<h3>Order of POIS</h3>
+<table ng-repeat="x in fvrtlCtrl.stam">
+        <tr ng-show="x.checked">
+          <td>{{ x.value }}</td>
+        </tr>
+</table>
+
+<button ng-click="fvrtlCtrl.saveNewOrder()" ng-disabled="fvrtlCtrl.disableNewOrder">Save new order</button>
+</span>
