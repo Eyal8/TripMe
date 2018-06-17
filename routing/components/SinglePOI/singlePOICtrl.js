@@ -3,7 +3,7 @@ angular.module('TripMe')
   
     self = this;
     self.current_poi = {};
-    self.current_poi.name = singlePOIService.cur_poi;
+    self.current_poi.name = singlePOIService.getCurrentPOI();
 
     getOnePOI = function(){
         $http.get(setHeadersToken.serverUrl + "poi/" + self.current_poi.name)

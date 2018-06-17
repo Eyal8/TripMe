@@ -111,3 +111,15 @@ body{
 #pois_table{
 	width:100%;
 }
+
+
+/**** FAVS ****/
+#fav_fav_table{
+	width: 0%;
+	margin: 0 auto;
+}
+
+#save_favs_img{
+	margin-left: 50% ;
+	cursor: pointer;
+}

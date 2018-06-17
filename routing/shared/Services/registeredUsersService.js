@@ -42,16 +42,21 @@ angular.module('TripMe')
         }
         self.inLocalStorage = function(poi){
             var local_storage_pois = localStorageModel.getLocalStorage('user saved pois');
-            for(var k = 0; k < local_storage_pois.length; k++){
-                if(poi == local_storage_pois[k].name){
-                    return true;
+            if(local_storage_pois != undefined){
+                for(var k = 0; k < local_storage_pois.length; k++){
+                    if(poi == local_storage_pois[k].name){
+                        return true;
+                    }
                 }
             }
             return false;
         }
         self.poisInLocalStorage = function(){
             var local_storage_pois = localStorageModel.getLocalStorage('user saved pois');
-            return local_storage_pois;
+            if(local_storage_pois != undefined){
+                return local_storage_pois;
+            }
+            return [];
         }
         sortPoisInLocalStorage = function(local_storage_pois){
             var currentTime = 0;

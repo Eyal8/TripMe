@@ -162,13 +162,13 @@ angular.module('TripMe')
 
     get2MostPopularPOIs = function(){
         setHeadersToken.route();
-        $http.get(setHeadersToken.serverUrl + "registeredUsers/getPOIs")
+       /* $http.get(setHeadersToken.serverUrl + "registeredUsers/getPOIs")
         .then(function (response2) {
             for(var j = 0; j < response2.data.length;j++){
                 user_pois[j] = response2.data[j].POI_name;
             }
             return Promise.resolve()})
-        .then(function () {
+        .then(function () {*/
             $http.get(setHeadersToken.serverUrl + "registeredUsers/get2MostPopularPOIs")
             .then(function (response) {
             let i = 0;
@@ -188,7 +188,7 @@ angular.module('TripMe')
                 i++;
             }
             });
-        });       
+      //  });       
     }
 
     get2MostRecentPOIs = function(){
@@ -233,10 +233,13 @@ angular.module('TripMe')
                 var firstPoiInLocalStorage;
                 var secondPoiInLocalStorage;
                 if(local_storage_pois[0] != undefined){
+                    self.noPoisForUser = false;
                     firstPoiInLocalStorage = local_storage_pois[0].name;
+                    self.NumOfSavedPois = 1;
                 }
                 if(local_storage_pois[1] != undefined){
                     secondPoiInLocalStorage = local_storage_pois[1].name;
+                    self.NumOfSavedPois = 2;
                 }
                 
                 for (poi in response.data){
@@ -249,7 +252,10 @@ angular.module('TripMe')
                     }
                     i++;
                 }
+                if(local_storage_pois[0] == undefined){
+                    self.noPoisForUser = true;
 
+                }
             }, function (response) {
                 //Second function handles error
            // })

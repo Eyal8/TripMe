@@ -104,8 +104,8 @@ router.post('/savePOI', function(req,res){
     
 })
 
-router.delete('/removePOI', function(req,res){
-    var poi_name = req.headers['poi_name'];
+router.delete('/removePOI/:name', function(req,res){
+    var poi_name = req.params.name;
     console.log("DELETE POI1: "+ poi_name);
 
     DButilsAzure.execQuery("IF EXISTS (SELECT POI_name FROM POIsForUser WHERE POI_name = '"+poi_name+"' AND UserName = '"+req.userName+"') BEGIN UPDATE RegisteredUsers SET NumOfFavorites = NumOfFavorites - 1 WHERE UserName = '"+req.userName+"' END").then(function (recordSet) {   

@@ -1,9 +1,4 @@
 angular.module('TripMe')
-    .service('singlePOIService',[ '$http', function ($http) {   
-        this.setCurrentPOI = function(poi){
-            this.cur_poi = poi;
-        }
-    }])
     .controller('indexController', ['localStorageModel', '$location', '$http', 'singlePOIService', 'setHeadersToken', function (localStorageModel, $location, $http, singlePOIService, setHeadersToken) {
 
 
