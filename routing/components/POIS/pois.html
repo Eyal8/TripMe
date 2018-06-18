@@ -1,26 +1,44 @@
 <div ng-show="!poiCtrl.guest">
-<button ng-click="poiCtrl.goToFavorites()">Go to favorites points of interest</button>
+    <h1>Favorites!</h1>
+    <button ng-click="poiCtrl.goToFavorites()">Go to favorites points of interest</button>
+    <br><br>
 </div>
 
-<span ng-repeat="c in poiCtrl.categories">
-    <h2 ng-bind="c.value"></h2>
-    <span ng-repeat="poi in c.pois">
-        <a ng-click="poiCtrl.singlePOI(poi.name)"><span class="pois_click" ng-bind="poi.name"></span></a>
-        <a ng-click="poiCtrl.singlePOI(poi.name)"><img class="pois_click" ng-style="{'height': '50px','width': '100px', 'border-radius': '10px'}" ng-src="../../tokens{{poi.poi_img}}"></a>
-<span ng-show="!poiCtrl.guest">
-            <span ng-show="poi.poi_saved=='full_heart'">
-                <a ng-click="poiCtrl.removePOI(poi.name)"><img class="favs" ng-style="{'height': '20px','width': '20px'}" ng-src="../../routing/resources/img/{{poi.poi_saved}}.png"/></a>
+<h1>All point of interest sorted by categories</h1><br>
+<button ng-click="poiCtrl.allPOIS()">Show/Hide all points of interest</button>
+
+<div ng-show="poiCtrl.showAll">
+    <table ng-show="poiCtrl.showAll" ng-repeat="c in poiCtrl.categories" style="display: inline-block">
+        <tr>
+            <th ng-bind="c.value">
+            </th>
+        </tr>
+        <tr ng-repeat="poi in c.pois">
+            <td>
+            <a ng-click="poiCtrl.singlePOI(poi.name)"><img class="pois_click" ng-style="{'height': '50px','width': '100px', 'border-radius': '10px'}" ng-src="../../tokens{{poi.poi_img}}"/></a>
+            <a ng-click="poiCtrl.singlePOI(poi.name)"><span class="pois_click" ng-bind="poi.name"></span></a>
+            <span ng-show="!poiCtrl.guest">
+                <span ng-show="poi.poi_saved=='full_heart'" class="tooltip">
+                    <a ng-click="poiCtrl.removePOI(poi.name)"><img class="favs" ng-style="{'height': '20px','width': '20px'}" ng-src="../../routing/resources/img/{{poi.poi_saved}}.png"/></a>
+                    <span class="tooltiptext">Remove from favorites</span>
+                </span>
+                <span ng-show="poi.poi_saved=='empty_heart'" class="tooltip">
+                    <a ng-click="poiCtrl.savePOI(poi.name)"><img class="favs" ng-style="{'height': '20px','width': '20px'}" ng-src="../../routing/resources/img/{{poi.poi_saved}}.png"/></a>
+                    <span class="tooltiptext">Add to favorites</span>
+                </span>
+                <span class="tooltip">
+                    <a ng-click="poiCtrl.rankAndReview(poi.name)"><img class="review_img" ng-src="../../routing/resources/img/review.png"/></a>
+                   <span class="tooltiptext">Rank/Review</span>
+                </span>
             </span>
-            <span ng-show="poi.poi_saved=='empty_heart'">
-                <a ng-click="poiCtrl.savePOI(poi.name)"><img class="favs" ng-style="{'height': '20px','width': '20px'}" ng-src="../../routing/resources/img/{{poi.poi_saved}}.png"/></a>
-            </span>
-            <a ng-click="poiCtrl.rankAndReview(poi.name)"><img class="review_img" ng-src="../../routing/resources/img/review.png"/></a>
-        </span>
-        </span>
-</span>
+            </td>
+        </tr>
+    </table>
+</div>
+
 
 <form name="form" novalidate>
-<h1>Sort by category:</h1>
+<h1>Filter by category:</h1>
 <select ng-model="poiCtrl.chosenCategory" name="category" required>
         <option value="" disabled selected>Select your category</option>
         <option ng-repeat="category in poiCtrl.categories" value="{{category.value}}">{{category.value}}</option>
@@ -29,25 +47,72 @@
 <div ng-show="form.$submitted || form.category.$touched">
 <div ng-show="form.category.$error.required">Please choose category.</div>
 </div><br>
-<button ng-click="poiCtrl.filterByCategory()" ng-disabled="!form.$valid">Filter by category</button>
+<button ng-click="poiCtrl.filterByCategory()" ng-disabled="!form.$valid">Filter/Unfilter by category</button>
 <span ng-bind="poiCtrl.sort.content"></span>
 </form>
+
+<div ng-show="poiCtrl.filter">
+        <table>
+                <tr>
+                    <td ng-repeat="p in poiCtrl.poisToShow">
+                            <a ng-click="poiCtrl.singlePOI(p.name)"><img class="pois_click" ng-style="{'height': '50px','width': '100px', 'border-radius': '10px'}" ng-src="../../tokens{{p.poi_img}}"></a>
+                            <a ng-click="poiCtrl.singlePOI(p.name)"><span class="pois_click" ng-bind="p.name"></span></a>
+                            <span ng-show="!poiCtrl.guest">
+                                    <span ng-show="p.poi_saved=='full_heart'" class="tooltip">
+                                        <a ng-click="poiCtrl.removePOI(p.name)"><img class="favs" ng-style="{'height': '20px','width': '20px'}" ng-src="../../routing/resources/img/{{p.poi_saved}}.png"/></a>
+                                        <span class="tooltiptext">Remove from favorites</span>
+                                    </span>
+                                    <span ng-show="p.poi_saved=='empty_heart'" class="tooltip">
+                                        <a ng-click="poiCtrl.savePOI(p.name)"><img class="favs" ng-style="{'height': '20px','width': '20px'}" ng-src="../../routing/resources/img/{{p.poi_saved}}.png"/></a>
+                                        <span class="tooltiptext">Add to favorites</span>
+                                    </span>
+                                    <span class="tooltip">
+                                        <a ng-click="poiCtrl.rankAndReview(p.name)"><img class="review_img" ng-src="../../routing/resources/img/review.png"/></a>
+                                    <span class="tooltiptext">Rank/Review</span>
+                                    </span>
+                            </span>
+                    </td>
+                </tr>
+        </table>
 </div>
 
-<span ng-repeat="p in poiCtrl.poisToShow">
-        <a ng-click="poiCtrl.singlePOI(p.name)"><span class="pois_click" ng-bind="p.name"></span></a>
-        <a ng-click="poiCtrl.singlePOI(p.name)"><img class="pois_click" ng-style="{'height': '50px','width': '100px', 'border-radius': '10px'}" ng-src="../../tokens{{p.poi_img}}"></a>
-</span>
 <br>
-<button ng-click="poiCtrl.sortByRank()">Sort by rank</button>
+
 <br>
-<span ng-repeat="po in poiCtrl.poisArray">
-        <a ng-click="poiCtrl.singlePOI(po.name)"><span class="pois_click" ng-bind="po.name"></span></a>
-        <a ng-click="poiCtrl.singlePOI(po.name)"><img class="pois_click" ng-style="{'height': '50px','width': '100px', 'border-radius': '10px'}" ng-src="../../tokens{{po.poi_img}}"></a>
-</span>
+<h1>Sort by rank:</h1>
+<button ng-click="poiCtrl.sortByRank()">Sort/Unsort by rank</button><br>
+
+<div ng-show="poiCtrl.rankSort">
+        <table>
+                <tr>
+                    <td style="padding:20px" ng-repeat="po in poiCtrl.poisArray">
+                            <a ng-click="poiCtrl.singlePOI(po.name)"><img class="pois_click" ng-style="{'height': '50px','width': '100px', 'border-radius': '10px'}" ng-src="../../tokens{{po.poi_img}}"></a>
+                            <a ng-click="poiCtrl.singlePOI(po.name)"><span class="pois_click" ng-bind="po.name"></span></a>
+                            <span ng-show="!poiCtrl.guest">
+                                    <span ng-show="pp.poi_saved=='full_heart'" class="tooltip">
+                                        <a ng-click="poiCtrl.removePOI(po.name)"><img class="favs" ng-style="{'height': '20px','width': '20px'}" ng-src="../../routing/resources/img/{{po.poi_saved}}.png"/></a>
+                                        <span class="tooltiptext">Remove from favorites</span>
+                                    </span>
+                                    <span ng-show="po.poi_saved=='empty_heart'" class="tooltip">
+                                        <a ng-click="poiCtrl.savePOI(po.name)"><img class="favs" ng-style="{'height': '20px','width': '20px'}" ng-src="../../routing/resources/img/{{po.poi_saved}}.png"/></a>
+                                        <span class="tooltiptext">Add to favorites</span>
+                                    </span>
+                                    <span class="tooltip">
+                                        <a ng-click="poiCtrl.rankAndReview(po.name)"><img class="review_img" ng-src="../../routing/resources/img/review.png"/></a>
+                                    <span class="tooltiptext">Rank/Review</span>
+                                    </span>
+                            </span>
+                    </td>
+                </tr>
+        </table>
+</div>
+
+
+<br>
+
 
 <div>
-    <h2>Search point of interst by name:</h2>
+    <h1>Search point of interst by name:</h1>
     <input type="text" placeholder="Enter point of interest's name" ng-model="poiCtrl.poiName"></input>
     <button ng-click="poiCtrl.searchByName()">Search</button>
 

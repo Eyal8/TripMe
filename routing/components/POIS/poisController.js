@@ -2,6 +2,9 @@ angular.module('TripMe')
  .controller('poisController', ['registeredUsersService', 'singlePOIService', '$location', 'localStorageModel', 'setHeadersToken', '$http', function(registeredUsersService, singlePOIService, $location, localStorageModel, setHeadersToken,$http) {
   
     self = this;
+    self.filter = false;
+    self.rankSort = false;
+    self.showAll = true;
 
     self.categories = [];
     self.pois = [];
@@ -70,11 +73,11 @@ angular.module('TripMe')
                 var exists = false;
                 //check if saved in local storage
                 if(registeredUsersService.inLocalStorage(response.data[i].POI_name)){
-                    self.pois[i] = {name: response.data[i].POI_name, poi_img: response.data[i].PicturePath, poi_saved: "full_heart"}
+                    self.pois[i] = {name: response.data[i].POI_name, poi_img: response.data[i].PicturePath, poi_saved: "full_heart", poi_rank: response.data[i].POI_rank}
                     addPOItoCategory(self.pois[i], response.data[i].Category);
                 }
                 else{
-                    self.pois[i] = {name: response.data[i].POI_name, poi_img: response.data[i].PicturePath, poi_saved: "empty_heart"}
+                    self.pois[i] = {name: response.data[i].POI_name, poi_img: response.data[i].PicturePath, poi_saved: "empty_heart", poi_rank: response.data[i].POI_rank}
                     addPOItoCategory(self.pois[i], response.data[i].Category);
                 }
                 i++;
@@ -109,20 +112,45 @@ angular.module('TripMe')
     getCategories();
 
     self.filterByCategory = function(){
-        for(var i = 0; i < self.categories.length; i++)
+        if(self.filter == true)
         {
-            if(self.categories[i].value == self.chosenCategory)
+            self.filter = false;
+        }
+        else{
+            self.filter = true;
+            for(var i = 0; i < self.categories.length; i++)
             {
-                self.poisToShow = self.categories[i].pois;
+                if(self.categories[i].value == self.chosenCategory)
+                {
+                    self.poisToShow = self.categories[i].pois;
+                }
             }
         }
     }
 
+    self.allPOIS = function(){
+        if(self.showAll == true)
+            self.showAll = false;
+        else{
+           self.showAll = true; 
+        }
+    }
+
     self.sortByRank = function(){
+        if(self.rankSort == true){
+            self.rankSort = false;
+        }
+        else{
+            self.rankSort = true;
+        }
         self.poisArray = Object.values(self.pois);
         self.poisArray.sort(function(obj1, obj2) {
             return obj2.poi_rank - obj1.poi_rank;
         });
+    }
+
+    self.cleanSortByRank = function(){
+        self.rankSort = false;
     }
 
     self.searchByName = function(){

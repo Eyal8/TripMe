@@ -10,6 +10,7 @@
                 <span ng-show="poi.poi_saved=='empty_heart'">
                         <a ng-click="fvrtlCtrl.savePOI(poi.name)"><img class="favs" ng-style="{'height': '20px','width': '20px'}" ng-src="../../routing/resources/img/{{poi.poi_saved}}.png"/></a>
                 </span>
+                <a ng-click="fvrtlCtrl.rankAndReview(poi.name)"><img class="review_img" ng-src="../../routing/resources/img/review.png"/></a>
                 <br> 
                 <a ng-click="fvrtlCtrl.singlePOI(poi.name)"><img class="pois_click" ng-style="{'height': '100px','width': '150px', 'border-radius': '10px'}" ng-src="../../tokens{{poi.poi_img}}"></a>
                 <br>
