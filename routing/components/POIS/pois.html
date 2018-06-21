@@ -1,12 +1,12 @@
 <div ng-show="!poiCtrl.guest">
     <h1>Favorites!</h1>
-    <button ng-click="poiCtrl.goToFavorites()">Go to favorites points of interest</button>
+    <button id="fav_button" ng-click="poiCtrl.goToFavorites()">My favorite points of interest</button>
     <br><br>
 </div>
 
 <h1>All point of interest sorted by categories</h1><br>
-<button ng-click="poiCtrl.allPOIS()">Show/Hide all points of interest</button>
-
+<button style="width:300px" ng-click="poiCtrl.allPOIS()">Show/Hide all points of interest</button>
+<br>
 <div ng-show="poiCtrl.showAll">
     <table ng-show="poiCtrl.showAll" ng-repeat="c in poiCtrl.categories" style="display: inline-block">
         <tr>
@@ -15,7 +15,7 @@
         </tr>
         <tr ng-repeat="poi in c.pois">
             <td>
-            <a ng-click="poiCtrl.singlePOI(poi.name)"><img class="pois_click" ng-style="{'height': '50px','width': '100px', 'border-radius': '10px'}" ng-src="../../tokens{{poi.poi_img}}"/></a>
+            <a ng-click="poiCtrl.singlePOI(poi.name)"><img class="pois_click" ng-style="{'height': '60px','width': '100px', 'border-radius': '10px'}" ng-src="../../tokens{{poi.poi_img}}"/></a>
             <a ng-click="poiCtrl.singlePOI(poi.name)"><span class="pois_click" ng-bind="poi.name"></span></a>
             <span ng-show="!poiCtrl.guest">
                 <span ng-show="poi.poi_saved=='full_heart'" class="tooltip">
@@ -47,7 +47,7 @@
 <div ng-show="form.$submitted || form.category.$touched">
 <div ng-show="form.category.$error.required">Please choose category.</div>
 </div><br>
-<button ng-click="poiCtrl.filterByCategory()" ng-disabled="!form.$valid">Filter/Unfilter by category</button>
+<button style="width:250px" ng-click="poiCtrl.filterByCategory()" ng-disabled="!form.$valid">Filter/Unfilter by category</button>
 <span ng-bind="poiCtrl.sort.content"></span>
 </form>
 
@@ -55,7 +55,7 @@
         <table>
                 <tr>
                     <td ng-repeat="p in poiCtrl.poisToShow">
-                            <a ng-click="poiCtrl.singlePOI(p.name)"><img class="pois_click" ng-style="{'height': '50px','width': '100px', 'border-radius': '10px'}" ng-src="../../tokens{{p.poi_img}}"></a>
+                            <a ng-click="poiCtrl.singlePOI(p.name)"><img class="pois_click" ng-style="{'height': '60px','width': '100px', 'border-radius': '10px'}" ng-src="../../tokens{{p.poi_img}}"></a>
                             <a ng-click="poiCtrl.singlePOI(p.name)"><span class="pois_click" ng-bind="p.name"></span></a>
                             <span ng-show="!poiCtrl.guest">
                                     <span ng-show="p.poi_saved=='full_heart'" class="tooltip">
@@ -80,13 +80,13 @@
 
 <br>
 <h1>Sort by rank:</h1>
-<button ng-click="poiCtrl.sortByRank()">Sort/Unsort by rank</button><br>
+<button style="width:200px" ng-click="poiCtrl.sortByRank()">Sort/Unsort by rank</button><br>
 
 <div ng-show="poiCtrl.rankSort">
         <table>
                 <tr>
                     <td style="padding:20px" ng-repeat="po in poiCtrl.poisArray">
-                            <a ng-click="poiCtrl.singlePOI(po.name)"><img class="pois_click" ng-style="{'height': '50px','width': '100px', 'border-radius': '10px'}" ng-src="../../tokens{{po.poi_img}}"></a>
+                            <a ng-click="poiCtrl.singlePOI(po.name)"><img class="pois_click" ng-style="{'height': '60px','width': '100px', 'border-radius': '10px'}" ng-src="../../tokens{{po.poi_img}}"></a>
                             <a ng-click="poiCtrl.singlePOI(po.name)"><span class="pois_click" ng-bind="po.name"></span></a>
                             <span ng-show="!poiCtrl.guest">
                                     <span ng-show="pp.poi_saved=='full_heart'" class="tooltip">
@@ -113,12 +113,14 @@
 
 <div>
     <h1>Search point of interst by name:</h1>
-    <input type="text" placeholder="Enter point of interest's name" ng-model="poiCtrl.poiName"></input>
+    <input style="width:200px" type="text" placeholder="Enter point of interest's name..." ng-model="poiCtrl.poiName"></input>
+    <br>
+    <br>
     <button ng-click="poiCtrl.searchByName()">Search</button>
 
     <div ng-show="poiCtrl.showme">
         <a ng-click="poiCtrl.singlePOI(poiCtrl.searchedPoi.POI_name)"><span class="pois_click" ng-bind="poiCtrl.searchedPoi.POI_name"></span></a>
-        <a ng-click="poiCtrl.singlePOI(poiCtrl.searchedPoi.POI_name)"><img class="pois_click" ng-style="{'height': '50px','width': '100px', 'border-radius': '10px'}" ng-src="../../tokens{{poiCtrl.searchedPoi.PicturePath
+        <a ng-click="poiCtrl.singlePOI(poiCtrl.searchedPoi.POI_name)"><img class="pois_click" ng-style="{'height': '60px','width': '100px', 'border-radius': '10px'}" ng-src="../../tokens{{poiCtrl.searchedPoi.PicturePath
  }}"></a>
     <br>
     </div>

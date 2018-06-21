@@ -1,5 +1,5 @@
 <h1 style="margin-left: 30%">
-   Deatils about...
+   Details about...
     <span ng-bind="sglCtrl.current_poi.name">
     </span>!
 </h1>
@@ -7,17 +7,16 @@
 <div style="margin-left: 30%">
     <table>
             <tr>
-                <span ng-bind="sglCtrl.current_poi.name"></span>
-                <br> 
                 <img ng-style="{'height': '300px','width': '500px', 'border-radius': '10px'}" ng-src="../../tokens{{sglCtrl.current_poi.poi_img}}">
                 <br>
-                Point rank: <span ng-bind="sglCtrl.current_poi.poi_rank"></span>%
+                <br>
+                <u>Point rank:</u>  <span style="margin-left:5px;" ng-bind="sglCtrl.current_poi.poi_rank"></span>%
                 <br>
                 <span ng-bind="sglCtrl.current_poi.num_of_views"></span> People have viewed this point!
                 <br>
                 <span ng-bind="sglCtrl.current_poi.poi_description"></span>
                 <br>
-                Point reviews
+                <u>Point reviews</u>
                 <br>
                 Review 1: <span ng-bind="sglCtrl.current_poi.poi_review1"></span>
                 <br>

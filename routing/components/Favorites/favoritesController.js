@@ -16,6 +16,8 @@ angular.module('TripMe')
     self.userName = setHeadersToken.userName;
     self.fav_pois = [];
     self.poisNotOnLocalStorage = [];
+    self.categories = [];
+    self.filter = false;
     //get all saved points of user
     getPOIsForUser = function(){
         self.fav_pois = [];
@@ -256,6 +258,82 @@ span.onclick = function() {
 window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
+    }
+}
+
+
+
+getCategories = function(){
+    $http.get(setHeadersToken.serverUrl + "general/getCategories")
+    .then(function (response) {
+        let i = 0;
+        for (categories in response.data){
+            self.categories[i] = {value: response.data[i].CategoryName, pois:[]};
+            i++;
+        }
+        return Promise.resolve();
+    }, function (response) {
+        //Second function handles error
+        self.signUp.content = "Something went wrong";
+    })
+    .then(function(){
+        getAllPOIsForRegisteredUsers();
+    });
+       
+}
+var addPOItoCategory = function(POI, Category){
+    for(var i = 0; i < self.categories.length; i++)
+    {
+        if(self.categories[i].value == Category)
+        {
+            self.categories[i].pois.push(POI);
+        }
+    }
+}
+var getAllPOIsForRegisteredUsers = function(){
+    setHeadersToken.authenticate();
+  /*  $http.get(setHeadersToken.serverUrl + "registeredUsers/getPOIs")
+    .then(function (response2) {
+        for(var j = 0; j < response2.data.length;j++){
+            registered_user_pois[j] = response2.data[j].POI_name;
+        }
+        return Promise.resolve()})
+    .then(function () {*/
+    $http.get(setHeadersToken.serverUrl + "poi/all")
+    .then(function (response) {
+        let i = 0;
+        for (poi in response.data){
+            var exists = false;
+            //check if saved in local storage
+            if(registeredUsersService.inLocalStorage(response.data[i].POI_name)){
+                //self.pois[i] = {name: response.data[i].POI_name, poi_img: response.data[i].PicturePath, poi_saved: "full_heart", poi_rank: response.data[i].POI_rank}
+                addPOItoCategory(response.data[i].POI_name, response.data[i].Category);
+            }
+            else{
+                //self.pois[i] = {name: response.data[i].POI_name, poi_img: response.data[i].PicturePath, poi_saved: "empty_heart", poi_rank: response.data[i].POI_rank}
+                addPOItoCategory(response.data[i].POI_name, response.data[i].Category);
+            }
+            i++;
+        }
+    });
+  //  });       
+}
+getCategories();
+
+self.filterByCategory = function(){
+    if(self.filter == true)
+    {
+        self.filter = false;
+    }
+    else{
+        self.filter = true;
+        for(var i = 0; i < self.categories.length; i++)
+        {
+            if(self.categories[i].value == self.chosenCategory)
+            {
+                self.poisToShow = self.categories[i].pois;
+            }
+        }
     }
 }
 

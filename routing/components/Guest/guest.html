@@ -1,23 +1,27 @@
 Hello guest!
 <br>
 <button ng-click="gstCtrl.login()">Login</button>
+<span id="casablanca">Casablanca</span>
+<img id="guest_morocco" ng-src="../../routing/resources/img/marocco-wall.jpg"/>
 <br>
 <br>
-<img id="register_cheering" ng-click="gstCtrl.register()" ng-src="../../routing/resources/img/cheers.jpg">
+<br>
+<span id="register_cheering">Register now to enjoy our website's full features and start planning your trip to Casablanca with us!</span>
+<br>
+<button id="register_cheering_button" ng-click="gstCtrl.register()">Register</button>
 <br>
 <div id="random_pois">
         <table id="guest_table">
                 <span class="side_spans">Explore popular points of interest at our website:</span>
                 <tr>
+                        <br>
+                        <br>
                         <td ng-repeat="(id, poi) in gstCtrl.rand_pois">
                                 <a ng-click="gstCtrl.singlePOI(poi.name)"> <span class="pois_click" ng-bind="poi.name"></span></a>
                                 <br> 
                                 <a ng-click="gstCtrl.singlePOI(poi.name)"><img class="pois_click" ng-style="{'height': '100px','width': '150px', 'border-radius': '10px'}" ng-src="../../tokens{{poi.poi_img}}"></a>
-                                <br>
-                                </td>
+                        </td>
                 </tr>
-                        
-                
         </table>
-    </div>
+</div>
  

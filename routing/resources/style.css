@@ -11,7 +11,7 @@ body{
 	z-index: 999;
 	position: -webkit-sticky;
 	position: sticky;
-	top: 20px;
+	top: 10px;
 	height: 45px;
 	line-height: 45px;
 	background: white;
@@ -19,8 +19,8 @@ body{
 	list-style-type: none;
     margin: auto;
 	width:85%;
-    background-color: rgba(200,180,240,0.8);
-    border-radius: 12px;
+    background-color: rgba(27, 221, 255, 0.8);
+	border-radius: 12px;
 }
 #topnav li{
 	float: left;
@@ -37,7 +37,7 @@ body{
 	bottom: 15px;
 }
 #topnav li a:hover{
-	background-color: rgba(200,80,255,0.6);
+	background-color: rgba(59, 164, 196, 0.6);
 }
 
 #pois_table{
@@ -46,9 +46,60 @@ body{
 	overflow: auto;
 
 }
-/**** REGISTER ****/
-.formbutton{
 
+button{
+/*	background-color: rgba(100,150,255,0.6);
+	height:25px;
+	width: 100px;
+	border-radius:10%;*/
+}
+
+#footer {
+    z-index: -1;
+    opacity: 0.7;
+    position: absolute;
+    bottom: 0;
+    height: 60px;
+    width: 100%;
+    background-color: darkturquoise;
+    color: white;
+    font-size: 18px;
+    text-align: center;
+}
+/**** REGISTER ****/
+button{
+  line-height: 1.5;
+  font-size-adjust: inherit;
+  width: 90px;
+  height: 30px;
+  font-size:16px;
+  border-radius:20px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 25px;
+
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+  background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+	outline:none;
+	border: 1px solid rgba(5, 8, 202, 0.767);
+
+
+}
+button:hover{
+	background: rgba(21, 124, 207, 0.4);
+	cursor: pointer;
 }
 /**** GUEST ****/
 #guest_table{
@@ -61,18 +112,27 @@ body{
 #guest_table tr td{
 	width:33.33%;
 }
-#register_cheering{
+#guest_morocco{
 	margin-left: 30%;
-	width:500px;
-	height:300px;
-	cursor: pointer;
+	width:550px;
+	height:330px;
+}
+#register_cheering{
+	margin-left: 25%;
+}
+#register_cheering_button{
+	margin-left: 45%;
 }
 .side_spans{
-	margin-left: 10%
+	margin-left: 10%;
+}
+#casablanca{
+	font-size:50px;
+	margin-left: 40%;
 }
 /**** ABOUT ****/
 #shivuk_img{
-    margin-left: 30% ;
+    margin-left: 34% ;
     width: 400px;
     height: 400px;
 
@@ -117,7 +177,10 @@ body{
 	width:100%;
 }
 
-
+/**** LOGIN ****/
+#login-table{
+	margin-left:100px;
+}
 /**** FAVS ****/
 #fav_fav_table{
 	width: 0%;
@@ -133,7 +196,13 @@ body{
 	cursor: pointer;
 	position: absolute;
 }
-
+#fav_button{
+	width:270px;
+	background-color: rgba(178,10,23,0.4);
+}
+#fav_button:hover{
+	background-color: rgba(255,10,23,0.7);
+}
 
 /* The Modal (background) */
 

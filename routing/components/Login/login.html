@@ -1,26 +1,37 @@
 <h1 style="margin-left: 30%">Please fill all the fields in order to login</h1>
-<div>
-    <form style="margin-left: 30%" name="form" novalidate>
-        <label>User Name:
-        <input type="text" ng-model="lgnCtrl.user.userName" name="userName" required="" />
-        </label>
-        <br />
-        <div ng-show="form.$submitted || form.userName.$touched">
-        <div ng-show="form.userName.$error.required">Please enter a user name.</div>
-        </div>
-    
-        <label>Password:
-        <input type="password" ng-model="lgnCtrl.user.password" name="password" required="" />
-        </label>
-        <br />
-        <div ng-show="form.$submitted || form.password.$touched">
-        <div ng-show="form.password.$error.required">Please enter a password.</div>
-        </div>
-    </form>
- </div>
-
- <br>
-<button style="margin-left: 30%" ng-click="lgnCtrl.login()" ng-disabled="!form.$valid">Login</button>
+<form style="margin-left: 30%" name="form" novalidate>
+    <table id="login_table">
+        <tr>
+            <td >
+                <label style="padding-right:10px; margin-left:100px">User Name:</label>
+                <input type="text" ng-model="lgnCtrl.user.userName" name="userName" required="" />
+            </td>
+            <td>
+                <div ng-show="form.$submitted || form.userName.$touched">
+                    <div ng-show="form.userName.$error.required">Please enter a user name.</div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label style="padding-right:23px ; margin-left:100px">Password:</label>
+                <input type="password" ng-model="lgnCtrl.user.password" name="password" required="" />
+            </td>
+            <td>
+                <div ng-show="form.$submitted || form.password.$touched">
+                    <div ng-show="form.password.$error.required">Please enter a password.</div>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <button style="margin-left:20%" ng-click="lgnCtrl.login()" ng-disabled="!form.$valid">Login</button>
 <span ng-bind="lgnCtrl.login.content"></span>
 <br>
-<button style="margin-left: 30%" ng-click="lgnCtrl.forgotPassword()">Forgot my password</button>
+<button style="margin-left:16%; width:180px" ng-click="lgnCtrl.forgotPassword()">Forgot password</button>
+</form>
+
+
+<br>
+<br>
+<img id="guest_morocco" ng-src="../../routing/resources/img/Moroccan Feast.jpg"/>
