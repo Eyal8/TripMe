@@ -1,27 +1,36 @@
-<h1 style="margin-left: 30%">
-   Details about...
-    <span ng-bind="sglCtrl.current_poi.name">
-    </span>!
-</h1>
+<h1 style="margin-left: 28%">
+    Details about...
+     <span ng-bind="sglCtrl.current_poi.name">
+     </span>!
+ </h1>
+ 
+ <div >
+     <table>
+             <tr>
+                 <img ng-style="{'height': '300px','width': '500px', 'border-radius': '10px', 'margin-left':'28%'}" ng-src="../../tokens{{sglCtrl.current_poi.poi_img}}">
+                 <br>
+                 <br>
+                 <div style="margin-left:22%">
+                 <span ng-bind="sglCtrl.current_poi.poi_description"></span>
+                 <br>
+                 <u>Point rank:</u>  <span style="margin-left:5px;" ng-bind="sglCtrl.current_poi.poi_rank"></span>%
+                 <br>
+                 <span ng-bind="sglCtrl.current_poi.num_of_views"></span> People have viewed this point!
 
-<div style="margin-left: 30%">
-    <table>
-            <tr>
-                <img ng-style="{'height': '300px','width': '500px', 'border-radius': '10px'}" ng-src="../../tokens{{sglCtrl.current_poi.poi_img}}">
-                <br>
-                <br>
-                <u>Point rank:</u>  <span style="margin-left:5px;" ng-bind="sglCtrl.current_poi.poi_rank"></span>%
-                <br>
-                <span ng-bind="sglCtrl.current_poi.num_of_views"></span> People have viewed this point!
-                <br>
-                <span ng-bind="sglCtrl.current_poi.poi_description"></span>
-                <br>
-                <u>Point reviews</u>
-                <br>
-                Review 1: <span ng-bind="sglCtrl.current_poi.poi_review1"></span>
-                <br>
-                Review 2: <span ng-bind="sglCtrl.current_poi.poi_review2"></span>
-                <br>
-            </tr>
-    </table>
-</div>
+                 <br>
+                 
+                 <br>
+                 <u>Point reviews</u>
+                 <br>
+                 Review 1: <span ng-bind="sglCtrl.current_poi.poi_review1"></span>
+                 <br>
+                 Review 2: <span ng-bind="sglCtrl.current_poi.poi_review2"></span>
+                 <br>
+                 <br>
+                 <div id="map"></div>
+             </div>
+             </tr>
+     </table>
+ </div>
+                 
+ 

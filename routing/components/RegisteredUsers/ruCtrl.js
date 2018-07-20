@@ -312,11 +312,25 @@ self.setRank = function()
 {
     var body = {};
     body.poi_name = self.modal.poi;
-    body.rank = self.modal.rank;
-    $http.put(setHeadersToken.serverUrl + "registeredUsers/rankPOI", body)
-    .then(function (response) {
-        self.setRank.content = response.data.message;
-    });
+    var ranks=document.getElementsByClassName('stars');
+    var rank_selected = false;
+    for(var i=0;i<ranks.length;i++){
+        if(ranks[i].checked)
+        {
+            body.rank = 4-i+1; //stars are opposite :)
+            rank_selected = true;
+            self.noRankSelected=false;
+        }
+    }
+    if(rank_selected){
+        $http.put(setHeadersToken.serverUrl + "registeredUsers/rankPOI", body)
+        .then(function (response) {
+            self.setRank.content = response.data.message;
+        });
+    }
+    else{
+        self.noRankSelected=true;
+    }
 }
 
 self.setReview = function(){
@@ -333,8 +347,10 @@ self.setReview = function(){
 self.rankAndReview = function(poi) {
     self.modal.poi = poi;
     modal.style.display = "block";
-    if(document.getElementById("selectRank"))
-     document.getElementById("selectRank").selectedIndex = "0";
+    var ranks=document.getElementsByClassName('stars');
+    for(var i=0;i<ranks.length;i++){
+        ranks[i].checked = false;
+    }
     if(document.getElementById("review"))
         document.getElementById("review").value = "";
     self.setRank.content = "";

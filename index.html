@@ -1,24 +1,61 @@
 <html ng-app="TripMe">
-    <head><title>Trip Me</title>
+    <head>
+        <title>Trip Me</title>
         <link rel="stylesheet" type="text/css" href="routing/resources/style.css" />
         <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Raleway|Ubuntu" rel="stylesheet">
+        <link rel="icon" type="image/png" href="routing/resources/img/tripme_logo.png"/>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+        integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+        crossorigin=""/>
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     </head>
     <body ng-controller="indexController as indxCtrl">
      
         <div id="topnav">
             <li><a ng-click="indxCtrl.route()">Home</a></li>
-            <li><a href="#/register">Register</a></li>
-            <li><a href="#/login">Login</a></li>
-            <li><a href="#/about">About</a></li>
-            <li><a href="#/pois">Our points of interest</a></li>
+            <li><a ng-href="#/register">Register</a></li>
+            <li><a ng-href="#/login">Login</a></li>
+            <li><a ng-href="#/about">About</a></li>
+            <li><a ng-href="#/pois">Our points of interest</a></li>
         </div>
         <br>
         <br>
         
         <div ng-view></div>
         <br>
-        
+        <hr>    
+        <footer id="footer">
+            <div class="footer_class">
+                <span id="reservedRights">&copy Eyal Arviv & Shani Houri</span>
+            </div>
+            <div class="footer_class">
+                <img id="footer_pic" ng-src="routing/resources/img/hot-air-balloon-large.png"/>
+            </div>
+            <div class="footer_class">
+                <ul>
+                    <li class="footer_links">
+                        <a  href="https://www.facebook.com/places/Things-to-do-in-Casablanca-Morocco/101891849853172/">
+                            <img class="footerpics" alt="Facebook" src="routing/resources/img/facebook.png"/>
+                        </a>
+                    </li>
+                    <li class="footer_links">
+                        <a href="https://www.instagram.com/explore/tags/casablanca/">
+                            <img class="footerpics" alt="Instagram" src="routing/resources/img/instagram.png" />
+                        </a>
+                    </li>
+                    <li class="footer_links">
+                        <a href="https://www.youtube.com/watch?v=1IZkUdr4-Y0" target="_blank">
+                            <img class="footerpics" alt="Youtube" src="routing/resources/img/youtube.png" />
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </footer>
+        <!-- <footer class="navelement" id="footer">
+            <p>Contact us by Email: eyalar@post.bgu.ac.il / hourish@post.bgu.ac.il </p>
+            <span>&copy Eyal Arviv & Shani Houri</span>
+        </footer> -->
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
         <script src="routing/node_modules/angular-local-storage/dist/angular-local-storage.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>       
@@ -37,10 +74,9 @@
         <script src="routing/components/Guest/guestCtrl.js"></script>
         <script src="routing/components/POIS/poisController.js"></script>
         <script src="routing/components/Favorites/favoritesController.js"></script>
-
-
-
- 
+        <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"
+        integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw=="
+        crossorigin=""></script>
     </body>
 </html>
     

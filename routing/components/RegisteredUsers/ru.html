@@ -6,19 +6,20 @@ Hello <span ng-bind="ruCtrl.userName"></span>!
 <table id="ru_fav_table">
     <tr>
             <td ng-repeat="(id, poi) in ruCtrl.two_fav_pois">
+                <a ng-click="ruCtrl.singlePOI(poi.name)"><img class="pois_click" ng-style="{'height': '100px','width': '150px', 'border-radius': '10px'}" ng-src="../../tokens{{poi.poi_img}}"></a>
                 <a ng-click="ruCtrl.singlePOI(poi.name)"> <span class="pois_click" ng-bind="poi.name"></span></a>
                 
-                <span ng-show="poi.poi_saved=='full_heart'">
+                <span ng-show="poi.poi_saved=='full_heart'" class="tooltip">
                     <a ng-click="ruCtrl.removePOI('favs', poi.name)"><img class="favs" ng-style="{'height': '20px','width': '20px'}" ng-src="../../routing/resources/img/{{poi.poi_saved}}.png"/></a>
+                    <span class="tooltiptext">Remove from favorites</span>
                 </span>
-                <span ng-show="poi.poi_saved=='empty_heart'">
-                        <a ng-click="ruCtrl.savePOI('favs', poi.name)"><img class="favs" ng-style="{'height': '20px','width': '20px'}" ng-src="../../routing/resources/img/{{poi.poi_saved}}.png"/></a>
+                <span ng-show="poi.poi_saved=='empty_heart'" class="tooltip">
+                    <a ng-click="ruCtrl.savePOI('favs', poi.name)"><img class="favs" ng-style="{'height': '20px','width': '20px'}" ng-src="../../routing/resources/img/{{poi.poi_saved}}.png"/></a>
+                    <span class="tooltiptext">Add to favorites</span>
                 </span>
-                <a ng-click="ruCtrl.rankAndReview(poi.name)"><img class="review_img" ng-src="../../routing/resources/img/review.png"/></a>
-                <br> 
-
-                <a ng-click="ruCtrl.singlePOI(poi.name)"><img class="pois_click" ng-style="{'height': '100px','width': '150px', 'border-radius': '10px'}" ng-src="../../tokens{{poi.poi_img}}"></a>
-                <br>
+                <span class="tooltip">
+                    <a ng-click="ruCtrl.rankAndReview(poi.name)"><img class="review_img" ng-src="../../routing/resources/img/review.png"/></a>
+                <span class="tooltiptext">Rank/Review</span>
                 </td>
     </tr>
             
@@ -31,17 +32,20 @@ Hello <span ng-bind="ruCtrl.userName"></span>!
 <table id="ru_recent_table">
     <tr>
             <td ng-repeat="(id, poi) in ruCtrl.two_recent_pois">
-                <a ng-click="ruCtrl.singlePOI(poi.name)"> <span class="pois_click" ng-bind="poi.name"></span></a>
-                <span ng-show="poi.poi_saved=='full_heart'">
-                    <a ng-click="ruCtrl.removePOI('recent', poi.name)"><img class="favs" ng-style="{'height': '20px','width': '20px'}" ng-src="../../routing/resources/img/{{poi.poi_saved}}.png"/></a>
-                </span>
-                <span ng-show="poi.poi_saved=='empty_heart'">
-                        <a ng-click="ruCtrl.savePOI('recent', poi.name)"><img class="favs" ng-style="{'height': '20px','width': '20px'}" ng-src="../../routing/resources/img/{{poi.poi_saved}}.png"/></a>
-                </span>
-                <a ng-click="ruCtrl.rankAndReview(poi.name)"><img class="review_img" ng-src="../../routing/resources/img/review.png"/></a>
-                <br> 
-                <br> 
                 <a ng-click="ruCtrl.singlePOI(poi.name)"><img class="pois_click" ng-style="{'height': '100px','width': '150px', 'border-radius': '10px'}" ng-src="../../tokens{{poi.poi_img}}"></a>
+                <a ng-click="ruCtrl.singlePOI(poi.name)"> <span class="pois_click" ng-bind="poi.name"></span></a>
+                <span ng-show="poi.poi_saved=='full_heart'" class="tooltip">
+                    <a ng-click="ruCtrl.removePOI('recent', poi.name)"><img class="favs" ng-style="{'height': '20px','width': '20px'}" ng-src="../../routing/resources/img/{{poi.poi_saved}}.png"/></a>
+                    <span class="tooltiptext">Remove from favorites</span>
+                </span>
+                <span ng-show="poi.poi_saved=='empty_heart'" class="tooltip">
+                        <a ng-click="ruCtrl.savePOI('recent', poi.name)"><img class="favs" ng-style="{'height': '20px','width': '20px'}" ng-src="../../routing/resources/img/{{poi.poi_saved}}.png"/></a>
+                        <span class="tooltiptext">Add to favorites</span>
+                </span>
+                <span class="tooltip">
+                    <a ng-click="ruCtrl.rankAndReview(poi.name)"><img class="review_img" ng-src="../../routing/resources/img/review.png"/></a>
+                <span class="tooltiptext">Rank/Review</span>
+            
                 <br>
             </td>
     </tr>
@@ -58,24 +62,33 @@ Hello <span ng-bind="ruCtrl.userName"></span>!
           <span class="close">&times;</span>
           <form name="form2" novalidate>
               <b>Rank and review <span ng-bind="ruCtrl.modal.poi"></span>!</b>
-              <br><br>
+              <br>
+              <br>
               <label>Rank:
-              <select id="selectRank" ng-model="ruCtrl.modal.rank" name="rankSelect" required>
-                      <option value="" disabled selected>Select your rank</option>
-                      <option ng-repeat="n in [] | range:5" value="{{$index + 1}}">{{$index + 1}}</option>
-              </select>
+                  <div class="rating">
+                      <input class="stars" type="radio" name="star" id="star1"><label for="star1">
+                      </label>
+                      <input class="stars" type="radio" name="star" id="star2"><label for="star2">
+                      </label>
+                      <input class="stars" type="radio" name="star" id="star3"><label for="star3">
+                      </label>
+                      <input class="stars" type="radio" name="star" id="star4"><label for="star4">
+                      </label>
+                      <input class="stars" type="radio" name="star" id="star5"><label for="star5">
+                      </label>
+                  </div>
               </label>
       
-              <div ng-show="form2.$submitted || form2.rankSelect.$touched">
-              <div ng-show="form2.rankSelect.$error.required">Please choose rank in order to submit.</div>
-              </div><br>
+      
               <button ng-click="ruCtrl.setRank()" ng-disabled="!form2.$valid">Submit rank</button>
+              <span ng-show="ruCtrl.noRankSelected">Please select a rank in order to submit it.</span>
               <span ng-bind="ruCtrl.setRank.content"></span>
           </form>
       
           <form name="form3" novalidate>
           <label>Review:
-          <input id="review" type="text" name="review" ng-model="ruCtrl.modal.review" required="" placeholder="Enter your review...">
+          <br>
+          <textarea id="review" name="review" ng-model="ruCtrl.modal.review" required="" placeholder="Enter your review..."></textarea>
           </label>
       
           <div ng-show="form3.$submitted || form3.review.$touched">

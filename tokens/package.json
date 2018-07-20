@@ -13,8 +13,11 @@
     "jsonwebtoken": "^8.2.1",
     "morgan": "^1.9.0",
     "mssql": "^3.3.0",
+    "my-sql": "^1.2.15",
+    "mysql": "^2.16.0",
     "nodemon": "^1.17.4",
     "reject": "^0.0.1",
+    "sql-injection": "0.0.6",
     "tedious": "^2.6.1",
     "tedious-connection-pool": "^1.0.5",
     "xmlserializer": "^0.6.1"

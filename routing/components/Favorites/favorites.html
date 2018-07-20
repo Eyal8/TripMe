@@ -129,24 +129,33 @@
           <span class="close">&times;</span>
           <form name="form2" novalidate>
               <b>Rank and review <span ng-bind="fvrtlCtrl.modal.poi"></span>!</b>
-              <br><br>
+              <br>
+              <br>
               <label>Rank:
-              <select id="selectRank" ng-model="fvrtlCtrl.modal.rank" name="rankSelect" required>
-                      <option value="" disabled selected>Select your rank</option>
-                      <option ng-repeat="n in [] | range:5" value="{{$index + 1}}">{{$index + 1}}</option>
-              </select>
+                  <div class="rating">
+                      <input class="stars" type="radio" name="star" id="star1"><label for="star1">
+                      </label>
+                      <input class="stars" type="radio" name="star" id="star2"><label for="star2">
+                      </label>
+                      <input class="stars" type="radio" name="star" id="star3"><label for="star3">
+                      </label>
+                      <input class="stars" type="radio" name="star" id="star4"><label for="star4">
+                      </label>
+                      <input class="stars" type="radio" name="star" id="star5"><label for="star5">
+                      </label>
+                  </div>
               </label>
       
-              <div ng-show="form2.$submitted || form2.rankSelect.$touched">
-              <div ng-show="form2.rankSelect.$error.required">Please choose rank in order to submit.</div>
-              </div><br>
+      
               <button ng-click="fvrtlCtrl.setRank()" ng-disabled="!form2.$valid">Submit rank</button>
+              <span ng-show="fvrtlCtrl.noRankSelected">Please select a rank in order to submit it.</span>
               <span ng-bind="fvrtlCtrl.setRank.content"></span>
           </form>
       
           <form name="form3" novalidate>
           <label>Review:
-          <input id="review" type="text" name="review" ng-model="fvrtlCtrl.modal.review" required="" placeholder="Enter your review...">
+          <br>
+          <textarea id="review" name="review" ng-model="fvrtlCtrl.modal.review" required="" placeholder="Enter your review..."></textarea>
           </label>
       
           <div ng-show="form3.$submitted || form3.review.$touched">

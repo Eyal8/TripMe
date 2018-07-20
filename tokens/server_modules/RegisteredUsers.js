@@ -147,6 +147,7 @@ router.get('/getSinglePOIForUser', function(req,res){
 })
 router.get('/get2MostPopularPOIs', function(req,res){
    DButilsAzure.execQuery("DECLARE @category VARCHAR(100), @poi_name1 VARCHAR(100), @poi_name2 VARCHAR(100); SELECT @poi_name1=POI_name, @category=POI.Category FROM CategoriesForUser JOIN POI ON CategoriesForUser.CategoryName = POI.Category WHERE UserName = '"+req.userName+"' AND POI_rank = (SELECT MAX(POI_rank) FROM CategoriesForUser JOIN POI ON CategoriesForUser.CategoryName = POI.Category); SELECT @poi_name2 = POI.POI_name FROM CategoriesForUser JOIN POI ON CategoriesForUser.CategoryName = POI.Category WHERE UserName = '"+req.userName+"' AND POI.Category <> @category AND POI_rank = (SELECT MAX(POI_rank) FROM CategoriesForUser JOIN POI ON CategoriesForUser.CategoryName = POI.Category WHERE POI.Category <> @category); SELECT * FROM POI WHERE POI_name=@poi_name1; SELECT * FROM POI WHERE POI_name=@poi_name2").then(function(recordSet){
+        console.log("RECORD SET: "+ recordSet);
         res.json(recordSet);
    }).catch(function (err) {
     res.send(err);

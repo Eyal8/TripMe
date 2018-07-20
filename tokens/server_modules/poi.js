@@ -3,7 +3,7 @@ var router = express.Router();
 var DButilsAzure = require('../DButils');
 
 router.get('/update', function(req,res){
-    DButilsAzure.execQuery("SELECT NumOfViews, POI_rank, Review1, Review2 FROM POI").then(function (recordSet) {   
+    DButilsAzure.execQuery("SELECT POI_name, NumOfViews, POI_rank, Review1, Review2 FROM POI").then(function (recordSet) {   
     res.json(recordSet);
 }).catch(function (err) {
 res.send(err);
@@ -19,7 +19,7 @@ router.get('/get3PopRand', function(req, res){
 })
 
 router.get('/all', function(req,res){
-        DButilsAzure.execQuery("SELECT * FROM POI").then(function (recordSet) {   
+        DButilsAzure.execQuery("SELECT POI_name, PicturePath, Category FROM POI").then(function (recordSet) {   
         res.json(recordSet);
    }).catch(function (err) {
     res.send(err);
@@ -33,7 +33,6 @@ router.get('/:name', function(req,res){
     promises.push(DButilsAzure.execQuery("SELECT * FROM POI WHERE POI_name = '"+name+"'"));     
     promises.push(DButilsAzure.execQuery("UPDATE POI SET NumOfViews = NumOfViews + 1 WHERE POI_name = '"+name+"'"));
     Promise.all(promises).then(function(recordSet){
-        console.log(recordSet);
         if(recordSet[0].length == 0)
         {
             res.json({success: false, message:"There is no such point of interest"});
@@ -49,7 +48,9 @@ router.get('/:name', function(req,res){
                 Review1: recordSet[0][0].Review1,
                 Review2: recordSet[0][0].Review2,
                 PicturePath: recordSet[0][0].PicturePath,
-                Category: recordSet[0][0].Category
+                Category: recordSet[0][0].Category,
+                Latitude: recordSet[0][0].Latitude,
+                Longitude: recordSet[0][0].Longitude
             })
         }
         }).catch(function (err) {

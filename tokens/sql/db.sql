@@ -60,6 +60,8 @@ CREATE TABLE POI
     Review2 VARCHAR(100),
     PicturePath VARCHAR(100) NOT NULL,
     Category VARCHAR(100) NOT NULL,
+    Latitude FLOAT,
+    Longitude FLOAT,
     
     CONSTRAINT [PK_poi] PRIMARY KEY (POI_name),    
     FOREIGN KEY (Category) REFERENCES Categories (CategoryName),

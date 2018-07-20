@@ -77,6 +77,15 @@ router.post('/register', function(req,res){
             res.json({ success: false, message: 'Please choose at least two categories.' });
         }
        else{
+            if(City.includes("\'")){
+                var parsedCity = City.split('\'');
+                City ="";
+                for(var i = 0;i<parsedCity.length-1;i++){
+                    City += parsedCity[i]+"\'\'";
+                }
+                City+=parsedCity[parsedCity.length-1];
+            }
+            console.log(City);
             var promises = [];
             promises.push(DButilsAzure.execQuery("INSERT INTO RegisteredUsers (UserName, Pass, FirstName, LastName, City, Country, Email,Answer1,Answer2, NumOfFavorites) VALUES ('"+UserName+"','"+Password+"','"+FirstName+"','"+LastName+"','"+City+"','"+Country+"','"+Email+"','"+answersForRecovery[0]+"','"+answersForRecovery[1]+"',0)"));
             for(var i=0; i<categories.length;i++){
