@@ -33,22 +33,34 @@ angular.module('TripMe')
         });
     }
 
+    self.all = false;
+
     validateCategories = function(){
         var index = 0;
         self.user.categories = [];
-        for (var i = 0; i < self.categories.length; i ++){
-            if(self.categories[i].checked == true)
-            {
-                self.user.categories[index] = self.categories[i].value;
-                index++;
-            }
-        }
-        if(index < 2)
+        if(self.all)
         {
-            self.register.content = "Please choose at least two categories";
-            return false;
+            for (var i = 0; i < self.categories.length; i ++){
+                self.user.categories[i] = self.categories[i].value;
+            }
+            return true;
         }
-        return true;
+        else
+            {
+            for (var i = 0; i < self.categories.length; i ++){
+                if(self.categories[i].checked == true)
+                {
+                    self.user.categories[index] = self.categories[i].value;
+                    index++;
+                }
+            }
+            if(index < 2 && self.all == false)
+            {
+                self.register.content = "Please choose at least two categories";
+                return false;
+            }
+            return true;
+        }
     }
 
 
@@ -65,6 +77,7 @@ angular.module('TripMe')
                 });
         }
     }
+
     self.getCountries();
     self.getCategories();
 }]);

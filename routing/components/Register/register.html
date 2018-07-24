@@ -8,11 +8,17 @@
             </td>
             <td>
                 <label>
-                   <input type="text" ng-model="rgCtrl.user.userName" name="userName" required="" />
+                   <input type="text" ng-model="rgCtrl.user.userName" name="userName" required="" ng-minlength="3" ng-maxlength="8" />
                 </label>
                 <br/>
                 <div ng-show="form.$submitted || form.userName.$touched">
                 <div ng-show="form.userName.$error.required">Please enter a user name.</div>
+                <div ng-show="form.userName.$error.minlength">
+                        UserName must be at least 3 characters long.
+                </div>
+                <div ng-show="form.userName.$error.maxlength">
+                        UserName must be at most 8 characters long.
+                </div>
                 </div>
             </td>
         </tr>
@@ -24,11 +30,17 @@
             </td>
             <td>
                 <label>
-                    <input type="password" ng-model="rgCtrl.user.password" name="password" required="" />
+                    <input type="password" ng-model="rgCtrl.user.password" name="password" required="" ng-minlength="5" ng-maxlength="10"/>
                 </label>
                 <br />
                 <div ng-show="form.$submitted || form.password.$touched">
                 <div ng-show="form.password.$error.required">Please enter a password.</div>
+                <div ng-show="form.password.$error.minlength">
+                        Password must be at least 5 characters long.
+                </div>
+                <div ng-show="form.password.$error.maxlength">
+                        Password must be at most 10 characters long.
+                </div>
                 </div>
             </td>
         </tr>
@@ -38,11 +50,17 @@
                 </td>
                 <td>
                     <label>
-                        <input type="password" ng-model="rgCtrl.user.confirmedPassword" name="confirmedPassword" required="" />
+                        <input type="password" ng-model="rgCtrl.user.confirmedPassword" name="confirmedPassword" required="" ng-minlength="5" ng-maxlength="10"/>
                     </label>
                     <br />
                     <div ng-show="form.$submitted || form.confirmedPassword.$touched">
                     <div ng-show="form.confirmedPassword.$error.required">Please enter the password again.</div>
+                    <div ng-show="form.confirmedPassword.$error.minlength">
+                            Password must be at least 5 characters long.
+                    </div>
+                    <div ng-show="form.confirmedPassword.$error.maxlength">
+                            Password must be at most 10 characters long.
+                    </div>
                     </div>
                 </td>
             </tr>
@@ -123,8 +141,9 @@
                 Categories (At least two)
             </td>
             <td>
+                <input type="checkbox" ng-model="rgCtrl.all"> Select all categories <br>
                 <label ng-repeat="category in rgCtrl.categories">
-                <input type="checkbox" ng-model="rgCtrl.categories[$index].checked">
+                <input type="checkbox" ng-model="rgCtrl.categories[$index].checked" ng-checked="rgCtrl.all">
                 {{category.value}}
                 <br>
                 </label>
@@ -167,7 +186,7 @@
         </tr>
     </table>
     <br>
-    <button class="formbutton" ng-click="rgCtrl.register()" ng-disabled="!form.$valid">Register</button>
+    <button type="submit" class="formbutton" ng-click="rgCtrl.register()" ng-disabled="!form.$valid">Register</button>
     <span ng-bind="rgCtrl.register.content"></span>
 </form>
 

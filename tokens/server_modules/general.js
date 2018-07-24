@@ -85,69 +85,29 @@ router.post('/register', function(req,res){
                 }
                 City+=parsedCity[parsedCity.length-1];
             }
-            console.log(City);
-            var promises = [];
-            promises.push(DButilsAzure.execQuery("INSERT INTO RegisteredUsers (UserName, Pass, FirstName, LastName, City, Country, Email,Answer1,Answer2, NumOfFavorites) VALUES ('"+UserName+"','"+Password+"','"+FirstName+"','"+LastName+"','"+City+"','"+Country+"','"+Email+"','"+answersForRecovery[0]+"','"+answersForRecovery[1]+"',0)"));
-            for(var i=0; i<categories.length;i++){
-                promises.push(DButilsAzure.execQuery("INSERT INTO CategoriesForUser (CategoryName, UserName) VALUES ('"+categories[i]+"','"+UserName+"')"))
-            }
-            Promise.all(promises).then(function(recordSet){
-                res.json({
-                    success: true,
-                    message: "User is registered in the system."
-                })
-                }).catch(function (err) {
-                    res.send(err);
-                });
-        }
-    }).catch(function (err) {
-        res.send(err);
-            });
 
- /*  if(UserName.length <3 || UserName.length > 8){
-        res.json({ success: false, message: 'Please enter a 3 to 8 characters in UserName.' });
-   }
-   else if(!(/^[a-zA-Z]+$/.test(UserName))){
-        res.json({ success: false, message: 'Please enter only alphabet characters for user name.' });
-   }
-   else if(Password.length <5 || Password.length > 10){
-        res.json({ success: false, message: 'Please enter a 5 to 10 numbers for your password.' });
-   }
-   else if(!(/^[A-Za-z0-9]+$/.test(Password))){
-        res.json({ success: false, message: 'Please enter only numbers and alphabet characters for your password.' });
-   }   
-   else if(Password != confirmedPassword){
-        res.json({ success: false, message: 'Passwords and confirmed password don\'t match.' });
-    }
-    else if(!validateEmail(Email))
-    {
-        res.json({ success: false, message: 'Please enter valid email.' });
-
-    }
-    else if(categories[0] == "" || categories[1] == "")
-    {
-        res.json({ success: false, message: 'Please choose two categories.' });
-    }
-    else if(categories[0] == categories[1])
-    {
-        res.json({ success: false, message: 'Please choose two different categories.' });
-    }
-   else{
-        var promises = [];
-        promises.push(DButilsAzure.execQuery("INSERT INTO RegisteredUsers (UserName, Pass, FirstName, LastName, City, Country, Email,Answer1,Answer2, NumOfFavorites) VALUES ('"+UserName+"','"+Password+"','"+FirstName+"','"+LastName+"','"+City+"','"+Country+"','"+Email+"','"+answersForRecovery[0]+"','"+answersForRecovery[1]+"',0)"));
-        for(var i=0; i<categories.length;i++){
-            promises.push(DButilsAzure.execQuery("INSERT INTO CategoriesForUser (CategoryName, UserName) VALUES ('"+categories[i]+"','"+UserName+"')"))
-        }
-        Promise.all(promises).then(function(recordSet){
-            res.json({
-                success: true,
-                message: "User is registered in the system."
+            DButilsAzure.execQuery("INSERT INTO RegisteredUsers (UserName, Pass, FirstName, LastName, City, Country, Email,Answer1,Answer2, NumOfFavorites) VALUES ('"+UserName+"','"+Password+"','"+FirstName+"','"+LastName+"','"+City+"','"+Country+"','"+Email+"','"+answersForRecovery[0]+"','"+answersForRecovery[1]+"',0)")
+            .then(function()
+            {
+                var promises = [];
+                for(var i=0; i<categories.length;i++){
+                    promises.push(DButilsAzure.execQuery("INSERT INTO CategoriesForUser (CategoryName, UserName) VALUES ('"+categories[i]+"','"+UserName+"')"))
+                }
+                Promise.all(promises).then(function(recordSet){
+                    res.json({
+                        success: true,
+                        message: "User is registered in the system."
+                    })
+                    }).catch(function (err) {
+                        res.send(err);
+                    });
             })
-            }).catch(function (err) {
+            .catch(function (err) {
                 res.send(err);
-            });
-   }*/
-});
+                    });
+        }
+})})
+
 
 function validateEmail(email) {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

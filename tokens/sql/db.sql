@@ -13,7 +13,7 @@ CREATE TABLE RegisteredUsers
 
    CONSTRAINT [PK_RegisteredUsers] PRIMARY KEY (UserName), 
    CONSTRAINT userNameLength CHECK (DATALENGTH([UserName]) >= 3 AND DATALENGTH([UserName]) <= 8),
-   CONSTRAINT passwordLength CHECK (DATALENGTH([Pass]) >= 3 AND DATALENGTH([Pass]) <= 8)
+   CONSTRAINT passwordLength CHECK (DATALENGTH([Pass]) >= 5 AND DATALENGTH([Pass]) <= 10)
 )   
  
 
