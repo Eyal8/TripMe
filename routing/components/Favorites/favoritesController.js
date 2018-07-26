@@ -45,36 +45,15 @@ angular.module('TripMe')
                             i++;
                     }
                     i=0;
-                    /*
-                    //check if saved in local storage
-                    if(firstPoiInLocalStorage == response.data[i].POI_name){
-                        self.two_recent_pois[0] = {name: response.data[i].POI_name, poi_img: response.data[i].PicturePath, poi_saved: "full_heart"}
-                    }
-                    if(secondPoiInLocalStorage == response.data[i].POI_name){
-                        self.two_recent_pois[1] = {name: response.data[i].POI_name, poi_img: response.data[i].PicturePath, poi_saved: "full_heart"}
-                    }
-                    i++;*/
                 }
                 if(local_storage_pois[0] == undefined){
                     self.noPoisForUser = true;
 
                 }
             }, function (response) {
-                //Second function handles error
-           // })
 
         });
-        /*
-        
-        $http.get(setHeadersToken.serverUrl + "registeredUsers/getPOIs")
-        .then(function (response) {
-            var i = 0;
-            for (poi in response.data){
-                self.fav_pois[i] = {name: response.data[i].POI_name, num_of_views: response.data[i].NumOfViews, poi_description: response.data[i].POI_description, poi_rank: response.data[i].POI_rank, poi_review1: response.data[i].Review1, poi_review2: response.data[i].Review2, poi_img: response.data[i].PicturePath, poi_saved: "full_heart"}
-                i++;
-            }
-        }, function (response) {
-        });*/
+
     }
     
     self.savePOI = function(poi){
@@ -110,7 +89,6 @@ angular.module('TripMe')
     self.saveFavoritesToDB = function(){
         var local_storage_pois = registeredUsersService.poisInLocalStorage();
         for(var i = 0; i < local_storage_pois.length; i++){
-       // for(i = 0; i < self.fav_pois.length; i++){
             var point = {};
             point.poi_name = local_storage_pois[i].name;
             setHeadersToken.authenticate();
@@ -149,7 +127,6 @@ angular.module('TripMe')
             return Promise.resolve()})
             .then(function () {
                 for(var l = 0; l < self.poisNotOnLocalStorage.length; l++){
-                    //$http.defaults.headers.common[ 'poi_name' ] = self.poisNotOnLocalStorage[l];
                     $http.delete(setHeadersToken.serverUrl + "registeredUsers/removePOI/"+ self.poisNotOnLocalStorage[l])
                     .then(function (response3) {
                         if(response3.data.success == false){

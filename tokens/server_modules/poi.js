@@ -2,14 +2,6 @@ var express = require('express');
 var router = express.Router();
 var DButilsAzure = require('../DButils');
 
-router.get('/update', function(req,res){
-    DButilsAzure.execQuery("SELECT POI_name, NumOfViews, POI_rank, Review1, Review2 FROM POI").then(function (recordSet) {   
-    res.json(recordSet);
-}).catch(function (err) {
-res.send(err);
-        });
-})
-
 router.get('/get3PopRand', function(req, res){
     DButilsAzure.execQuery("SELECT TOP 3 * FROM POI WHERE POI_rank >= 70 ORDER BY NEWID()").then(function (recordSet) {   
         res.json(recordSet);
@@ -47,6 +39,8 @@ router.get('/:name', function(req,res){
                 POI_rank: recordSet[0][0].POI_rank,
                 Review1: recordSet[0][0].Review1,
                 Review2: recordSet[0][0].Review2,
+                DateReview1:recordSet[0][0].DateReview1,
+                DateReview2:recordSet[0][0].DateReview2,
                 PicturePath: recordSet[0][0].PicturePath,
                 Category: recordSet[0][0].Category,
                 Latitude: recordSet[0][0].Latitude,

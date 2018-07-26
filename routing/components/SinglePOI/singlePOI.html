@@ -22,9 +22,11 @@
                  <br>
                  <u>Point reviews</u>
                  <br>
-                 Review 1: <span ng-bind="sglCtrl.current_poi.poi_review1"></span>
+                 Review 1 (<span ng-bind="sglCtrl.current_poi.poi_date_review1"></span>): <span ng-bind="sglCtrl.current_poi.poi_review1"></span>     
                  <br>
-                 Review 2: <span ng-bind="sglCtrl.current_poi.poi_review2"></span>
+                 <span ng-show="sglCtrl.twoReviews">
+                 Review 2 (<span ng-bind="sglCtrl.current_poi.poi_date_review2"></span>): <span ng-bind="sglCtrl.current_poi.poi_review2"></span>
+                </span>
                  <br>
                  <br>
                  <div id="map"></div>

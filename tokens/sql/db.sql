@@ -16,18 +16,6 @@ CREATE TABLE RegisteredUsers
    CONSTRAINT passwordLength CHECK (DATALENGTH([Pass]) >= 5 AND DATALENGTH([Pass]) <= 10)
 )   
  
-
-
-
- 
- --Insert into HotelMaster(RoomNo,RoomType,Prize) Values('101','Single','50$')
-  --Insert into HotelMaster(RoomNo,RoomType,Prize) Values('102','Double','80$')
- 
---select * from HotelMaster 
- 
-   
---IF EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'RoomBooking' )   
---DROP TABLE RoomBooking   
 GO   
 CREATE TABLE Categories  
 (   
@@ -58,6 +46,8 @@ CREATE TABLE POI
     NumOfRanks INT NOT NULL,
     Review1 VARCHAR(100),
     Review2 VARCHAR(100),
+    DateReview1 DATE,
+    DateReview2 DATE,
     PicturePath VARCHAR(100) NOT NULL,
     Category VARCHAR(100) NOT NULL,
     Latitude FLOAT,
@@ -73,7 +63,6 @@ CREATE TABLE POIsForUser
 (   
     POI_name VARCHAR(100) NOT NULL,
     UserName VARCHAR(100) NOT NULL,
-    CreatedAt DATETIME NOT NULL,
     Position INT,
 
     CONSTRAINT [PK_POIsUsers] PRIMARY KEY (POI_name, UserName),    
@@ -81,32 +70,5 @@ CREATE TABLE POIsForUser
     FOREIGN KEY (POI_name) REFERENCES POI (POI_name)    
    
 )    
-
-
-
-   /*
-GO   
-
-
-CREATE TABLE Questions   
-(   
-    QuestionID VARCHAR(100) NOT NULL UNIQUE,
-    QuestionContent VARCHAR(300) NOT NULL,    
-    CONSTRAINT [PK_Questions] PRIMARY KEY (QuestionID)   
-) 
-
-GO
-CREATE TABLE IdentificationQuestions   
-(   
-    QuestionID VARCHAR(100) NOT NULL UNIQUE,
-    UserName VARCHAR(100) NOT NULL UNIQUE,
-    Answer VARCHAR(100) NOT NULL,
-    CONSTRAINT [PK_IdentificationQuestions] PRIMARY KEY (QuestionID, UserName),    
-    FOREIGN KEY (UserName) REFERENCES RegisteredUsers (UserName),
-    FOREIGN KEY (QuestionID) REFERENCES Questions (QuestionID)  
-)    
-*/
-
-
 
 
